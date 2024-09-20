@@ -3,7 +3,6 @@ $title = 'Autot';
 //$css = 'kuvagalleria.css';
 include "header.php";
 include "db.php";
-
 $query = "SELECT * FROM auto";
 $tulokset = $yhteys->query($query);
 if ($tulokset->num_rows > 0) {
