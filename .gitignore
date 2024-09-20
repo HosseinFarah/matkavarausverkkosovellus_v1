@@ -1,0 +1,6 @@
+.env
+tunnukset.*
+*.txt
+!curl_testaus.txt
+profiilikuvat/*
+tunnukset.php
