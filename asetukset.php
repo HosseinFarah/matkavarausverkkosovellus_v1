@@ -14,7 +14,6 @@ define("PROFIILIKUVAKOKO",5242880);
 $DB = "tourdb";
 $LOCAL = in_array($_SERVER['REMOTE_ADDR'],array('127.0.0.1','REMOTE_ADDR' => '::1'));
 if ($LOCAL) {	
-    define("DEBUG",true);
     $tunnukset = "tunnukset.php";
     if (file_exists($tunnukset)){
         include_once("tunnukset.php");

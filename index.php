@@ -132,7 +132,8 @@ $searchResult = my_query($searchSql);
                 </div>
                 
                 <div class='text-end'>
-                  <a href='tour.php?id=$id' class='btn btn-primary mt-1'>Lue lisää</a>
+                  <a href='tour.php?id=$id' class='btn btn-primary mt-1'>Lue lisää <i class='fas fa-binoculars fs-5 text-light'></i></a>
+                  <a href='reserve.php?id=$id' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>
               </div>
               </div>
             </div>
