@@ -66,5 +66,5 @@ include('kasittelija_forgotpassword.php');
 
 </div>
 <?php
-include('footer.html');
+include('footer.php');
 ?>

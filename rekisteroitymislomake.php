@@ -1,4 +1,5 @@
 <?php
+ob_start();
 /* Huom. Tässä salasanakenttien täsmääminen tarkistetaan vain palvelimella. */
 $title = 'Rekisteröityminen';
 $kentat = ['firstname', 'lastname', 'email', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];
@@ -192,4 +193,4 @@ include "rekisterointi.php";
        </div>
 
 </div>
-<?php include "footer.html"; ?>
+<?php include "footer.php"; ?>

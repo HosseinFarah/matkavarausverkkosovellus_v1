@@ -52,7 +52,7 @@ ini_set('default_charset', 'utf-8');
     <label for="toggle-btn" class="icon open"><i class="fa fa-bars"></i></label>
     <label for="toggle-btn" class="icon close"><i class="fa fa-times"></i></label>
     <a href="<?= "http://$PALVELIN/#etusivu" ?>" class="active">Etusivu</a>
-    <a href="<?= "http://$PALVELIN/#tietoameista" ?>">Tietoa meistä</a>
+    <a href="<?= "http://$PALVELIN/aboutus.php" ?>">Tietoa meistä</a>
     <a href="<?= "http://$PALVELIN/#otayhteytta" ?>">Ota yhteyttä</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>

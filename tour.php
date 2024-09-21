@@ -30,6 +30,10 @@ if ($result && $result->num_rows > 0) {
     $duration = htmlspecialchars($row['duration']);
     $tourImage = htmlspecialchars($row['tourImage']);
     $locations = $row['locations'];
+
+    $sql_free = "SELECT * FROM reservations WHERE tour_id = $id";
+    $result_free = my_query($sql_free);
+    $vapaa = $groupSize - $result_free->num_rows;
 } else {
     echo "Tour not found.";
     exit;
@@ -84,7 +88,12 @@ if ($result && $result->num_rows > 0) {
                                 echo "<p class='text-center'><strong>varausnumero:</strong> <span class='badge text-bg-primary fs-6'>" . $num_rows['reservation_id'] . "</span></p>
                                 <p class='text-center'><strong>Päivämäärä:</strong> <span class='badge text-bg-primary fs-6'> " . $num_rows['created'] . "</span></p>";
                             } else {
-                                echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
+                                if ($vapaa > 0) {
+                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                    echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
+                                } else {
+                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-danger fs-6'>0</span></p>";
+                                }
                             }
                         }
                         // If the user is not logged in, display a login button
@@ -101,7 +110,7 @@ if ($result && $result->num_rows > 0) {
             </div>
         </div>
         <?php
-        include 'footer.html';
+        include 'footer.php';
         ?>
         <script>
             mapboxgl.accessToken = "<?= $pk ?>";

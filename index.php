@@ -8,6 +8,7 @@ $slider = ["(1).jpg", "(2).jpg", "(3).jpg", "(4).jpg", "(5).jpg", "(6).jpg", "(7
 $searchSql = "SELECT * FROM tours";
 $searchResult = my_query($searchSql);
 
+
 // if (isset($_POST['contact'])) {
 //   $name = $_POST['name'];
 //   $email = $_POST['email'];
@@ -111,33 +112,41 @@ $searchResult = my_query($searchSql);
             $duration = htmlspecialchars($row['duration']);
             $tourImage = htmlspecialchars($row['tourImage']);
 
+            $sql_free = "SELECT * FROM reservations WHERE tour_id = $id";
+            $result_free = my_query($sql_free);
+            $vapaa = $groupSize - $result_free->num_rows;
+
             // Start a new row every 3 cards
             if ($counter % 3 == 0 && $counter > 0) {
               echo "</div><div class='row'>";
             }
 
             echo "
-          <div class='col-md-4 mb-4'>
-            <div class='card shadow-lg shine-effect'>
-              <img src='profiilikuvat/tours/$tourImage' class='card-img-top' alt='$name'>
-              <div class='card-body'>
-                <h5 class='card-title fs-2 text-primary'>$name</h5>
-                <p class='card-text'><i class='fas fa-info'> </i><strong> $summary</strong></p>
-                <p class='card-text'><i class='far fa-clock'></i> $duration tuntia</p>
-                <p class='card-text'><i class='fas fa-map-marker-alt'></i> $places</p>
-                <p class='card-text'><strong><i class='fas fa-users'></i> Max osallistujamäärä: </strong><span class ='badge text-bg-warning fs-6'> $groupSize </span></p>
-                <div class='card-footer rounded'>
-                <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>Hinta: $price €</p></small>
-                <small class='text-body-secondary'><p class='card-text fs-6 text-primary-emphasis '><i class='fas fa-calendar'></i> $startDate</p></small>
+            <div class='col-md-4 mb-4'>
+              <div class='card shadow-lg shine-effect'>
+                <img src='profiilikuvat/tours/$tourImage' class='card-img-top' alt='$name'>
+                <div class='card-body'>
+                  <h5 class='card-title fs-2 text-primary'>$name</h5>
+                  <p class='card-text'><i class='fas fa-info'> </i><strong> $summary</strong></p>
+                  <p class='card-text'><i class='far fa-clock'></i> $duration tuntia</p>
+                  <p class='card-text'><i class='fas fa-map-marker-alt'></i> $places</p>
+                  <p class='card-text'><strong><i class='fas fa-users'></i> Max osallistujamäärä: </strong><span class ='badge text-bg-warning fs-6'> $groupSize </span></p>
+                  <p class='card-text'><strong><i class='fas fa-users'></i> Vapaita paikkoja: </strong><span class ='badge text-bg-warning fs-6'> $vapaa </span></p>
+                  <div class='card-footer rounded'>
+                    <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>Hinta: $price €</p></small>
+                    <small class='text-body-secondary'><p class='card-text fs-6 text-primary-emphasis '><i class='fas fa-calendar'></i> $startDate</p></small>
+                  </div>
+                  <div class='text-end'>
+                    <a href='tour.php?id=$id' class='btn btn-primary m-1'>Lue lisää <i class='fas fa-binoculars fs-5 text-light'></i></a>";
+                    if ($vapaa > 0) {
+                      echo "<a href='reserve.php?id=$id' class='btn btn-success m-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
+                    } else {
+                      echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Ei paikkoja </a>";
+                    }
+                  echo "</div>
                 </div>
-                
-                <div class='text-end'>
-                  <a href='tour.php?id=$id' class='btn btn-primary mt-1'>Lue lisää <i class='fas fa-binoculars fs-5 text-light'></i></a>
-                  <a href='reserve.php?id=$id' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>
               </div>
-              </div>
-            </div>
-          </div>";
+            </div>";
 
             $counter++;
           }
@@ -147,7 +156,7 @@ $searchResult = my_query($searchSql);
         ?>
       </div>
     </div>
-    <?php include 'footer.html'; ?>
+    <?php include 'footer.php'; ?>
   </div>
 
     <!-- Include Bootstrap JS -->

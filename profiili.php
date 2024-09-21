@@ -48,22 +48,64 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
         <!-- admin access part -->
-        <?php if ($loggedIn === 'admin') { ?>
-            <div class="col-md-8">
+        <div class="col-md-8">
+            <?php if ($loggedIn === 'admin') { ?>
                 <h2>Admin-Part</h2>
                 <a href="kayttajat.php" class="btn btn-primary">active</a>
                 <a href="tours.php" class="btn btn-primary">Kaikki matkat</a>
                 <a href="users.php" class="btn btn-primary">Kaikki käyttäjät</a>
                 <a href="tour_new.php" class="btn btn-primary">Lisää uusi matka</a>
                 <a href="user_new.php" class="btn btn-primary">Lisää uusi käyttäjä</a>
-
-
-
-            </div>
-        <?php } ?>
+            <?php } else {
+            ?>
+                <h2 class="badge text-bg-secondary text-light fs-3">Tilaukset</h2>
+                <?php
+                $sql = "SELECT * FROM `reservations` WHERE `user_id` = $user_id";
+                $result = my_query($sql);
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $tour_id = $row['tour_id'];
+                        $reservation_id = $row['reservation_id'];
+                        $sql = "SELECT * FROM `tours` WHERE `id` = $tour_id";
+                        $result2 = my_query($sql);
+                        if ($result2 && $result2->num_rows > 0) {
+                            $row2 = $result2->fetch_assoc();
+                            $tour_id = $row2['id'];
+                            $tour_name = $row2['name'];
+                            $tour_image = $row2['tourImage'];
+                            $tour_summary = $row2['summary'];
+                            $tour_price = $row2['price'];
+                            $tour_start_date = $row2['startDate'];
+                            $tour_start_date = date("d.m.Y", strtotime($tour_start_date));
+                            $tour_image = "http://$PALVELIN/profiilikuvat/tours/" . $tour_image;
+                            echo "<div class='card mb-3'>
+                            <div class='row g-0'>
+                                <div class='col-md-4'>
+                                    <img src='$tour_image' class='img-fluid rounded-start' alt='$tour_name'>
+                                </div>
+                                <div class='col-md-8'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'>$tour_name</h5>
+                                        <p class='card-text'>$tour_summary</p>
+                                        <p class='card-text'><strong>Hinta:</strong> $tour_price €</p>
+                                        <p class='card-text'><strong>Alkamispäivä:</strong> $tour_start_date</p>
+                                        <a href='tour.php?id=$tour_id' class='btn btn-primary'>Näytä matka</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>";
+                        }
+                    }
+                } else {
+                    echo "<p class='badge text-bg-danger fs-6'>Et ole tehnyt yhtään varausta</p>";
+                }
+                ?>
+            <?php }
+            ?>
+        </div>
 
     </div>
 </div>
 
 
-<?php include "footer.html"; ?>
+<?php include "footer.php"; ?>

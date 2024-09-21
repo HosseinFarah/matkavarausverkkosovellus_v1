@@ -146,5 +146,5 @@ var_export($_FILES);
 echo "<br>";
 var_export($errors);*/
 }
-
+ob_end_flush();
 ?>

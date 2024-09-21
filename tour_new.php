@@ -344,7 +344,7 @@ if ($loggedIn == 'admin') {
     </body>
 
 <?php
-    include 'footer.html';
+    include 'footer.php';
 }
 ob_end_flush();
 ?>

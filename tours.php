@@ -135,7 +135,7 @@ if ($loggedIn == 'admin') {
                 </div>
             </div>
         </div>
-        <?php include 'footer.html'; ?>
+        <?php include 'footer.php'; ?>
         </div>
     </body>
 
@@ -143,6 +143,6 @@ if ($loggedIn == 'admin') {
 <?php
 } else {
     include '404.html';
-    include 'footer.html';
+    include 'footer.php';
 }
 ?>

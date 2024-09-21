@@ -153,7 +153,7 @@ if($loggedIn == 'admin') {
        </div>
 
 </div>
-<?php include "footer.html"; ?>
+<?php include "footer.php"; ?>
 <?php
 } else {
          header("Location: index.php");

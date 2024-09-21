@@ -138,6 +138,6 @@ if ($loggedIn == 'admin') {
 <?php
 } else {
     include '404.html';
-    include 'footer.html';
+    include 'footer.php';
 }
 ?>

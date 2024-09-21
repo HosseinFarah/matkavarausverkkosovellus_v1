@@ -163,7 +163,7 @@ if($loggedIn=='admin'){
                 </div>
             </div>
         </div>
-        <?php include 'footer.html'; ?>
+        <?php include 'footer.php'; ?>
     </div>
 </body>
 </html>
@@ -172,5 +172,5 @@ ob_end_flush();
 }
 else{
   include '404.html';
-  include 'footer.html';
+  include 'footer.php';
 }

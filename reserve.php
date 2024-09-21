@@ -67,14 +67,14 @@ if ($_SESSION['user_id'] == null) {
                         <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Etusivu</a>
                     </div>
                     <div class='row d-flex alig-item-center'>
-                        <div class='col-md-4'>
+                        <div class='col-md-5'>
                             <div class='card mb-3'><img src="profiilikuvat/tours/<?= $tourImage ?>" class='card-img-top' alt='$name'>
                                 <div class='card-body'>
                                     <h5 class='card-title'><?= $title ?></h5>
-                                    <p class='card-text'><small class='text-muted'><?= $location ?> </small></p>
-                                    <p class='card-text'><small class='text-muted'><?= $startDate ?> </small></p>
-                                    <p class='card-text'><small class='text-muted'><?= $price ?> </small></p>
-                                    <p class='card-text'><small class='text-muted'><?= $duration ?> </small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-map-marker-alt"></i> Paikka:<strong class="badge text-bg-secondary fs-6"> <?= $location ?></strong> </small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-clock"></i> Aloituspäivämäärä:<strong class="badge text-bg-secondary fs-6"> <?= $startDate ?> </strong></small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-money-check-alt"></i> Hinta: <strong class="badge text-bg-secondary fs-6"><?= $price ?> </strong></small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-hourglass-half"></i> Kesto: <strong class="badge text-bg-secondary fs-6"><?= $duration ?></strong> </small></p>
                                 </div>
                             </div>
                         </div>
