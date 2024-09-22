@@ -55,10 +55,16 @@
       <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
       <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
     </div>
-    <div class="text-center">
+  </div>
+  <div class="row">
+    <div class=" col-md-6 text-start m-5">
       <span class="text-muted">
         <p class="text center">&copy; 2023 Web-ohjelmointikoulutus|HosseinFarahkordmahaleh</p>
       </span>
+    </div>
+    <!-- set HuviMatka.png to the footer in the right middle width:250px -->
+    <div class="col-md-3 text-end">
+      <img src="HuviMatka.png" alt="Logo" width="150px" class="rounded">
     </div>
   </div>
 </footer>

@@ -47,11 +47,11 @@ ini_set('default_charset', 'utf-8');
   ?>
   <nav class="topnav" id="myTopnav">
     <a class="brand-logo" href="index.php">
-      <img src="omniamusta_tausta.png" alt="Logo"></a>
+      <img src="HuviMatka.png" alt="Logo"></a>
     <input type="checkbox" id="toggle-btn">
     <label for="toggle-btn" class="icon open"><i class="fa fa-bars"></i></label>
     <label for="toggle-btn" class="icon close"><i class="fa fa-times"></i></label>
-    <a href="<?= "http://$PALVELIN/#etusivu" ?>" class="active">Etusivu</a>
+    <a href="<?= "http://$PALVELIN/" ?>" class="active">Etusivu</a>
     <a href="<?= "http://$PALVELIN/aboutus.php" ?>">Tietoa meistä</a>
     <a href="<?= "http://$PALVELIN/#otayhteytta" ?>">Ota yhteyttä</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
