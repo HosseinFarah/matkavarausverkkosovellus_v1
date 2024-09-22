@@ -58,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
                 <a href="user_new.php" class="btn btn-primary">Lisää uusi käyttäjä</a>
             <?php } else {
             ?>
-                <h2 class="badge text-bg-secondary text-light fs-3">Tilaukset</h2>
+                <h2 class="badge text-bg-danger text-light fs-3">Tilaukset</h2>
                 <?php
                 $sql = "SELECT * FROM `reservations` WHERE `user_id` = $user_id";
                 $result = my_query($sql);
@@ -103,7 +103,52 @@ if (isset($_SESSION['user_id'])) {
             <?php }
             ?>
         </div>
+    </div>
+    <div class="container">
+        <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
+        <div class="row flex-nowrap overflow-auto">
+            <!-- show this users all reviews for tours -->
+            <?php
+            $sql = "SELECT * FROM `reviews` WHERE `user_id` = $user_id";
+            $result = my_query($sql);
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $tour_id = $row['tour_id'];
+                    $rating = $row['rating'];
+                    $comment = $row['review'];
+                    $sql = "SELECT * FROM `tours` WHERE `id` = $tour_id";
+                    $result2 = my_query($sql);
+                    if ($result2 && $result2->num_rows > 0) {
+                        $row2 = $result2->fetch_assoc();
+                        $tour_id = $row2['id'];
+                        $tour_name = $row2['name'];
+                    }
+            ?>
+                    <div class="card mb-3 col-md-4 m-2">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $tour_name ?></h5>
+                            <!-- replace arvosana with <i class="fas fa-star"></i> stars are 5 starts and based on rating value starts color change to green -->
+                            <p class="card-text"><?php for ($i = 1; $i <= 5; $i++) {
+                                                                if ($i <= $rating) {
+                                                                    echo "<i class='fas fa-star text-success'></i>";
+                                                                } else {
+                                                                    echo "<i class='far fa-star'></i>";
+                                                                }
+                                                            } ?></p>
 
+
+                            <p class="card-text"><?= $comment ?></p>
+                            <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-primary">Näytä matka</a>
+                        </div>
+                    </div>
+            <?php
+                }
+            } else {
+                echo "<p class='badge text-bg-danger fs-6'>Et ole tehnyt yhtään arvostelua</p>";
+            }
+            ?>
+
+        </div>
     </div>
 </div>
 

@@ -119,6 +119,47 @@ if ($result && $result->num_rows > 0) {
                         <p><strong class="text-danger"><i class="fas fa-shuttle-van text-danger fs-5"></i> Start date:</strong> <?= htmlspecialchars($startDate) ?></p>
                     </div>
                     <hr>
+                    <!-- show all reviews for this tour join left for geting user firstname with table reviews and tours -->
+                    <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
+                    <div class="row flex-nowrap overflow-auto">
+                        <?php
+                        $tour_id = intval($_GET['id']);
+                        $sql = "SELECT * FROM `reviews` LEFT JOIN `users` ON `reviews`.`user_id` = `users`.`id` WHERE `tour_id` = $tour_id";
+                        $result = my_query($sql);
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $rating = $row['rating'];
+                                $comment = $row['review'];
+                                $user_firstname = $row['firstname'];
+                        ?>
+                                <div class="card mb-3 col-md-4 m-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $user_firstname ?></h5>
+                                        <p class="card-text"><?php for ($i = 1; $i <= 5; $i++) {
+                                                                    if ($i <= $rating) {
+                                                                        echo "<i class='fas fa-star text-success'></i>";
+                                                                    } else {
+                                                                        echo "<i class='fas fa-star text-secondary'></i>";
+                                                                    }
+                                                                } ?></p>
+                                        <p class="card-text"><?= $comment ?></p>
+
+                                    </div>
+                                </div>
+                        <?php
+
+                            }
+                        } else {
+                            echo "<p class='badge text-bg-danger fs-6'>Ei arvosteluja</p>";
+                        }
+                        ?>
+
+
+
+                    </div>
+
+
+                    <hr>
                     <div class="row mt-1 mb-1">
                         <div class="col-md-6"
                             <?php
@@ -243,7 +284,7 @@ if ($result && $result->num_rows > 0) {
                             </div>
                     </div>
                 </div>
-        <?php
+            <?php
                                 }
                                 // END-  if user has not reserved this tour, display the reservation button
                                 else {
@@ -257,7 +298,10 @@ if ($result && $result->num_rows > 0) {
                             }
                             // If the user is not logged in, display a login button
                             else {
-                                echo "<a href='login.php' class='btn btn-primary mt-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>";
+            ?>
+            <p class='badge text-bg-danger fs-6 m-1'>Kirjaudu sisään varataksesi kierroksen</p>
+            <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>
+        <?php
                             }
         ?>
             </div>
