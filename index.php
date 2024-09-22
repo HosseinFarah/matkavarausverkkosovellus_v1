@@ -121,6 +121,17 @@ $searchResult = my_query($searchSql);
               echo "</div><div class='row'>";
             }
 
+            $reviewSql = "SELECT AVG(rating) as rating FROM reviews WHERE tour_id = $id";
+            $reviewResult = my_query($reviewSql);
+            $reviewRow = $reviewResult->fetch_assoc();
+
+            $votesSql = "SELECT COUNT(*) as votes FROM reviews WHERE tour_id = $id";
+            $votesResult = my_query($votesSql);
+            $votesRow = $votesResult->fetch_assoc();
+            $voter = $votesRow['votes'];
+
+            $rating = intval($reviewRow['rating'])." <i class= 'fas fa-star text-light'></i>"." | ".$voter." <i class='fas fa-user text-light'></i>";
+
             echo "
             <div class='col-md-4 mb-4'>
               <div class='card shadow-lg shine-effect'>
@@ -135,11 +146,12 @@ $searchResult = my_query($searchSql);
                   <div class='card-footer rounded'>
                     <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>Hinta: $price €</p></small>
                     <small class='text-body-secondary'><p class='card-text fs-6 text-primary-emphasis '><i class='fas fa-calendar'></i> $startDate</p></small>
+                    <p class='card-text mt-2 text-end'><strong></strong><span class ='badge text-bg-primary'> $rating</span></p>
                   </div>
                   <div class='text-end'>
-                    <a href='tour.php?id=$id' class='btn btn-primary m-1'>Lue lisää <i class='fas fa-binoculars fs-5 text-light'></i></a>";
+                    <a href='tour.php?id=$id' class='btn btn-primary m-1'> <i class='fas fa-binoculars fs-5 text-light'></i></a>";
                     if ($vapaa > 0) {
-                      echo "<a href='reserve.php?id=$id' class='btn btn-success m-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
+                      echo "<a href='reserve.php?id=$id' class='btn btn-success m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>  </a>";
                     } else {
                       echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Ei paikkoja </a>";
                     }
