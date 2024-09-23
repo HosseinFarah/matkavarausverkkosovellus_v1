@@ -134,7 +134,9 @@ if ($result && $result->num_rows > 0) {
                         ?>
                                 <div class="card mb-3 col-md-4 m-2">
                                     <div class="card-body">
+                                        <img src="profiilikuvat/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                                         <h5 class="card-title"><?= $user_firstname ?></h5>
+
                                         <p class="card-text"><?php for ($i = 1; $i <= 5; $i++) {
                                                                     if ($i <= $rating) {
                                                                         echo "<i class='fas fa-star text-success'></i>";
@@ -279,8 +281,7 @@ if ($result && $result->num_rows > 0) {
                             ?>
                             </div>
                     </div>
-                </div>
-            <?php
+                <?php
                                 }
                                 // END-  if user has not reserved this tour, display the reservation button
                                 else {
@@ -294,48 +295,75 @@ if ($result && $result->num_rows > 0) {
                             }
                             // If the user is not logged in, display a login button
                             else {
-            ?>
-            <p class='badge text-bg-danger fs-6 m-1'>Kirjaudu sisään varataksesi kierroksen</p>
-            <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>
-        <?php
+                ?>
+                <p class='badge text-bg-danger fs-6 m-1'>Kirjaudu sisään varataksesi kierroksen</p>
+                <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>
+            <?php
                             }
-        ?>
-            </div>
-        </div>
-    </div>
-    </div>
-    <?php
-    include 'footer.php';
-    ?>
-    <script>
-        mapboxgl.accessToken = "<?= $pk ?>";
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            scrollZoom: false
-        });
-        var locationsString = '<?php echo $locations; ?>';
-        var locations = locationsString.split(',').map(function(item) {
-            var parts = item.split('-');
-            return [parseFloat(parts[0]), parseFloat(parts[1])];
-        });
-        var bounds = new mapboxgl.LngLatBounds();
-        locations.forEach(function(location) {
-            new mapboxgl.Marker({
-                    color: 'red',
-                    draggable: false,
-                    scale: 1,
-                })
-                .setLngLat(location)
-                .addTo(map);
-            bounds.extend(location);
-        });
+                            if ($loggedIn == 'admin') {
+            ?>
+                <!-- registered user in this tour -->
+                <h2 class="badge text-bg-danger text-light fs-3 mt-3">Rekisteröityneet käyttäjät</h2>
+                <div class="row flex-nowrap overflow-auto">
 
-        map.fitBounds(bounds, {
-            padding: 50,
-            duration: 2000
-        });
-    </script>
+                    <?php
+                                $sql = "SELECT * FROM `reservations` LEFT JOIN `users` ON `reservations`.`user_id` = `users`.`id` WHERE `tour_id` = $id";
+                                $result = my_query($sql);
+                                if ($result && $result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $user_firstname = $row['firstname'];
+                    ?>
+                            <div class="card mb-3 col-md-6 m-2">
+                                <div class="card-body">
+                                    <img src="profiilikuvat/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                    <h5 class="card-title"><?= $user_firstname . $row['lastname'] ?></h5>
+                                    <h5 class="card-text"><?= $row['email'] ?></h5>
+                                    <h5 class="card-text"><?= $row['mobilenumber'] ?></h5>
+                                </div>
+
+                            </div>
+
+                <?php
+                                    }
+                                }
+                            }
+                ?>
+                </div>
+                </div>
+
+                <?php
+                include 'footer.php';
+                ?>
+            </div>
 </body>
+<script>
+    mapboxgl.accessToken = "<?= $pk ?>";
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        scrollZoom: false
+    });
+    var locationsString = '<?php echo $locations; ?>';
+    var locations = locationsString.split(',').map(function(item) {
+        var parts = item.split('-');
+        return [parseFloat(parts[0]), parseFloat(parts[1])];
+    });
+    var bounds = new mapboxgl.LngLatBounds();
+    locations.forEach(function(location) {
+        new mapboxgl.Marker({
+                color: 'red',
+                draggable: false,
+                scale: 1,
+            })
+            .setLngLat(location)
+            .addTo(map);
+        bounds.extend(location);
+    });
+
+    map.fitBounds(bounds, {
+        padding: 50,
+        duration: 2000
+    });
+</script>
 
 </html>

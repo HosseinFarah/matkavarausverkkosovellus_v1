@@ -82,7 +82,7 @@ if ($loggedIn == 'admin') {
                         <?php
                         while ($row = $result->fetch_assoc()) {
                             foreach ($row as $key => $value) {
-                                $row[$key] = htmlspecialchars($value);
+                                $row[$key] = $value;
                             }
                             echo
                             "<tbody> 
