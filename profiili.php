@@ -114,7 +114,7 @@ if (isset($_SESSION['user_id'])) {
     ?>
         <div class="container">
             <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
-            <div class="row flex-nowrap overflow-auto">
+            <div class="row flex-nowrap overflow-x-scroll">
                 <!-- show this users all reviews for tours -->
                 <?php
                 $sql = "SELECT * FROM `reviews` WHERE `user_id` = $user_id";
