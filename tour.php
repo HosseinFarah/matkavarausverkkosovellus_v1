@@ -153,11 +153,7 @@ if ($result && $result->num_rows > 0) {
                             echo "<p class='badge text-bg-danger fs-6'>Ei arvosteluja</p>";
                         }
                         ?>
-
-
-
                     </div>
-
 
                     <hr>
                     <div class="row mt-1 mb-1">

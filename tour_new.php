@@ -335,6 +335,8 @@ if ($loggedIn == 'admin') {
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="painike">Tallenna</button>
+                                <!-- cancelled -->
+                                <a href="tours.php" class="btn btn-secondary fs-5">Peruuta</a>
                             </div>
                         </form>
                     </div>
