@@ -149,7 +149,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="col-md-4">
                         <div class="card">
                             <div class="d-flex justify-content-center align-items-center mt-3">
-                                <img src="<?= "http://$PALVELIN/profiilikuvat/" . $photo ?>" style="width: 300px ;" class="card-img-top rounded" alt="<?= $photo ?>">
+                                <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . $photo ?>" style="width: 300px ;" class="card-img-top rounded" alt="<?= $photo ?>">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Nimi: <?= $name ?></h5>

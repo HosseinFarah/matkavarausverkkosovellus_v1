@@ -134,7 +134,7 @@ if ($result && $result->num_rows > 0) {
                         ?>
                                 <div class="card mb-3 col-md-4 m-2">
                                     <div class="card-body">
-                                        <img src="profiilikuvat/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                        <img src="profiilikuvat/users/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                                         <h5 class="card-title"><?= $user_firstname ?></h5>
 
                                         <p class="card-text"><?php for ($i = 1; $i <= 5; $i++) {
@@ -315,7 +315,7 @@ if ($result && $result->num_rows > 0) {
                     ?>
                             <div class="card mb-3 col-md-6 m-2">
                                 <div class="card-body">
-                                    <img src="profiilikuvat/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                    <img src="profiilikuvat/users/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                                     <h5 class="card-title"><?= $user_firstname . $row['lastname'] ?></h5>
                                     <h5 class="card-text"><?= $row['email'] ?></h5>
                                     <h5 class="card-text"><?= $row['mobilenumber'] ?></h5>
