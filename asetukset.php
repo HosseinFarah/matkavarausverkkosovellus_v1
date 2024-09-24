@@ -32,6 +32,9 @@ elseif (strpos($_SERVER['HTTP_HOST'],"azurewebsites") !== false){
     $db_server = $_ENV['MYSQL_HOSTNAME'] ?? getenv('MYSQL_HOSTNAME');
     $db_username = $_ENV['MYSQL_USERNAME'] ?? getenv('MYSQL_USERNAME');
     $db_password = $_ENV['MYSQL_PASSWORD'] ?? getenv('MYSQL_PASSWORD');
+    $map_box = $_ENV['MAPBOX_TOKEN'] ?? getenv('MAPBOX_TOKEN');
+    $stripe_pk = $_ENV['STRIPE_PK'] ?? getenv('STRIPE_PK');
+    $stripe_private = $_ENV['STRIPE_PRIVATE'] ?? getenv('STRIPE_PRIVATE');
     /* Mailtrap */
     $EMAIL_ADMIN = $_ENV['EMAIL_ADMIN'] ?? getenv('EMAIL_ADMIN'); 
     $username_mailtrap = $_ENV['EMAIL_USERNAME'] ?? getenv('EMAIL_USERNAME');
