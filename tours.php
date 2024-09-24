@@ -1,6 +1,6 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kasvien hoito";
+$title = "Kaikki matkat";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -23,7 +23,7 @@ if ($loggedIn == 'admin') {
                 <div class="row">
                     <div class="col-md-12">
                         <!-- back to main page -->
-                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Etusivu</a>
+                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
                         <h1 class="text-center">Kaikki matkat</h1>
                         <p class="text-center">Täältä löydät kaikki matkat</p>
                     </div>
@@ -82,7 +82,7 @@ if ($loggedIn == 'admin') {
                         <?php
                         while ($row = $result->fetch_assoc()) {
                             foreach ($row as $key => $value) {
-                                $row[$key] = htmlspecialchars($value);
+                                $row[$key] = $value;
                             }
                             echo
                             "<tbody> 
@@ -135,7 +135,7 @@ if ($loggedIn == 'admin') {
                 </div>
             </div>
         </div>
-        <?php include 'footer.html'; ?>
+        <?php include 'footer.php'; ?>
         </div>
     </body>
 
@@ -143,6 +143,6 @@ if ($loggedIn == 'admin') {
 <?php
 } else {
     include '404.html';
-    include 'footer.html';
+    include 'footer.php';
 }
 ?>

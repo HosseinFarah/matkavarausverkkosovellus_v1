@@ -1,6 +1,6 @@
 <?php
 ob_start();
-$title = "Kasvien hoito";
+$title = "UUsi käyttäjä";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -140,8 +140,11 @@ if($loggedIn == 'admin') {
                                           </div>
                                           <button type="button" class="float-end btn btn-secondary m-3" onclick="window.location.href='users.php'">Peruuta</button>
                                           <button name='painike' type="submit" class="mt-3 float-end btn btn-primary">Rekisteröidy</button>
+                                          
                                    </fieldset>
                             </form>
+              </div>
+              
 
                      <?php } ?>
               </div>
@@ -153,7 +156,7 @@ if($loggedIn == 'admin') {
        </div>
 
 </div>
-<?php include "footer.html"; ?>
+<?php include "footer.php"; ?>
 <?php
 } else {
          header("Location: index.php");

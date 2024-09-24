@@ -5,7 +5,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-
+  overflow: auto;
 }
 body{
   display: flex;
@@ -302,6 +302,7 @@ li {
   background-size: cover;
   background-attachment: fixed;
   background-position-y: center;
+  z-index: 100;
 }
 
 .topnav a {
@@ -431,7 +432,7 @@ li {
 }
 a> span {
   color: #ffffff;
-  font-size: 2rem;
+  font-size: 1rem;
   float: right;
   margin-right: 2%;
   transition: margin-right 0.2s ease-in-out;

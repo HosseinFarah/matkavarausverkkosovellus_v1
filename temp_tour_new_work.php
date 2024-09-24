@@ -194,7 +194,7 @@ if ($loggedIn == 'admin') {
                     </div>
                 </div>
             </div>
-            <?php include 'footer.html'; ?>
+            <?php include 'footer.php'; ?>
         </div>
     </body>
 

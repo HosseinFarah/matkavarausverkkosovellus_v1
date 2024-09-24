@@ -4,7 +4,7 @@ $PALVELIN = $_SERVER['HTTP_HOST'];
 $PALVELU = "";
 $LINKKI_RESETPASSWORD = "resetpassword.php";
 $LINKKI_VERIFICATION = "verification.php";
-$PALVELUOSOITE = "asiakaspalvelu@neilikka.fi";
+$PALVELUOSOITE = "asiakaspalvelu@huvimatka.fi";
 
 define("OLETUSSIVU","profiili.php");
 define("PROFIILIKUVAKANSIO","profiilikuvat");
@@ -14,7 +14,6 @@ define("PROFIILIKUVAKOKO",5242880);
 $DB = "tourdb";
 $LOCAL = in_array($_SERVER['REMOTE_ADDR'],array('127.0.0.1','REMOTE_ADDR' => '::1'));
 if ($LOCAL) {	
-    define("DEBUG",true);
     $tunnukset = "tunnukset.php";
     if (file_exists($tunnukset)){
         include_once("tunnukset.php");
@@ -26,15 +25,17 @@ if ($LOCAL) {
     $db_server = $db_server_local;
     $db_username = $db_username_local; 
     $db_password = $db_password_local;
-    $EMAIL_ADMIN = $admin_mail;
     }
 elseif (strpos($_SERVER['HTTP_HOST'],"azurewebsites") !== false){
     define("DEBUG",false);
     $db_server = $_ENV['MYSQL_HOSTNAME'] ?? getenv('MYSQL_HOSTNAME');
     $db_username = $_ENV['MYSQL_USERNAME'] ?? getenv('MYSQL_USERNAME');
     $db_password = $_ENV['MYSQL_PASSWORD'] ?? getenv('MYSQL_PASSWORD');
+    $map_box = $_ENV['MAPBOX_TOKEN'] ?? getenv('MAPBOX_TOKEN');
+    $stripe_pk = $_ENV['STRIPE_PK'] ?? getenv('STRIPE_PK');
+    $stripe_private = $_ENV['STRIPE_PRIVATE'] ?? getenv('STRIPE_PRIVATE');
     /* Mailtrap */
-    $EMAIL_ADMIN = $_ENV['EMAIL_ADMIN'] ?? getenv('EMAIL_ADMIN'); 
+    $admin_mail= $_ENV['EMAIL_ADMIN'] ?? getenv('EMAIL_ADMIN'); 
     $username_mailtrap = $_ENV['EMAIL_USERNAME'] ?? getenv('EMAIL_USERNAME');
     $password_mailtrap = $_ENV['EMAIL_PASSWORD'] ?? getenv('EMAIL_PASSWORD');
     }

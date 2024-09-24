@@ -163,10 +163,10 @@ if($loggedIn=='admin'){
         </div>
     </div>
 </div>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 </body>
 <?php
 } else {
     include '404.html';
-    include 'footer.html';
+    include 'footer.php';
 }

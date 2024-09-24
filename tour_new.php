@@ -38,6 +38,36 @@ if (isset($_POST['painike'])) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     $extensions_arr = array("jpg", "jpeg", "png", "gif");
 
+
+    // upload multiple images uploaded
+    if (isset($_FILES['images'])) {
+        $images = "";
+        $target_dir = "profiilikuvat/tours/";
+        $image_names = is_array($_FILES['images']['name']) ? $_FILES['images']['name'] : array($_FILES['images']['name']);
+
+        $total = count($image_names);
+        for ($i = 0; $i < $total; $i++) {
+            $image = $image_names[$i];
+            $target_file = $target_dir . basename($image);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $extensions_arr = array("jpg", "jpeg", "png", "gif");
+
+            // Check if the file type is allowed
+            if (in_array($imageFileType, $extensions_arr)) {
+                move_uploaded_file($_FILES['images']['tmp_name'][$i], $target_file);
+                $images .= $image . ",";
+            } else {
+                // Handle invalid file type
+                die("Invalid file type.");
+            }
+        }
+        $images = rtrim($images, ",");
+    } else {
+        // No new image, use the current one
+        $images = $row['images'];
+    }
+
+
     if (in_array($imageFileType, $extensions_arr)) {
         move_uploaded_file($_FILES['tourImage']['tmp_name'], $target_dir . $tourImage);
     }
@@ -186,7 +216,7 @@ if (isset($_POST['painike'])) {
     //  extract($values);
 
     if (empty($errors)) {
-        $sql = "INSERT INTO tours (name, title, summary, description, location, startDate, groupSize, price, places, duration, tourImage, locations) VALUES ('$name', '$title', '$summary', '$description', '$location', '$startDate', '$groupSize', '$price', '$places', '$duration', '$tourImage', '$locations')";
+        $sql = "INSERT INTO tours (name, title, summary, description, location, startDate, groupSize, price, places, duration, tourImage, locations,images) VALUES ('$name', '$title', '$summary', '$description', '$location', '$startDate', '$groupSize', '$price', '$places', '$duration', '$tourImage', '$locations','$images')";
         $result = my_query($sql);
         if ($result) {
             $success = "success";
@@ -324,6 +354,12 @@ if ($loggedIn == 'admin') {
                                 </div>
                             </div>
 
+                            <!-- make upload multiple images max 5 images -->
+                            <div class="mb-3">
+                                <label for="images" class="form-label">Matkan kuvat</label>
+                                <input type="file" class="form-control" id="images" name="images[]" multiple>
+                            </div>
+
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Matkan kohteet:</span>
                                 <textarea pattern="<?= pattern('locations'); ?>" id="locations" name="locations" class="form-control <?= is_invalid('locations'); ?>" title="Matkan kohteet" required autofocus><?= arvo("locations"); ?></textarea>
@@ -335,6 +371,8 @@ if ($loggedIn == 'admin') {
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="painike">Tallenna</button>
+                                <!-- cancelled -->
+                                <a href="tours.php" class="btn btn-secondary fs-5">Peruuta</a>
                             </div>
                         </form>
                     </div>
@@ -344,7 +382,7 @@ if ($loggedIn == 'admin') {
     </body>
 
 <?php
-    include 'footer.html';
+    include 'footer.php';
 }
 ob_end_flush();
 ?>

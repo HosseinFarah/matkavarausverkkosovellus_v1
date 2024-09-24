@@ -50,7 +50,7 @@ if($loggedIn=='admin'){
 else{
   include '404.html';
 ?>
-    <?php include 'footer.html'; ?>
+    <?php include 'footer.php'; ?>
 <?php
 }
 ?>

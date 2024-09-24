@@ -1,6 +1,6 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kasvien hoito";
+$title = "Kaikki käyttäjät";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -18,7 +18,7 @@ if ($loggedIn == 'admin') {
             <div class="container my-5">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Etusivu</a>
+                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
                         <h1 class="text-center">Kaikki käyttäjät</h1>
                         <p class="text-center">Täältä löydät kaikki käyttäjät</p>
                     </div>
@@ -138,6 +138,6 @@ if ($loggedIn == 'admin') {
 <?php
 } else {
     include '404.html';
-    include 'footer.html';
+    include 'footer.php';
 }
 ?>

@@ -52,4 +52,4 @@ include "kasittelija_resetpassword.php";
 <a href="forgotpassword.php" class="<?= $display ?? ""; ?>">Pyydä salasanan uusiminen uudestaan</a>
 </p>
 </div>
-<?php include "footer.html"; ?>
+<?php include "footer.php"; ?>

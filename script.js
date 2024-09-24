@@ -83,19 +83,19 @@ function setActiveLink() {
   
   
 
-    document.getElementById('read-more-btn').addEventListener('click', function(event) {
-      event.preventDefault();
-      var moreContent = document.querySelector('.more-content');
-      var button = this;
+  //   document.getElementById('read-more-btn').addEventListener('click', function(event) {
+  //     event.preventDefault();
+  //     var moreContent = document.querySelector('.more-content');
+  //     var button = this;
 
-      if (moreContent.style.display === 'none') {
-          moreContent.style.display = 'inline';
-          button.textContent = 'Read Less';
-      } else {
-          moreContent.style.display = 'none';
-          button.textContent = 'Read More';
-      }
-  });
+  //     if (moreContent.style.display === 'none') {
+  //         moreContent.style.display = 'inline';
+  //         button.textContent = 'Read Less';
+  //     } else {
+  //         moreContent.style.display = 'none';
+  //         button.textContent = 'Read More';
+  //     }
+  // });
 
 // mapbox
   
