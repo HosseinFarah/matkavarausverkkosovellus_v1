@@ -40,6 +40,11 @@ if (empty($errors['password2']) and empty($errors['password'])) {
     if (empty($errors)) {
         $updated = date('Y-m-d H:i:s');
         $password = password_hash($password, PASSWORD_DEFAULT);
+        if(isset($POST['password']) && !empty($POST['password'])) {
+            $password = password_hash($POST['password'], PASSWORD_DEFAULT);
+        } else {
+            $password = $row['password'];
+        }
         $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  password='$password', image='$image' , updated='$updated' WHERE id='$id'";
         $result_update=my_query($query_update);
         if ($result_update) {

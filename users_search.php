@@ -4,25 +4,48 @@ $PALVELIN = $_SERVER['HTTP_HOST'];
 $title = "kaikki tilaukset";
 $loggedIn = secure_page();
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $search = trim($_POST['search']) ?? '';
-    $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city,  roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.firstname LIKE ? OR users.lastname LIKE ? OR users.city LIKE ? OR roles.name LIKE ? OR users.email LIKE ?";
+// filter usres by role with combo box with values admin guide user
+if (isset($_POST['roleBtn'])) {
+    $role = $_POST['role'];
+    $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.role = ?";
     $stmt = $yhteys->prepare($sql);
-
-    $searchParam = "%{$search}%";
-    $stmt->bind_param("sssss", $searchParam, $searchParam, $searchParam, $searchParam, $searchParam);
+    $stmt->bind_param("i", $role);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
 }
 
-if (isset($_POST['clearBtn'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['search'])) {
+        $search = trim($_POST['search']) ?? '';
+        $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city,  roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.firstname LIKE ? OR users.lastname LIKE ? OR users.city LIKE ? OR roles.name LIKE ? OR users.email LIKE ?";
+        $stmt = $yhteys->prepare($sql);
 
-    $sql = "SELECT users.id, users.firstname, users.lastname,users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id";
-    $result = my_query($sql);
-    header("Location: users.php");
+        $searchParam = "%{$search}%";
+        $stmt->bind_param("sssss", $searchParam, $searchParam, $searchParam, $searchParam, $searchParam);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+    } elseif (isset($_POST['roleBtn'])) {
+        $role = $_POST['role'];
+        $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.role = ?";
+        $stmt = $yhteys->prepare($sql);
+        $stmt->bind_param("i", $role);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+    } elseif (isset($_POST['clearBtn'])) {
+        $sql = "SELECT users.id, users.firstname, users.lastname,users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id";
+        $result = my_query($sql);
+        header("Location: users_search.php");
+    }
 }
+
+
+
+
+
+
 
 if ($loggedIn == 'admin') {
 ?>
@@ -43,6 +66,22 @@ if ($loggedIn == 'admin') {
                             <button type="submit" class="btn btn-primary m-2" name="reservationBtn">Hae</button>
                             <!-- make button for clear search -->
                             <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>>Tyhjennä</button>
+
+                        </div>
+                    </div>
+                </form>
+                <!-- filter usres by role with combo box with values admin guide user-->
+                <form method="post">
+                    <div class="row d-flex justify-content-start mt-5">
+                        <div class="col-md-4 text-start">
+                            <select name="role" class="form-select" aria-label="Default select example">
+                                <option value="0" disabled selected></option>
+                                <option value="1">Käyttäjä</option>
+                                <option value="2">Opas</option>
+                                <option value="3">Admin</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary m-2" name="roleBtn">Hae</button>
+                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($_POST['role'])) echo "disabled"; ?>>Tyhjennä</button>
 
                         </div>
                     </div>

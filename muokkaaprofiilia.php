@@ -128,7 +128,7 @@ include 'muokkaaprofiiliatarkistus.php';
                     <div class="input-group mb-3">
                         <span class="input-group-text">Salasana:</span>
                         <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
-                            pattern="<?= pattern('password'); ?>" required autofocus />
+                            pattern="<?= pattern('password'); ?>"  autofocus />
                         <div class="invalid-feedback">
                             <?= $errors['password'] ?? ""; ?>
                         </div>
@@ -137,7 +137,7 @@ include 'muokkaaprofiiliatarkistus.php';
                     <div class="input-group mb-3">
                         <span class="input-group-text">Vahvista salasana:</span>
                         <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
-                            pattern="<?= pattern('password2'); ?>" required autofocus />
+                            pattern="<?= pattern('password2'); ?>"  autofocus />
                         <div class="invalid-feedback">
                             <?= $errors['password2'] ?? ""; ?>
                         </div>
