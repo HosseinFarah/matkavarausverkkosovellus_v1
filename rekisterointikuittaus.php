@@ -1,5 +1,5 @@
 <?php 
-$title = 'Kuvagalleria';
+$title = 'Rekisteröintikuittaus';
 $css = 'kuvagalleria.css';
 include "header.php"; 
 ?>

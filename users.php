@@ -1,6 +1,6 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kasvien hoito";
+$title = "Kaikki käyttäjät";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";

@@ -4,7 +4,7 @@ $PALVELIN = $_SERVER['HTTP_HOST'];
 $PALVELU = "";
 $LINKKI_RESETPASSWORD = "resetpassword.php";
 $LINKKI_VERIFICATION = "verification.php";
-$PALVELUOSOITE = "asiakaspalvelu@neilikka.fi";
+$PALVELUOSOITE = "asiakaspalvelu@huvimatka.fi";
 
 define("OLETUSSIVU","profiili.php");
 define("PROFIILIKUVAKANSIO","profiilikuvat");
@@ -25,7 +25,6 @@ if ($LOCAL) {
     $db_server = $db_server_local;
     $db_username = $db_username_local; 
     $db_password = $db_password_local;
-    $EMAIL_ADMIN = $admin_mail;
     }
 elseif (strpos($_SERVER['HTTP_HOST'],"azurewebsites") !== false){
     define("DEBUG",false);
@@ -36,7 +35,7 @@ elseif (strpos($_SERVER['HTTP_HOST'],"azurewebsites") !== false){
     $stripe_pk = $_ENV['STRIPE_PK'] ?? getenv('STRIPE_PK');
     $stripe_private = $_ENV['STRIPE_PRIVATE'] ?? getenv('STRIPE_PRIVATE');
     /* Mailtrap */
-    $EMAIL_ADMIN = $_ENV['EMAIL_ADMIN'] ?? getenv('EMAIL_ADMIN'); 
+    $admin_mail= $_ENV['EMAIL_ADMIN'] ?? getenv('EMAIL_ADMIN'); 
     $username_mailtrap = $_ENV['EMAIL_USERNAME'] ?? getenv('EMAIL_USERNAME');
     $password_mailtrap = $_ENV['EMAIL_PASSWORD'] ?? getenv('EMAIL_PASSWORD');
     }

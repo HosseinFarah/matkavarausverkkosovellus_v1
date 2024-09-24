@@ -1,6 +1,6 @@
 <?php
 ob_start();
-$title = "Kasvien hoito";
+$title = "UUsi käyttäjä";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";

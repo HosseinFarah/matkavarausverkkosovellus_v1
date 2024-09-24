@@ -239,6 +239,7 @@ if (isset($_SESSION['user_id'])) {
                     <a href="tour_new.php" class="btn btn-primary m-1">Lisää uusi matka</a>
                     <a href="user_new.php" class="btn btn-primary m-1">Lisää uusi käyttäjä</a>
                     <a href="reviews.php" class="btn btn-primary mt-1">Kaikki arvostelut</a>
+                    <a href="reserved.php" class="btn btn-primary mt-1">Kaikki varaukset</a>
                 <?php } else {
                 ?>
                     <h2 class="badge text-bg-danger text-light fs-3">Tilaukset</h2>

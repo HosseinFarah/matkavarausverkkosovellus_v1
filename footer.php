@@ -5,10 +5,11 @@
         <div class="col-md-6">
           <h5>Yhteystiedot</h5>
           <p>
-            Web-ohjelmointikoulutus<br />
-            Osoite: Koulukatu 123, 12345 Kaupunki<br />
-            Puhelin: 040 123 4567<br />
-            Sähköposti: info@huvimatka.fi
+            Huvimatkat Oy <br>
+            Rautatienkatu 21 <br>
+            33100 Tampere <br>
+            Puh. 010 123 4567 <br>
+            Sähköposti: <?php echo $PALVELUOSOITE ?> <br>
           </p>
         </div>
         <!-- Lue lisää meistä -->
@@ -69,7 +70,7 @@
     <div class="row">
       <div class=" col-sm-12 m-1">
         <span class="text-muted">
-          <h6 class="text-center">&copy; 2023 Web-ohjelmointikoulutus|HosseinFarahkordmahaleh</h6>
+          <h6 class="text-center">&copy; 2024 Huvimatkat Oy | HosseinFarahkordmahaleh</h6></h6>
         </span>
       </div>
     </div>
