@@ -75,7 +75,9 @@ function token_is_valid(string $token)
     // parse the token to get the selector and validator [$selector, $validator] = parse_token($token);
     [$selector, $validator] = parse_token($token);
     $tokens = find_rememberme_token($selector);
-    if (!$tokens) return false;
+    if (!$tokens || empty($tokens['hashed_validator'])) {
+        return false; // Return false if no token is found or if hashed_validator is null/empty
+    }
     $verified_token = password_verify($validator, $tokens['hashed_validator']);
     return $verified_token ? $tokens['user_id'] : false;
 }

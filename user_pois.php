@@ -11,7 +11,7 @@ if ($loggedIn == 'admin') {
         echo "Failed to delete record";
     }
     // redirect back the previous page
-    header("Location: " . $_SERVER['HTTP_REFERER']); 
+    header("Location: users.php"); 
     exit;
 } else {
     header("Location: index.php");

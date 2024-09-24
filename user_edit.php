@@ -156,8 +156,7 @@ if($loggedIn=='admin'){
 
                     <div>
                         <button type="submit" name="painike" class="btn btn-primary">Päivitä</button>
-                        <button type="button" class="btn btn-secondary" onclick="window.history.back()"> Peruuta </button>
-                    </div>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='users.php'">Peruuta</button>                    </div>
                 </fieldset>
             </form>
         </div>

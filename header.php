@@ -73,7 +73,6 @@ if (!$loggedIn) {
     switch ($loggedIn) {
       case 'admin':
         echo "<a class='" . active('kayttajat', $active) . "' href='kayttajat.php'>Käyttäjät</a>";
-        echo "<a class='" . active('hfk', $active) . "' href='hfk.php'>HFK</a>";
         echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Asetukset</a>";
         echo '<a href="poistu.php">Poistu</a>';
         break;
