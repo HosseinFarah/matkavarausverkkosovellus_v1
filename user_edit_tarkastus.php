@@ -9,7 +9,7 @@ if (isset($_POST['painike'])) {
     $mobilenumber = $_POST['mobilenumber'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
-    $target_dir = "profiilikuvat/";
+    $target_dir = "profiilikuvat/users/";
 
     
 if (empty($errors['password2']) and empty($errors['password'])) {

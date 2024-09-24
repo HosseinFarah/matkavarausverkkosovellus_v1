@@ -52,7 +52,7 @@ if($loggedIn=='admin'){
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="<?= "http://$PALVELIN/profiilikuvat/" . htmlspecialchars($image, ENT_QUOTES) ?>" class="img-thumbnail" alt="Profiilikuva" />
+                    <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . htmlspecialchars($image, ENT_QUOTES) ?>" class="img-thumbnail" alt="Profiilikuva" />
             <form method="post" class="mb-3 needs-validation" enctype="multipart/form-data" novalidate>
                 <fieldset>
                     <legend>Rekisteröityminen</legend>

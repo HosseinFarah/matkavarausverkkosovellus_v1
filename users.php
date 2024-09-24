@@ -83,7 +83,7 @@ if ($loggedIn == 'admin') {
                                     <td><?= $row['lastname'] ?></td>
                                     <td><?= $row['city'] ?></td>
                                     <td><?= $row['role'] ?></td>
-                                    <td><img src='http://<?= $PALVELIN ?>/profiilikuvat/<?= $row['image'] ?>' alt='kuva' class='rounded' style='width: 100px;'></td>
+                                    <td><img src='http://<?= $PALVELIN ?>/profiilikuvat/users/<?= $row['image'] ?>' alt='kuva' class='rounded' style='width: 100px;'></td>
                                     <td>
                                         <div class='row'>
                                             <a href='user_edit.php?id=<?= $row['id'] ?>'><i class='text-primary fs-4 fas fa-edit'></i></a>
