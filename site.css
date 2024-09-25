@@ -467,10 +467,10 @@ a>span:hover {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 200%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-  transform: skewX(-45deg);
+  width: 250%;
+  height: 200%;
+  background: rgba(20, 103, 151, 0.5);
+  transform: skewX(180deg);
   transition: all 0.7s ease-in-out;
   opacity: 0;
   pointer-events: none; /* Ensures pseudo-element doesn't block interaction */

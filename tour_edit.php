@@ -182,6 +182,9 @@ if ($loggedIn == 'admin') {
                                     <img id="imagePreview" src="profiilikuvat/tours/<?= $row['images'] ?>" alt="<?= $row['images'] ?>" class="img-fluid mt-2">
                                 </div>
                                 <?php
+                                if (empty($row['images'])) {
+                                    $row['images'] = "default.jpg";
+                                }
                                 $image_names = explode(",", $row['images']);
                                 foreach ($image_names as $image_name) {
                                     echo '<img src="profiilikuvat/tours/' . $image_name . '" alt="' . $row['name'] . '" class="img-fluid mt-2" width="100">';

@@ -46,20 +46,21 @@ ini_set('default_charset', 'utf-8');
   /* Huom. nav-suojaus vie viimeiset linkit oikealle. */
   ?>
   <nav class="topnav" id="myTopnav">
-    <a class="brand-logo" href="index.php">
-      <img src="HuviMatka.png" alt="Logo"></a>
-    <input type="checkbox" id="toggle-btn">
-    <label for="toggle-btn" class="icon open"><i class="fa fa-bars"></i></label>
-    <label for="toggle-btn" class="icon close"><i class="fa fa-times"></i></label>
-    <a href="<?= "http://$PALVELIN/" ?>" class="active">Etusivu</a>
-    <a href="<?= "http://$PALVELIN/aboutus.php" ?>">Tietoa meistä</a>
-    <a href="<?= "http://$PALVELIN/#otayhteytta" ?>">Ota yhteyttä</a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-      <i class="fa fa-bars"></i>
-    </a>
-    <a class="<?= ($active == 'kuvagalleria') ? 'active' : ''; ?>" href="kuvagalleria.php">Kuvagalleria</a>
-    <?php
-    /*if ($loggedIn === 'admin') {
+      <a class="brand-logo" href="index.php">
+        <img src="HuviMatka.png" alt="Logo"></a>
+      <!-- liged in user image -->
+      <input type="checkbox" id="toggle-btn">
+      <label for="toggle-btn" class="icon open"><i class="fa fa-bars"></i></label>
+      <label for="toggle-btn" class="icon close"><i class="fa fa-times"></i></label>
+      <a href="<?= "http://$PALVELIN/" ?>" class="active">Etusivu</a>
+      <a href="<?= "http://$PALVELIN/aboutus.php" ?>">Tietoa meistä</a>
+      <a href="<?= "http://$PALVELIN/#otayhteytta" ?>">Ota yhteyttä</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+      <!-- <a class="<?= ($active == 'kuvagalleria') ? 'active' : ''; ?>" href="kuvagalleria.php">Kuvagalleria</a> -->
+      <?php
+      /*if ($loggedIn === 'admin') {
   echo "<a class='".active('kayttajat',$active). "' href='kayttajat.php'>Käyttäjät</a>";
   }
 if ($loggedIn) {
@@ -70,23 +71,54 @@ if (!$loggedIn) {
   echo "<a class='nav-suojaus ".active('login',$active)."' href='login.php'>Kirjautuminen</a>";
   }*/
 
-    switch ($loggedIn) {
-      case 'admin':
-        echo "<a class='" . active('kayttajat', $active) . "' href='kayttajat.php'>Käyttäjät</a>";
-        echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Asetukset</a>";
-        echo '<a href="poistu.php">Poistu</a>';
-        break;
-      case true:
-        echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Profiili</a>";
-        /* Huom. tästä oikeaan laitaan. */
-        // echo "<a class='nav-suojaus " . active('phpinfo', $active) . "' href='phpinfo.php'>phpinfo</a>";
-        // echo "<a class='" . active('fake', $active) . "' href='fake.php'>fake</a>";
-        echo '<a href="poistu.php">Poistu</a>';
-        break;
-      default:
-        echo "<a class='nav-suojaus " . active('login', $active) . "' href='login.php'>Kirjautuminen</a>";
-        break;
-    }
-
-    ?>
+      switch ($loggedIn) {
+        case 'admin':
+          echo "<a class='" . active('kayttajat', $active) . "' href='kayttajat.php'>Käyttäjät</a>";
+          echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Asetukset</a>";
+          echo '<a href="poistu.php">Poistu</a>';
+          break;
+        case true:
+          // echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Profiili</a>";
+          /* Huom. tästä oikeaan laitaan. */
+          // echo "<a class='nav-suojaus " . active('phpinfo', $active) . "' href='phpinfo.php'>phpinfo</a>";
+          // echo "<a class='" . active('fake', $active) . "' href='fake.php'>fake</a>";
+          // echo '<a href="poistu.php">Poistu</a>';
+          break;
+        default:
+          echo "<a class='nav-suojaus " . active('login', $active) . "' href='login.php'>Kirjautuminen</a>";
+          break;
+      }
+// dropdown menu
+      if ($loggedIn && $_SESSION['user_id']) {
+        $id = intval($_SESSION['user_id']);
+        $sql = "SELECT image FROM users WHERE id = $id";
+        $result = my_query($sql);
+        if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $image = $row['image'];
+      ?>
+       <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown text-end">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="profiilikuvat/users/<?= $image ?>" alt="Profile" class="rounded-circle" width="40" height="40">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class='dropdown-item text-primary " . active('profiili', $active) . "' href='profiili.php'>Profiili</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-danger" href="poistu.php">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+      <?php
+        }
+      }
+      ?>
   </nav>
+  <?php
+  if($_SERVER['PHP_SELF'] == '/profiili.php') {
+
+  } else {
+    echo '<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>';
+  }
