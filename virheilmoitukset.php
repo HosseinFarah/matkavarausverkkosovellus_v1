@@ -31,17 +31,17 @@ $patterns['city'] = "/^[a-zåäöA-ZÅÄÖ '\-]+$/";
 $patterns['payment_method'] = "/^(sampo|nordea|osuuspankki|aktia)$/";
 $patterns['feedback'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-]+$/";
 $patterns['name'] = "/^[a-zåäöA-ZÅÄÖ '\-]+$/";
-$patterns['title'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-]+$/";
-$patterns['summary'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-]+$/";
-$patterns['description'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-]+$/";
+$patterns['title'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-:]+$/";
+$patterns['summary'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-,.()\":!]+$/";
+$patterns['description'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-.,():!\"\\s]+$/";
 $patterns['location'] = "/^[a-zåäöA-ZÅÄÖ '\-]+$/";
 $patterns['startDate'] = "/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/";
 $patterns['groupSize'] = "/^[0-9]+$/";
-$patterns['price'] = "/^[0-9]+$/";
+$patterns['price'] = "/^[0-9\.]+$/";
 $patterns['places'] = "/^[0-9]+$/";
 $patterns['duration'] = "/^[0-9]+$/";
 $patterns['tourImage'] = "/^[^\s]+\.(jpe?g|png|gif|bmp)$/";
-$patterns['locations'] = "/^[0-9\-,]+$/";
+$patterns['locations'] = "/^[0-9\-,.]+$/";
 $patterns['review'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-,!:;().\"\'*\n\r]+$/";
 
 

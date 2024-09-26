@@ -11,24 +11,24 @@ include 'header.php';
 
 $kentat = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration', 'tourImage', 'locations');
 $kentat_suomi = array('Matkan nimi', 'Matkan otsikko', 'Matkan yhteenveto', 'Matkan kuvaus', 'Matkan paikka', 'Matkan aloituspäivä', 'Matkan ryhmäkoko', 'Matkan hinta', 'Matkan paikkoja', 'Matkan kesto', 'Matkan kuva', 'Matkan kohteet');
-$pakolliset = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations');
+$pakolliset = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations', 'tourImage');
 
 include 'virheilmoitukset.php';
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
 
 if (isset($_POST['painike'])) {
     // Initialize variables
-    $name = $_POST['name'] ?? '';
-    $title = $_POST['title'] ?? '';
-    $summary = $_POST['summary'] ?? '';
-    $description = $_POST['description'] ?? '';
-    $location = $_POST['location'] ?? '';
-    $startDate = $_POST['startDate'] ?? '';
-    $groupSize = $_POST['groupSize'] ?? '';
-    $price = $_POST['price'] ?? '';
-    $places = $_POST['places'] ?? '';
-    $duration = $_POST['duration'] ?? '';
-    $locations = $_POST['locations'] ?? '';
+    // $name = $_POST['name'] ?? '';
+    // $title = $_POST['title'] ?? '';
+    // $summary = $_POST['summary'] ?? '';
+    // $description = $_POST['description'] ?? '';
+    // $location = $_POST['location'] ?? '';
+    // $startDate = $_POST['startDate'] ?? '';
+    // $groupSize = $_POST['groupSize'] ?? '';
+    // $price = $_POST['price'] ?? '';
+    // $places = $_POST['places'] ?? '';
+    // $duration = $_POST['duration'] ?? '';
+    // $locations = $_POST['locations'] ?? '';
     // include 'tour_new_validation.php';
 
     // File upload handling
@@ -58,7 +58,7 @@ if (isset($_POST['painike'])) {
                 $images .= $image . ",";
             } else {
                 // Handle invalid file type
-                die("Invalid file type.");
+                $success = "danger";
             }
         }
         $images = rtrim($images, ",");
@@ -194,7 +194,17 @@ if (isset($_POST['painike'])) {
         }
     }
 
-
+    $tourImage = $_FILES["tourImage"]["name"] ?? "";
+    $kentta_11 = "tourImage";
+    if (in_array($kentta_11, $pakolliset) and empty($tourImage)) {
+        $errors[$kentta_11] = "Kuva on pakollinen tieto!";
+    } else {
+        if (isset($patterns[$kentta_11]) and !preg_match($patterns[$kentta_11], $tourImage)) {
+            $errors[$kentta_11] = "Kuva ei ole kelvollinen!";
+        } else {
+            $tourImage = $yhteys->real_escape_string(strip_tags(trim($tourImage)));
+        }
+    }
 
     $locations = $_POST["locations"] ?? "";
     $kentta_12 = "locations";

@@ -4,7 +4,7 @@ $title = "Kaikki matkat";
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
-$loggedIn = secure_page();
+$loggedIn = secure_page('admin');
 
 include 'virheilmoitukset.php';
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
