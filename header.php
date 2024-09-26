@@ -54,7 +54,7 @@ ini_set('default_charset', 'utf-8');
       <label for="toggle-btn" class="icon close"><i class="fa fa-times"></i></label>
       <a href="<?= "http://$PALVELIN/" ?>" class="active">Etusivu</a>
       <a href="<?= "http://$PALVELIN/aboutus.php" ?>">Tietoa meistä</a>
-      <a href="<?= "http://$PALVELIN/#otayhteytta" ?>">Ota yhteyttä</a>
+      <a href="<?= "http://$PALVELIN/contact_us.php" ?>">Ota yhteyttä</a>
       <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
       </a>
@@ -85,7 +85,7 @@ if (!$loggedIn) {
           // echo '<a href="poistu.php">Poistu</a>';
           break;
         default:
-          echo "<a class='nav-suojaus " . active('login', $active) . "' href='login.php'>Kirjautuminen</a>";
+          echo "<a class='nav-suojaus " . active('login', $active) . "' href='login.php'><i class='fas fa-sign-in-alt'></i> Kirjautuminen</a>";
           break;
       }
 // dropdown menu

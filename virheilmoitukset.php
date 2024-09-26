@@ -43,6 +43,7 @@ $patterns['duration'] = "/^[0-9]+$/";
 $patterns['tourImage'] = "/^[^\s]+\.(jpe?g|png|gif|bmp)$/";
 $patterns['locations'] = "/^[0-9\-,.]+$/";
 $patterns['review'] = "/^[a-zåäöA-ZÅÄÖ0-9 '\-,!:;().\"\'*\n\r]+$/";
+$patterns['fullname'] = "/^[a-zåäöA-ZÅÄÖ'\\- ]+$/";
 
 
 
