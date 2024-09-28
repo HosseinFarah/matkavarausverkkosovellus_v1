@@ -13,11 +13,15 @@ if ($user_id = loggedIn() === false) {
     exit;
     }*/
 include "debuggeri.php";
-debuggeri(__FUNCTION__.",session ja cookie");    
+// debuggeri(__FUNCTION__.",session ja cookie");   
+// update in 27.9.2024 korjattu rememberme 
+debuggeri(__FILE__.",session ja cookie:");    
+
 debuggeri($_SESSION);    
 debuggeri($_COOKIE);    
 // $user_id = $_SESSION['user_id'] ?? '';
 if (is_int($user_id)) {
+    // update in 27.9.2024 korjattu rememberme 
     // include_once('db.php');
     delete_rememberme_token($user_id);
     }
@@ -36,5 +40,5 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]);
     }   
 session_destroy();
-header('location:index.php');
+header('location:login.php');
 ?>

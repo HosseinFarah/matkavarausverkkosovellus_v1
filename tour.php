@@ -264,12 +264,12 @@ if ($result && $result->num_rows > 0) {
                         <div class="row">
                             <div class="col-md-6">
                                 <h1 class="text-secondary fs-5">Arvostelusi on lähetetty: <?= $created; ?></h1>
-                                <!-- Button trigger modal -->
+                                <!-- Button trigger modal for updating the review -->
                                 <button type="button" class="btn btn-warning w-50 mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Näytä arvostelusi
                                 </button>
 
-                                <!-- Modal -->
+                                <!-- Updating the review with Modal -->
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -321,11 +321,17 @@ if ($result && $result->num_rows > 0) {
                             }
                             // END-  if user has not reserved this tour, display the reservation button
                             else {
-                                if ($vapaa > 0) {
+
+                                if ($vapaa > 0 && strtotime($startDate) > strtotime(date('Y-m-d'))) {
                                     echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
                                     echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
                                 } else {
-                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-danger fs-6'>0</span></p>";
+                                    if ($vapaa == 0) {
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                        echo "<a href='#' class='btn btn-danger mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Kaikki paikat varattu</a>";
+                                    } else {
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Varaukisa on päättynyt</strong></p>";
+                                    }
                                 }
                             }
                         }

@@ -21,7 +21,9 @@ if (isset($_POST['painike'])){
             } 
          }
       }
-   $rememberme = isset($rememberme) ? true : false;
+   // $rememberme = isset($rememberme) ? true : false;
+   // update in 27.9.2024 korjattu rememberme
+   $rememberme = $rememberme ?? false;
    if ($errors) debuggeri($errors);
    if (!$errors){
       $query = "SELECT users.id,password,is_active,name FROM users LEFT JOIN roles ON role = roles.id WHERE email = '$email'";

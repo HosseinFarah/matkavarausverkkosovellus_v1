@@ -23,7 +23,7 @@ if ($loggedIn == 'admin') {
                 <div class="row">
                     <div class="col-md-12">
                         <!-- back to main page -->
-                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
+                        <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
                         <h1 class="text-center">Kaikki matkat</h1>
                         <p class="text-center">Täältä löydät kaikki matkat</p>
                     </div>
@@ -142,7 +142,7 @@ if ($loggedIn == 'admin') {
     </html>
 <?php
 } else {
-    include '404.html';
-    include 'footer.php';
+   header("Location: index.php");
+    exit;
 }
 ?>

@@ -1,11 +1,12 @@
 <?php
+ob_start();
 include "header.php";
 $PALVELIN = $_SERVER['HTTP_HOST'];
 $title = "kaikki tilaukset";
 $loggedIn = secure_page();
 
 // filter usres by role with combo box with values admin guide user
-if (isset($_POST['roleBtn'])) {
+if (isset($_POST['roleBtn']) && isset($_POST['role'])) {
     $role = $_POST['role'];
     $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.role = ?";
     $stmt = $yhteys->prepare($sql);
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-    } elseif (isset($_POST['roleBtn'])) {
+    } elseif (isset($_POST['roleBtn']) && isset($_POST['role'])) {
         $role = $_POST['role'];
         $sql = "SELECT users.id, users.firstname, users.lastname, users.email, users.city, roles.name as role_name FROM users LEFT JOIN roles ON users.role = roles.id WHERE users.role = ?";
         $stmt = $yhteys->prepare($sql);
@@ -40,20 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: users_search.php");
     }
 }
-
-
-
-
-
-
-
 if ($loggedIn == 'admin') {
 ?>
 
     <body>
         <div class="content">
             <div class="container mt-5 mb-5">
-                <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
+                <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
 
                 <!-- search for a reservation by fullname or tour name or reservation_id or price or created date -->
                 <form method="post">
@@ -130,6 +124,8 @@ if ($loggedIn == 'admin') {
     </body>
 
 <?php
+ob_end_flush();
 } else {
     header("Location: index.php");
+    exit;
 }

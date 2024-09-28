@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
         $postcode = $row['postcode'];
         $city = $row['city'];
         $mobilenumber = $row['mobilenumber'];
-        $password = $row['password'];
+        // $password = $row['password'];
         $image = $row['image']; // Existing image
     }
 } else {
@@ -124,26 +124,6 @@ include 'muokkaaprofiiliatarkistus.php';
                             <?= $errors['mobilenumber'] ?? ""; ?>
                         </div>
                     </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Salasana:</span>
-                        <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
-                            pattern="<?= pattern('password'); ?>"  autofocus />
-                        <div class="invalid-feedback">
-                            <?= $errors['password'] ?? ""; ?>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Vahvista salasana:</span>
-                        <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
-                            pattern="<?= pattern('password2'); ?>"  autofocus />
-                        <div class="invalid-feedback">
-                            <?= $errors['password2'] ?? ""; ?>
-                        </div>
-                    </div>
-
-
                     <!-- Image upload -->
                     <div class="input-group mb-3">
                         <label for="image" class="form-label">Profiilikuva:</label>

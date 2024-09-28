@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'header.php';
 if ($loggedIn == 'admin') {
     $loggedIn = secure_page();
@@ -17,3 +18,4 @@ if ($loggedIn == 'admin') {
     header("Location: index.php");
     exit;
 }
+ob_end_flush();

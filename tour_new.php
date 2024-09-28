@@ -394,5 +394,9 @@ if ($loggedIn == 'admin') {
 <?php
     include 'footer.php';
 }
+else {
+    header("Location: index.php");
+    exit;
+}
 ob_end_flush();
 ?>

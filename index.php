@@ -150,10 +150,14 @@ $searchResult = my_query($searchSql);
                   </div>
                   <div class='text-end'>
                     <a href='tour.php?id=$id' class='btn btn-primary m-1'> <i class='fas fa-binoculars fs-5 text-light'></i></a>";
-              if ($vapaa > 0) {
+              if ($vapaa > 0 && strtotime($startDate) > strtotime(date('Y-m-d'))) {
                 echo "<a href='reserve.php?id=$id' class='btn btn-success m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>  </a>";
               } else {
-                echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Ei paikkoja </a>";
+                if ($vapaa == 0) {
+                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>Kaikki paikat varattu</a>";
+                } else {
+                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>Varauksia on päättynyt</a>";
+                }
               }
               echo "</div>
                 </div>

@@ -173,6 +173,6 @@ if($loggedIn=='admin'){
 </body>
 <?php
 } else {
-    include '404.html';
-    include 'footer.php';
+   header("Location: index.php");
+    exit;
 }

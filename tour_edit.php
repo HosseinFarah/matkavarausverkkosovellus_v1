@@ -1,6 +1,7 @@
 <?php
 ob_start();
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 $PALVELIN = $_SERVER['HTTP_HOST'];
 $title = "Uusi matka";
 include "asetukset.php";
@@ -45,20 +46,6 @@ if ($id) {
 }
 
 if (isset($_POST['painike'])) {
-    // Initialize variables
-    // $name = $_POST['name'] ?? '';
-    // $title = $_POST['title'] ?? '';
-    // $summary = $_POST['summary'] ?? '';
-    // $description = $_POST['description'] ?? '';
-    // $location = $_POST['location'] ?? '';
-    // $startDate = $_POST['startDate'] ?? '';
-    // $groupSize = $_POST['groupSize'] ?? '';
-    // $price = $_POST['price'] ?? '';
-    // $places = $_POST['places'] ?? '';
-    // $duration = $_POST['duration'] ?? '';
-    // $locations = $_POST['locations'] ?? '';
-    // include 'tour_new_validation.php';
-
     // File upload handling
     $tourImage = $_FILES['tourImage']['name'];
     $target_dir = "profiilikuvat/tours/";
@@ -248,17 +235,14 @@ if (isset($_POST['painike'])) {
             $locations = $yhteys->real_escape_string(strip_tags(trim($locations)));
         }
     }
-
-
-
-
     // // Validation function call
     //  [$errors, $values] = validointi($kentat);
     //  extract($values);
 
+
     if (empty($errors)) {
         $query = "UPDATE tours SET name = '$name', title = '$title', summary = '$summary', description = '$description', location = '$location', startDate = '$startDate', groupSize = '$groupSize', price = '$price', places = '$places', duration = '$duration', tourImage = '$tourImage' ,locations= '$locations', images='$images' WHERE id = $id";
-        $result = my_query($sql);
+        $result = my_query($query);
         if ($result) {
             $success = "success";
             $message = "Matka päivitetty onnistuneesti!";
@@ -449,6 +433,10 @@ if ($loggedIn == 'admin') {
 
 <?php
     include 'footer.php';
+}
+else{
+    header("Location: index.php");
+    exit;
 }
 ob_end_flush();
 ?>

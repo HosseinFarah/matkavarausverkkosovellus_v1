@@ -140,8 +140,12 @@ function loggedIn()
         if ($token = $_COOKIE['rememberme'] ?? '') {
             $token = htmlspecialchars($token);
             if ($user_id = token_is_valid($token)) {
+                // update in 27.9.2024 korjattu rememberme
+
                 // $loggedIn = hae_rooli($user_id);
-                $loggedIn = $user_id;
+                // $loggedIn = $user_id;
+                $loggedIn = hae_rooli($user_id);
+
                 $_SESSION['loggedIn'] = $loggedIn;
             }
         }

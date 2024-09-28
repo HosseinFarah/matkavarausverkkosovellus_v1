@@ -18,7 +18,7 @@ if ($loggedIn == 'admin') {
             <div class="container my-5">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
+                        <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
                         <h1 class="text-center">Kaikki käyttäjät</h1>
                         <p class="text-center">Täältä löydät kaikki käyttäjät</p>
                     </div>
@@ -143,12 +143,15 @@ if ($loggedIn == 'admin') {
                 </div>
             </div>
         </div>
+        <?php
+        include 'footer.php';
+        ?>
     </body>
 
     </html>
 <?php
 } else {
-    include '404.html';
-    include 'footer.php';
+    header("Location: index.php");
+    exit;
 }
 ?>
