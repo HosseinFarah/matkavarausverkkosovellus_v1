@@ -20,7 +20,7 @@ body {
   transition: all 0.3s;
   position: absolute;
   left: -250px; /* Hide sidebar initially */
-  height: 70%;
+  height: auto;
   z-index: 999;
   border-radius: 0 15px 15px 0;
 }

@@ -99,13 +99,42 @@ if ($result && $result->num_rows > 0) {
                 <div id="ilmoitukset" class="col-md-12 alert alert-<?= $success; ?> alert-dismissible fade show <?= $display ?? ""; ?>" role="alert">
                     <p><?= $message; ?></p>
                 </div>
-                <div class="col-md-6 ">
-                    <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-1"></i> Etusivu</a>
-                    <div class="shadow mb-2 mt-1" id='map' style='width: 100%; height: 500px;'></div>
-                    <img src="profiilikuvat/tours/<?= htmlspecialchars($tourImage) ?>" alt="<?= htmlspecialchars($name) ?>" class="img-fluid">
-                </div>
                 <div class="col-md-6">
-                    <h1 class="badge text-bg-secondary"><?= htmlspecialchars($name) ?></h1>
+                    <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-1"></i> Etusivu</a>
+                    <div class="shadow mb-2 mt-1 rounded" id='map' style='width: 100%; height: 500px;'></div>
+                    <img src="profiilikuvat/tours/<?= htmlspecialchars($tourImage) ?>" alt="<?= htmlspecialchars($name) ?>" class="img-fluid rounded">
+                    <!-- show tour guide for this tour Start-->
+                    <hr>
+                    <h2 class="badge text-bg-success fs-5 mt-1 display-1"><i class="fas fa-user-tie text-light fs-3"></i> Matkaoppaat</h2>
+                    <?php
+                    $guide_sql = "SELECT * FROM tours_guides LEFT JOIN users ON tours_guides.guide_id = users.id WHERE tour_id = $id";
+                    $guide_result = my_query($guide_sql);
+                    if ($guide_result && $guide_result->num_rows > 0) {
+                        while ($guide_row = $guide_result->fetch_assoc()) {
+                            $guide_id = $guide_row['guide_id'];
+                            $guide_firstname = $guide_row['firstname'];
+                            $guide_lastname = $guide_row['lastname'];
+                            $guide_image = $guide_row['image'];
+                            $guide_email = $guide_row['email'];
+                    ?>
+                            <div class="row d-flex align-items-center mt-1 bg-secondary rounded w-75 shine-effect">
+                                <div class='col-md-3 text-end'>
+                                    <img src='profiilikuvat/users/<?= $guide_image ?>' alt='<?= $guide_firstname ?>' class='img-fluid rounded-circle' style='width: 50px; height: 50px;'>
+                                </div>
+                                <div class='col-md-9'>
+                                    <h5 class='text-light'><?= $guide_firstname . " " . $guide_lastname ?></h5>
+                                    <p class='text-light'><?= $guide_email ?></p>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                    <!-- show tour guide for this tour End-->
+                    <hr>
+                </div>
+                <div class=" col-md-6">
+                    <h1 class="badge text-bg-success fs-5"><?= htmlspecialchars($name) ?></h1>
                     <h2><?= htmlspecialchars($title) ?></h2>
                     <p><strong class="text-danger">Summary:</strong><br><?= htmlspecialchars($summary) ?></p>
                     <p><strong class="text-danger">Description:</strong> <?= nl2br(htmlspecialchars(str_replace('-', "\n-", $description))) ?></p>
@@ -342,7 +371,7 @@ if ($result && $result->num_rows > 0) {
                     <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>
                 <?php
                         }
-                        if ($loggedIn == 'admin') {
+                        if ($loggedIn == 'admin'|| $loggedIn == 'guide') {
                 ?>
                     <!-- registered user in this tour -->
                     <h2 class="badge text-bg-danger text-light fs-3 mt-3">Rekisteröityneet käyttäjät</h2>

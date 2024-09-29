@@ -419,6 +419,8 @@ if ($loggedIn == 'admin') {
                                     <?= $errors['locations'] ?? ""; ?>
                                 </div>
                             </div>
+                            <!-- show tour guide -->
+                            
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="painike">Tallenna</button>
                                 <!-- cancelled -->

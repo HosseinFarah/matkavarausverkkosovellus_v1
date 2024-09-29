@@ -144,12 +144,20 @@ if($loggedIn === 'admin') {
       <a href="reserved.php" >
         <i class="fas fa-book"></i> Kaiikki varaukset
       </a>
-
+      
+      <!-- tour guides -->
+      <a href="tour_guides.php">
+        <i class="fas fa-user-tie"></i> Kaikki oppaat
+      </a>
       <a href="user_new.php">
         <i class="fas fa-user-plus"></i> Lisää käyttäjä
       </a>
       <a href="tour_new.php">
         <i class="fas fa-plus-circle"></i> Lisää matka
+      </a>
+      <!-- add tour guide -->
+      <a href="tour_guide_new.php">
+        <i class="fas fa-user-plus"></i> Lisää opas
       </a>
     </div>
 

@@ -153,7 +153,7 @@ if ($loggedIn === 'user') { ?>
         ?>
 
     <?php
-} elseif ($loggedIn === 'admin') {
+} elseif ($loggedIn === 'admin' || $loggedIn === 'guide') {
     ?>
         <div class="container mt-5 mb-5">
             <div class="row">
