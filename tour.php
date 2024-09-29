@@ -122,8 +122,8 @@ if ($result && $result->num_rows > 0) {
                                     <img src='profiilikuvat/users/<?= $guide_image ?>' alt='<?= $guide_firstname ?>' class='img-fluid rounded-circle' style='width: 50px; height: 50px;'>
                                 </div>
                                 <div class='col-md-9'>
-                                    <h5 class='text-light'><?= $guide_firstname . " " . $guide_lastname ?></h5>
-                                    <p class='text-light'><?= $guide_email ?></p>
+                                    <h5 class='text-light'><i class='fas fa-user-tie text-info fs-6'> </i> <?= $guide_firstname . " " . $guide_lastname ?></h5>
+                                    <p class='text-light'><i class='fas fa-envelope text-info fs-6'> </i> <?= $guide_email ?></p>
                                 </div>
                             </div>
                     <?php
