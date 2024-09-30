@@ -35,7 +35,12 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
         $city = $row['city'];
         $mobilenumber = $row['mobilenumber'];
         // $password = $row['password'];
-        $image = $row['image']; // Existing image
+        if($row['image'] == NULL || $row['image'] == "") {
+            $image = "default.jpg";
+        } else {
+            $image = $row['image'];
+        }
+        // $image = $row['image']; // Existing image
     }
 } else {
     header("Location: index.php");

@@ -16,10 +16,14 @@ if (isset($_SESSION['user_id'])) {
     $email = $row['email'];
     $name = $row['firstname'] . " " . $row['lastname'];
     $phone = $row['mobilenumber'];
-    $photo = $row['image'];
     $kaupunki = $row['city'];
     $katuosoite = $row['address'];
     $postinumero = $row['postcode'];
+    if ($row['image'] == NULL || $row['image'] == "") {
+        $photo = "default.jpg";
+    } else {
+        $photo = $row['image'];
+    }
 }
 ?>
 

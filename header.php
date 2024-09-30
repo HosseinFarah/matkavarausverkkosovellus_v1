@@ -95,7 +95,11 @@ if (!$loggedIn) {
     $result = my_query($sql);
     if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
-      $image = $row['image'];
+      if ($row['image'] == NULL || $row['image'] == "") {
+        $image = "default.jpg";
+      } else {
+        $image = $row['image'];
+      }
   ?>
       <ul class="navbar-nav">
         <li class="nav-item dropdown text-end">

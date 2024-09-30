@@ -88,7 +88,10 @@ function error($kentta)
 function arvo($kentta)
 {
     $error = $GLOBALS['errors'][$kentta] ?? false;
-    return ($error) ? "" : $_POST[$kentta] ?? "";
+    // return ($error) ? "" : $_POST[$kentta] ?? "";
+    $row = $GLOBALS['row'] ?? [];
+    $arvo = $_POST[$kentta] ?? $row[$kentta] ?? "";
+    return ($error) ? "" : $arvo ?? "";
 }
 
 function is_invalid($kentta)
@@ -175,7 +178,6 @@ function validointi($kentat)
                 }
             }
         }
-        
     }
 
     return array($errors, $values);
