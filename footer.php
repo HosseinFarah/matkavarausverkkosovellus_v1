@@ -3,27 +3,25 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h5>Yhteystiedot</h5>
+          <h5><?= translate('contact_info') ?></h5>
           <p>
             Huvimatkat Oy <br>
             Rautatienkatu 21 <br>
             33100 Tampere <br>
-            Puh. 010 123 4567 <br>
-            Sähköposti: <?php echo $PALVELUOSOITE ?> <br>
+            <?php echo translate('phone') ?>: 010 123 4567 <br>
+            <?php echo translate('email') ?>: <?php echo $PALVELUOSOITE ?> <br>
           </p>
         </div>
         <!-- Lue lisää meistä -->
 
         <div class="col-md-6">
-          <h5>Lue lisää meistä</h5>
-          <p> Meidän tavoitteena on tarjota asiakkaillemme laadukkaita ja turvallisia matkoja ympäri maailmaa.
-            <a data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-              Lue lisää</a>
+          <h5><?= translate('read_more_about_us') ?></h5>
+          <p> <?= translate('about_us_desc') ?></p>
+          <a data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+            <?= translate('read_more') ?> </a>
           <div class="collapse" id="collapse">
             <p>
-              Olemme toimineet alalla jo yli 20 vuotta ja olemme erikoistuneet järjestämään matkoja yksin matkustaville, pariskunnille ja perheille. Tarjoamme laajan valikoiman matkoja, joista voit valita mieleisesi. Tervetuloa Huvimatkojen sivuille!
-              Aloita matkasi kanssamme ja varaa matkasi jo tänään!
-              Hyvää matkaa! ja tervetuloa Huvimatkojen sivuille!
+              <?= translate('about_us_desc_more') ?>
             </p>
           </div>
         </div>
@@ -31,7 +29,7 @@
       <!-- providers -->
       <div class="row">
         <div class="col-md-12 text-start ml-4">
-          <h5>Yhteistyökumppanit</h5>
+          <h5><?= translate('providers') ?></h5>
           <p>
             <a href="https://www.tallinksilja.fi" target="_blank">Tallink Silja</a>
             | <a href="https://www.vr.fi" target="_blank">VR</a> |
@@ -46,11 +44,11 @@
           <p class="text-center">
             <?php
             if (isset($_SESSION['user_id'])) {
-              echo '<a href="poistu.php">Kirjaudu ulos</a>';
+              echo '<a href="poistu.php">' . translate('logout') . '</a>';
               echo ' | ';
-              echo '<a href="profiili.php">Omat varaukset</a>';
+              echo '<a href="profiili.php">' . translate('my_reservations') . '</a>';
             } else {
-              echo '<a href="rekisteroitymislomake.php">Rekisteröidy</a> | <a href="login.php">Kirjaudu</a>';
+              echo '<a href="rekisteroitymislomake.php">' . translate('register') . '</a> | <a href="login.php">' . translate("login") . '</a>';
             }
             ?>
           </p>
@@ -70,7 +68,8 @@
     <div class="row">
       <div class=" col-sm-12 m-1">
         <span class="text-muted">
-          <h6 class="text-center">&copy; 2024 Huvimatkat Oy | HosseinFarahkordmahaleh</h6></h6>
+          <h6 class="text-center">&copy; 2024 Huvimatkat Oy | HosseinFarahkordmahaleh</h6>
+          </h6>
         </span>
       </div>
     </div>

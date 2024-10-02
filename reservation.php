@@ -1,8 +1,9 @@
 <?php
 ob_start();
-include "header.php";
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "kaikki tilaukset";
+include_once 'lang.php';
+$title = translate('all_reservations');
+include "header.php";
 $loggedIn = secure_page();
 
 

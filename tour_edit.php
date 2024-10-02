@@ -1,9 +1,8 @@
 <?php
 ob_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Uusi matka";
+include_once 'lang.php';
+$title = translate('tour_edit');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";

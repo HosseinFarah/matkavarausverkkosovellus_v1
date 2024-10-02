@@ -136,21 +136,21 @@ if ($result && $result->num_rows > 0) {
                 <div class=" col-md-6">
                     <h1 class="badge text-bg-success fs-5"><?= htmlspecialchars($name) ?></h1>
                     <h2><?= htmlspecialchars($title) ?></h2>
-                    <p><strong class="text-danger">Summary:</strong><br><?= htmlspecialchars($summary) ?></p>
-                    <p><strong class="text-danger">Description:</strong> <?= nl2br(htmlspecialchars(str_replace('-', "\n-", $description))) ?></p>
+                    <p><strong class="text-danger">Yhteenveto:</strong><br><?= htmlspecialchars($summary) ?></p>
+                    <p><strong class="text-danger">Kuvaus:</strong> <?= nl2br(htmlspecialchars(str_replace('-', "\n-", $description))) ?></p>
 
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-6">
-                        <p class="badge text-bg-success fs-6 "><strong>Location:</strong> <?= htmlspecialchars($location) ?></p>
-                        <p><strong class="text-danger"><i class="fas fa-stopwatch text-danger fs-5"></i> Duration:</strong> <?= htmlspecialchars($duration) ?> hours</p>
-                        <p><strong class="text-danger"><i class="fas fa-map-marker-alt text-danger fs-5"></i> Places:</strong> <?= htmlspecialchars($places) ?></p>
-                        <p><strong class="text-danger"><i class="fas fa-users text-danger fs-5"></i> Max group size:</strong> <span class="badge text-bg-warning fs-6"><?= htmlspecialchars($groupSize) ?></span></p>
+                        <p class="badge text-bg-success fs-6 "><strong>Sijainti:</strong> <?= htmlspecialchars($location) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-stopwatch text-danger fs-5"></i> Kesto:</strong> <?= htmlspecialchars($duration) ?> hours</p>
+                        <p><strong class="text-danger"><i class="fas fa-map-marker-alt text-danger fs-5"></i> Paikat:</strong> <?= htmlspecialchars($places) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-users text-danger fs-5"></i> Ryhmän enimmäiskoko:</strong> <span class="badge text-bg-warning fs-6"><?= htmlspecialchars($groupSize) ?></span></p>
 
                     </div>
                     <div class="col-md-6">
-                        <p><strong class="text-danger"><i class="fas fa-money-check-alt text-danger fs-5"></i> Price:</strong> <?= htmlspecialchars($price) ?> €</p>
-                        <p><strong class="text-danger"><i class="fas fa-shuttle-van text-danger fs-5"></i> Start date:</strong> <?= htmlspecialchars($startDate) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-money-check-alt text-danger fs-5"></i> Hinta:</strong> <?= htmlspecialchars($price) ?> €</p>
+                        <p><strong class="text-danger"><i class="fas fa-shuttle-van text-danger fs-5"></i> Aloituspäivämäärä:</strong> <?= htmlspecialchars($startDate) ?></p>
                     </div>
                 </div>
 

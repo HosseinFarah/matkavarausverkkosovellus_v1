@@ -1,12 +1,12 @@
 <?php
 ob_start();
-$title = "UUsi käyttäjä";
+include_once 'lang.php';
+$title = translate('new_user');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
 $loggedIn = secure_page();
 /* Huom. Tässä salasanakenttien täsmääminen tarkistetaan vain palvelimella. */
-$title = 'Rekisteröityminen';
 $kentat = ['firstname', 'lastname', 'email', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];
 $kentat_suomi = ['etunimi', 'sukunimi', 'sähköpostiosoite', 'salasana', 'salasana', 'katuosoite', 'postinumero', 'kaupunki', 'puhelinnumero'];
 $pakolliset = ['firstname', 'lastname', 'email', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];

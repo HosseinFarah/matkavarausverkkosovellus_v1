@@ -3,7 +3,9 @@ include "asetukset.php";
 include "db.php";
 include "rememberme.php";
 $loggedIn = secure_page();
-$title = 'Profiili';
+include_once 'lang.php';
+$title = translate('profile');
+
 include "header.php";
 $css = 'site.css';
 

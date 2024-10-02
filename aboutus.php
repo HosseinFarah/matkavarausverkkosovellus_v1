@@ -1,6 +1,8 @@
 <?php
+include_once "lang.php";     
+$title = translate('about_us');
+$_SESSION['lang'] ??= 'fi';
 include 'header.php';
-
 ?>
 <div class="container my-5">
     <div class="row">

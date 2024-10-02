@@ -1,5 +1,8 @@
 <?php
-$title = "Huvimatkojen palvelut- Etusivu";
+
+include_once "lang.php";
+$title = translate('index_title');
+$_SESSION['lang'] ??= 'fi';
 include 'header.php';
 include 'posti.php';
 $sql = "SELECT * FROM tours";
@@ -35,9 +38,9 @@ $searchResult = my_query($searchSql);
       $searchSql = "SELECT * FROM tours WHERE name LIKE '%$search%' OR title LIKE '%$search%' OR summary LIKE '%$search%' OR description LIKE '%$search%'";
       $result = my_query($searchSql);
       if ($result->num_rows == 0) {
-        echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>Ei hakutuloksia</h2></div></div></div>";
+        echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>".  translate('no_results') ."</h2></div></div></div>";
       } else {
-        echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>Hakutulokset</h2></div></div></div>";
+        echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>" . translate('search_results'). "</h2></div></div></div>";
       }
     }
     ?>
@@ -45,8 +48,8 @@ $searchResult = my_query($searchSql);
     <div class="container my-5">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center">Tervetuloa Huvimatkojen sivuille</h1>
-          <p class="text-center">Täältä löydät kaikki matkamme</p>
+          <h1 class="text-center"><?= translate('welcome') ?></h1>
+          <p class="text-center"><?= translate('desc_1') ?></p>
         </div>
       </div>
     </div>
@@ -77,8 +80,8 @@ $searchResult = my_query($searchSql);
         <div class="col-md-12">
           <form method="GET">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Hae matkaa" name="search">
-              <button class="btn btn-primary" type="submit">Hae</button>
+              <input type="text" class="form-control" placeholder="<?= translate('search_tour') ?>" name="search">
+              <button class="btn btn-primary" type="submit"><?= translate('search') ?></button>
             </div>
           </form>
         </div>
@@ -87,7 +90,7 @@ $searchResult = my_query($searchSql);
       <div class="container my-5">
         <div class="row">
           <div class="col-md-12">
-            <h2 class="text-center">Matkamme</h2>
+            <h2 class="text-center"><?= translate('all_tours') ?></h2>
           </div>
         </div>
       </div>
@@ -139,12 +142,12 @@ $searchResult = my_query($searchSql);
                 <div class='card-body'>
                   <h5 class='card-title fs-2 text-primary'>$name</h5>
                   <p class='card-text'><i class='fas fa-info'> </i><strong> $summary</strong></p>
-                  <p class='card-text'><i class='far fa-clock'></i> $duration tuntia</p>
-                  <p class='card-text'><i class='fas fa-map-marker-alt'></i> $places</p>
-                  <p class='card-text'><strong><i class='fas fa-users'></i> Max osallistujamäärä: </strong><span class ='badge text-bg-warning fs-6'> $groupSize </span></p>
-                  <p class='card-text'><strong><i class='fas fa-users'></i> Vapaita paikkoja: </strong><span class ='badge text-bg-warning fs-6'> $vapaa </span></p>
+                  <p class='card-text'><strong><i class='far fa-clock'></i> ".translate('duration').": </strong> $duration ".translate('hours')."</p>
+                  <p class='card-text'><strong><i class='fas fa-map-marker-alt'></i> ".translate('tour_places').":</strong> $places</p>
+                  <p class='card-text'><strong><i class='fas fa-users'></i> ".translate('max_participants').": </strong><span class ='badge text-bg-warning fs-6'> $groupSize </span></p>
+                  <p class='card-text'><strong><i class='fas fa-users'></i> ".translate('free_places').": </strong><span class ='badge text-bg-warning fs-6'> $vapaa </span></p>
                   <div class='card-footer rounded'>
-                    <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>Hinta: $price €</p></small>
+                    <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>".translate('price').": $price €</p></small>
                     <small class='text-body-secondary'><p class='card-text fs-6 text-primary-emphasis '><i class='fas fa-calendar'></i> $startDate</p></small>
                     <p class='card-text mt-2 text-end'><strong></strong><span class ='badge text-bg-primary'> $rating</span></p>
                   </div>
@@ -154,9 +157,9 @@ $searchResult = my_query($searchSql);
                 echo "<a href='reserve.php?id=$id' class='btn btn-success m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>  </a>";
               } else {
                 if ($vapaa == 0) {
-                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>Kaikki paikat varattu</a>";
+                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>".translate('all_places_reserved')."</a>";
                 } else {
-                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>Varauksia on päättynyt</a>";
+                  echo "<a href='#' class='btn btn-danger m-1'><i class='fas fa-cart-plus fs-5 text-light'></i>".translate('reservations_ended')."</a>";
                 }
               }
               echo "</div>
@@ -166,54 +169,54 @@ $searchResult = my_query($searchSql);
 
               $counter++;
             }
-          } else {
-          //  render only tours for guides
-          $guideSql = "SELECT * FROM tours_guides LEFT JOIN tours ON tours_guides.tour_id = tours.id WHERE guide_id = $_SESSION[user_id]";
-          $guideResult = my_query($guideSql);
-          $counter = 0;
-          while ($row = $guideResult->fetch_assoc()) {
-            // Extract fields
-            $id = $row['id'];
-            $name = htmlspecialchars($row['name']);
-            $title = htmlspecialchars($row['title']);
-            $summary = htmlspecialchars($row['summary']);
-            $description = htmlspecialchars($row['description']);
-            $location = htmlspecialchars($row['location']);
-            $startDate = htmlspecialchars($row['startDate']);
-            $groupSize = htmlspecialchars($row['groupSize']);
-            $price = htmlspecialchars($row['price']);
-            $places = htmlspecialchars($row['places']);
-            $duration = htmlspecialchars($row['duration']);
-            $tourImage = htmlspecialchars($row['tourImage']);
+          } elseif ($result->num_rows > 0 && $loggedIn === 'guide') {
+            //  render only tours for guides
+            $guideSql = "SELECT * FROM tours_guides LEFT JOIN tours ON tours_guides.tour_id = tours.id WHERE guide_id = $_SESSION[user_id]";
+            $guideResult = my_query($guideSql);
+            $counter = 0;
+            while ($row = $guideResult->fetch_assoc()) {
+              // Extract fields
+              $id = $row['id'];
+              $name = htmlspecialchars($row['name']);
+              $title = htmlspecialchars($row['title']);
+              $summary = htmlspecialchars($row['summary']);
+              $description = htmlspecialchars($row['description']);
+              $location = htmlspecialchars($row['location']);
+              $startDate = htmlspecialchars($row['startDate']);
+              $groupSize = htmlspecialchars($row['groupSize']);
+              $price = htmlspecialchars($row['price']);
+              $places = htmlspecialchars($row['places']);
+              $duration = htmlspecialchars($row['duration']);
+              $tourImage = htmlspecialchars($row['tourImage']);
 
-            $sql_free = "SELECT * FROM reservations WHERE tour_id = $id";
-            $result_free = my_query($sql_free);
-            $vapaa = $groupSize - $result_free->num_rows;
+              $sql_free = "SELECT * FROM reservations WHERE tour_id = $id";
+              $result_free = my_query($sql_free);
+              $vapaa = $groupSize - $result_free->num_rows;
 
-            // Start a new row every 3 cards
-            if ($counter % 3 == 0 && $counter > 0) {
-              echo "</div><div class='row'>";
-            }
+              // Start a new row every 3 cards
+              if ($counter % 3 == 0 && $counter > 0) {
+                echo "</div><div class='row'>";
+              }
 
-            $reviewSql = "SELECT AVG(rating) as rating FROM reviews WHERE tour_id = $id";
-            $reviewResult = my_query($reviewSql);
-            $reviewRow = $reviewResult->fetch_assoc();
+              $reviewSql = "SELECT AVG(rating) as rating FROM reviews WHERE tour_id = $id";
+              $reviewResult = my_query($reviewSql);
+              $reviewRow = $reviewResult->fetch_assoc();
 
-            $votesSql = "SELECT COUNT(*) as votes FROM reviews WHERE tour_id = $id";
-            $votesResult = my_query($votesSql);
-            $votesRow = $votesResult->fetch_assoc();
-            $voter = $votesRow['votes'];
+              $votesSql = "SELECT COUNT(*) as votes FROM reviews WHERE tour_id = $id";
+              $votesResult = my_query($votesSql);
+              $votesRow = $votesResult->fetch_assoc();
+              $voter = $votesRow['votes'];
 
-            $rating = intval($reviewRow['rating']) . " <i class= 'fas fa-star text-light'></i>" . " | " . $voter . " <i class='fas fa-user text-light'></i>";
+              $rating = intval($reviewRow['rating']) . " <i class= 'fas fa-star text-light'></i>" . " | " . $voter . " <i class='fas fa-user text-light'></i>";
 
-            echo "<div class='col-md-4 mb-4'>
+              echo "<div class='col-md-4 mb-4'>
             <div class='card shadow-lg shine-effect'>
               <img src='profiilikuvat/tours/$tourImage' class='card-img-top' alt='$name'>
               <div class='card-body'>
                 <h5 class='card-title fs-2 text-primary'>$name</h5>
                 <p class='card-text'><i class='fas fa-info'> </i><strong> $summary</strong></p>
-                <p class='card-text'><i class='far fa-clock'></i> $duration tuntia</p>
-                <p class='card-text'><i class='fas fa-map-marker-alt'></i> $places</p>
+                <p class='card-text'><strong><i class='far fa-clock'></i> Kesto: </strong> $duration tuntia</p>
+                <p class='card-text'><strong><i class='fas fa-map-marker-alt'></i> Kiertueen paikat:</strong> $places</p>
                 <p class='card-text'><strong><i class='fas fa-users'></i> Max osallistujamäärä: </strong><span class ='badge text-bg-warning fs-6'> $groupSize </span></p>
                 <p class='card-text'><strong><i class='fas fa-users'></i> Vapaita paikkoja: </strong><span class ='badge text-bg-warning fs-6'> $vapaa </span></p>
                 <div class='card-footer rounded'>
@@ -227,10 +230,10 @@ $searchResult = my_query($searchSql);
               </div>
             </div>
           </div>";
-            
+
               $counter++;
+            }
           }
-        }
 
           ?>
         </div>

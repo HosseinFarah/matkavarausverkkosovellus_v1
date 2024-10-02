@@ -1,6 +1,7 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kaikki matkat";
+include_once 'lang.php';
+$title = translate('all_tours');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";

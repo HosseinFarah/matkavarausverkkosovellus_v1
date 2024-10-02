@@ -46,7 +46,7 @@ if (empty($errors['password2']) and empty($errors['password'])) {
             $password = $row['password'];
         }
         $is_active = isset($_POST['is_active']) ? 1 : 0;
-        $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  password='$password', image='$image' , updated='$updated' , is_active='$is_active' WHERE id='$id'";
+        $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  password='$password', image='$image' , updated='$updated' , is_active='$is_active' ,role='$role' WHERE id='$id'";
         $result_update=my_query($query_update);
         if ($result_update) {
             $success = "success";
