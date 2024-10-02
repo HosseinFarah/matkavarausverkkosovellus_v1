@@ -4,7 +4,7 @@ $display = "d-none";
 $message = "";
 $attempt_msg = "";
 $success = "success";
-$ilmoitukset['errorMsg'] = 'Kirjautuminen epäonnistui. ';
+$ilmoitukset['errorMsg'] = translate('login_failed');
 debuggeri("POST:" . var_export($_POST, true));
 
 if (isset($_POST['painike'])) {

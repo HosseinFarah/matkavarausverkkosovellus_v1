@@ -7,26 +7,26 @@ if (isset($_POST['painike'])) {
     $currentPassword = $_POST['currentPassword'];
 
     if (empty($currentPassword)) {
-        $errors['currentPassword'] = "Nykyinen salasana puuttuu";
+        $errors['currentPassword'] = translate('current_password_missing');
     } else {
         $query = "SELECT * FROM users WHERE id='$id'";
         $result = my_query($query);
         $row = $result->fetch_assoc();
         if (!password_verify($currentPassword, $row['password'])) {
-            $errors['currentPassword'] = "Virheellinen salasana";
+            $errors['currentPassword'] = translate('current_password_error');
         }
     }
 
     if (empty($password)) {
         $errors['password'] = "Salasana puuttuu";
     } elseif (!preg_match('/' . pattern('password') . '/', $password)) {
-        $errors['password'] = "Salasanan pitää olla vähintään 12 merkkiä pitkä";
+        $errors['password'] = translate('password_invalid');
     }
 
     if (empty($password2)) {
         $errors['password2'] = "Salasana puuttuu";
     } elseif (!preg_match('/' . pattern('password2') . '/', $password2)) {
-        $errors['password2'] = "Salasanan pitää olla vähintään 12 merkkiä pitkä";
+        $errors['password2'] = translate('password_invalid');
     }
 
     if (empty($errors['password2']) and empty($errors['password'])) {
@@ -44,7 +44,7 @@ if (isset($_POST['painike'])) {
         $result_update = my_query($query_update);
         if ($result_update) {
             $success = "success";
-            $message = "Profiili päivitetty onnistuneesti! Kirjaudu uudelleen!";
+            $message = translate('profile_updated_msg');
             echo "<html><body>";
             echo "<div class='alert alert-$success'>$message</div>";
             echo "<meta http-equiv='refresh' content='2;url=poistu.php'>";
@@ -52,7 +52,7 @@ if (isset($_POST['painike'])) {
             exit;
         } else {
             $success = "danger";
-            $message = "Profiilin päivitys epäonnistui.";
+            $message = translate('profile_update_failed_msg');
         }
     }
 }

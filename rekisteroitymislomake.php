@@ -25,10 +25,10 @@ include "rekisterointi.php";
                      if ($success != "success") { ?>
                             <form method="post" class="mb-3 needs-validation" enctype="multipart/form-data" novalidate>
                                    <fieldset>
-                                          <legend>Rekisteröityminen</legend>
+                                          <legend><?= translate('registeration'); ?></legend>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">etunimi:</span>
+                                                 <span class="input-group-text"><?= translate('firstname'); ?>:</span>
                                                  <input pattern="<?= pattern('firstname'); ?>" type="text" id="firstname" name="firstname" class="form-control <?= is_invalid('firstname'); ?>"
                                                         title="Nimen tulee olla vähintään kaksi merkkiä pitkä ja saa sisältää vain kirjaimia, välilyöntejä, viivoja ja heittomerkkejä."
                                                         value="<?= arvo("firstname"); ?>" required autofocus />
@@ -37,7 +37,7 @@ include "rekisterointi.php";
                                                  </div>
                                           </div>
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Sukunimi:</span>
+                                                 <span class="input-group-text"><?= translate('lastname'); ?>:</span>
                                                  <input type="text" id="lastname" name="lastname" class="form-control <?= is_invalid('lastname'); ?>"
                                                         title="Nimen tulee olla vähintään kaksi merkkiä pitkä ja saa sisältää vain kirjaimia, välilyöntejä, viivoja ja heittomerkkejä."
                                                         value="<?= arvo("lastname"); ?>" pattern="<?= pattern('lastname'); ?>" required autofocus />
@@ -46,7 +46,7 @@ include "rekisterointi.php";
                                                  </div>
                                           </div>
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Katuosoite:</span>
+                                                 <span class="input-group-text"><?= translate('street_address'); ?>:</span>
                                                  <input type="text" id="address" name="address" value="<?= arvo("address"); ?>"
                                                         pattern="<?= pattern('address'); ?>" required autofocus
                                                         class="form-control <?= is_invalid('address'); ?>"
@@ -57,7 +57,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Postinumero:</span>
+                                                 <span class="input-group-text"><?= translate('postal_code'); ?>:</span>
                                                  <input type="text" id="postcode" name="postcode" class="form-control <?= is_invalid('postcode'); ?>"
                                                         value="<?= arvo("postcode"); ?>" pattern="<?= pattern('postcode'); ?>" required autofocus />
                                                  <div class="invalid-feedback">
@@ -66,7 +66,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Kaupunki:</span>
+                                                 <span class="input-group-text"><?= translate('city'); ?>:</span>
                                                  <input
                                                         type="text"
                                                         id="city"
@@ -86,7 +86,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Puhelinnumero:</span>
+                                                 <span class="input-group-text"><?= translate('phone_number'); ?>:</span>
                                                  <input type="text" id="mobilenumber" name="mobilenumber" class="form-control <?= is_invalid('mobilenumber'); ?>"
                                                         value="<?= arvo("mobilenumber"); ?>" pattern="<?= pattern('mobilenumber'); ?>" required autofocus />
                                                  <div class="invalid-feedback">
@@ -95,7 +95,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Sähköposti:</span>
+                                                 <span class="input-group-text"><?= translate('email'); ?>:</span>
                                                  <input type="email" id="email" name="email" class="form-control <?= is_invalid('email'); ?>"
                                                         value="<?= arvo("email"); ?>" pattern="<?= pattern('email'); ?>" required autofocus />
                                                  <div class="invalid-feedback">
@@ -104,7 +104,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Salasana:</span>
+                                                 <span class="input-group-text"><?= translate('password'); ?>:</span>
                                                  <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
                                                         pattern="<?= pattern('password'); ?>" required autofocus />
                                                  <div class="invalid-feedback">
@@ -113,7 +113,7 @@ include "rekisterointi.php";
                                           </div>
 
                                           <div class="input-group mb-3">
-                                                 <span class="input-group-text">Vahvista salasana:</span>
+                                                 <span class="input-group-text"><?= translate('confirm_password'); ?>:</span>
                                                  <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
                                                         pattern="<?= pattern('password2'); ?>" required autofocus />
                                                  <div class="invalid-feedback">
@@ -159,7 +159,7 @@ include "rekisterointi.php";
 
 
                                           <div class="row mb-sm-1">
-                                                 <label for="image" class="form-label mb-0 col-sm-4">Kuva</label>
+                                                 <label for="image" class="form-label mb-0 col-sm-4"><?= translate('photo'); ?>:</label>
                                                  <div class="col-sm-8">
                                                         <input id="image" name="image" type="file" accept="image/*" pattern="<?= pattern('image'); ?>" class="form-control <?= is_invalid('image'); ?>" placeholder="kuva"></input>
                                                         <div class="invalid-feedback">
@@ -174,12 +174,12 @@ include "rekisterointi.php";
                                           <div class="form-check mb-3">
                                                  <input type="checkbox" id="terms_of_delivery" name="terms_of_delivery" class="form-check-input <?= is_invalid('terms_of_delivery'); ?>"
                                                         value="kylla" <?= $terms_of_delivery === 'kylla' ? 'checked' : ''; ?> required autofocus />
-                                                 <label class="form-check-label" for="terms_of_delivery">Hyväksyn toimitusehdot</label>
+                                                 <label class="form-check-label" for="terms_of_delivery"><?= translate('accept_terms'); ?></label>
                                                  <div class="invalid-feedback">
                                                         <?= $errors['terms_of_delivery'] ?? ""; ?>
                                                  </div>
                                           </div>
-                                          <button name='painike' type="submit" class="mt-3 float-end btn btn-primary">Rekisteröidy</button>
+                                          <button name='painike' type="submit" class="mt-3 float-end btn btn-primary"><?= translate('register'); ?></button>
                                    </fieldset>
                             </form>
 

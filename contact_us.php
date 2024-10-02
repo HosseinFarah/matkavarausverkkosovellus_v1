@@ -39,37 +39,38 @@ include 'contact_us_post.php';
                     <div class="form-group">
                         <label for="fullname"><?= translate('fullname'); ?></label>
                         <input type="text" class="form-control <?= is_invalid('fullname'); ?>" id="fullname" name="fullname"
-                        value="<?= arvo("fullname"); ?>" pattern="<?= pattern('fullname'); ?>"
-                        required>
+                            value="<?= arvo("fullname"); ?>" pattern="<?= pattern('fullname'); ?>"
+                            required>
                         <div class="invalid-feedback">
-                            <?= $errors['fullname'] ?? ""; ?>
+                            <?= $errors['fullname'] ?? translate('invalid_field') . ' ' . translate('fullname'); ?>
+
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="title"><?= translate('title'); ?></label>
-                        <input type="text" class="form-control <?= is_invalid('title'); ?>" id="title" name="title" 
-                        value="<?= arvo("title"); ?>" pattern="<?= pattern('title'); ?>"
-                        required>
+                        <input type="text" class="form-control <?= is_invalid('title'); ?>" id="title" name="title"
+                            value="<?= arvo("title"); ?>" pattern="<?= pattern('title'); ?>"
+                            required>
                         <div class="invalid-feedback">
-                            <?= $errors['title'] ?? ""; ?>
+                            <?= $errors['title'] ?? translate('invalid_field') . ' ' . translate('title'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message"><?= translate('message'); ?></label>
                         <textarea class="form-control <?= is_invalid('message'); ?>" id="message" name="message" rows="3"
-                        pattern="<?= pattern('description'); ?>"
-                        required><?= arvo("message"); ?></textarea>
+                            pattern="<?= pattern('description'); ?>"
+                            required><?= arvo("message"); ?></textarea>
                         <div class="invalid-feedback">
-                            <?= $errors['message'] ?? ""; ?>
+                            <?= $errors['message'] ?? translate('invalid_field') . ' ' . translate('message'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email"><?= translate('email'); ?></label>
-                        <input type="email" class="form-control <?= is_invalid('email'); ?>" id="email" name="email" 
-                        value="<?= arvo("email"); ?>" pattern="<?= pattern('email'); ?>"
-                        required>
+                        <input type="email" class="form-control <?= is_invalid('email'); ?>" id="email" name="email"
+                            value="<?= arvo("email"); ?>" pattern="<?= pattern('email'); ?>"
+                            required>
                         <div class="invalid-feedback">
-                            <?= $errors['email'] ?? ""; ?>
+                            <?= $errors['email'] ?? translate('invalid_field') . ' ' . translate('email'); ?>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mb-3" name="btn"><?= translate('send'); ?></button>

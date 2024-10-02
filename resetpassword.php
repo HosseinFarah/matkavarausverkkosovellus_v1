@@ -1,5 +1,6 @@
 <?php 
-$title = 'Uusi salasana';
+include_once "lang.php";
+$title = translate('new_password');
 //$css = 'kuvagalleria.css';
 $kentat = ['password','passoword2'];
 $kentat_suomi = ['salasana','salasana'];
@@ -16,13 +17,13 @@ include "kasittelija_resetpassword.php";
 <?php if (!$message) { ?>    
 <form method="post" class="mb-3 needs-validation" novalidate>
 <fieldset>
-<legend>Uusi salasana</legend>
+<legend><?= translate('new_password'); ?></legend>
 
 <div class="row">
-<label for="password" class="col-sm-4 form-label">Salasana</label>
+<label for="password" class="col-sm-4 form-label"><?= translate('password'); ?></label>
 <div class="col-sm-8">
 <input type="password" class="mb-1 form-control <?= is_invalid('password'); ?>" name="password" id="password" 
-       placeholder="salasana" pattern="<?= pattern('password'); ?>" required>
+       placeholder="<?= translate('password'); ?>" pattern="<?= pattern('password'); ?>" required>
 <div class="invalid-feedback">
 <?= $errors['password'] ?? ""; ?>    
 </div>
@@ -30,16 +31,16 @@ include "kasittelija_resetpassword.php";
 </div>
 
 <div class="row">
-<label for="password2" class="text-nowrap col-sm-4 form-label">Salasana uudestaan</label>
+<label for="password2" class="text-nowrap col-sm-4 form-label"><?= translate('password2'); ?></label>
 <div class="col-sm-8">
 <input type="password" class="mb-1 form-control <?= is_invalid('password2'); ?>" name="password2" id="password2" 
-       placeholder="salasana uudestaan" pattern="<?= pattern('password2'); ?>" required>
+       placeholder="<?= translate('password2'); ?>" pattern="<?= pattern('password2'); ?>" required>
 <div class="invalid-feedback">
 <?= $errors['password2'] ?? ""; ?>    
 </div>
 </div>
 </div>
-<button name='painike' type="submit" class="mt-3 float-end btn btn-primary">Tallenna salasana</button>
+<button name='painike' type="submit" class="mt-3 float-end btn btn-primary"><?= translate('save_password'); ?></button>
 </fieldset>
 
 </form>
@@ -49,7 +50,7 @@ include "kasittelija_resetpassword.php";
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <p>
-<a href="forgotpassword.php" class="<?= $display ?? ""; ?>">Pyydä salasanan uusiminen uudestaan</a>
+<a href="forgotpassword.php" class="<?= $display ?? ""; ?>"><?= translate('request_password'); ?></a>
 </p>
 </div>
 <?php include "footer.php"; ?>

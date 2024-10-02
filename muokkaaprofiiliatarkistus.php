@@ -35,13 +35,13 @@ if (isset($_POST['painike'])) {
         $result_update=my_query($query_update);
         if ($result_update) {
             $success = "success";
-            $message = "Profiili päivitetty onnistuneesti!";
+            $message = translate('profile_updated');
             //reload the page
             header("Location: profiili.php");
             exit;
         } else {
             $success = "danger";
-            $message = "Profiilin päivitys epäonnistui.";
+            $message = translate('profile_update_failed');
         }
     }
 }
