@@ -7,7 +7,7 @@ try {
    $yhteys->set_charset("utf8");
    }
 catch (Throwable $e) {
-   die("Virhe yhteyden muodostamisessa: " . $e->getMessage());
+    die("Virhe yhteyden muodostamisessa: " . $e->getMessage() . " Error code: " . $e->getCode());
    }
 
 function db_connect(){

@@ -13,14 +13,17 @@ return htmlspecialchars($arvo, ENT_QUOTES, 'UTF-8');
 
 if (isset($_POST['tallenna'])) {
     debuggeri($_POST);
+    $is_actives = $_POST['is_active'] ?? [];
+    $roles = $_POST['role'] ?? [];
     $values = "";
     $query = "INSERT INTO users (id,is_active,role) VALUES ";
 
     foreach($_POST['id'] as $id) {
-        $is_active = in_array($id,$_POST['is_active']) ? 1 : 0;
-        $role = in_array($id,$_POST['name']) ? 2 : 1;
-        $values.= "($id,'$is_active',$role),";
+        $is_active = in_array($id,$is_actives) ? 1 : 0;
+        $role = in_array($id,$roles) ? 2 : 1;
+        $values.= "($id,$is_active,$role),";
         }
+        
     $values = rtrim($values,',');
     $query.= $values;
     $query.= " ON DUPLICATE KEY UPDATE is_active = VALUES(is_active), role = VALUES(role)";
@@ -28,7 +31,7 @@ if (isset($_POST['tallenna'])) {
     $result = $yhteys->query($query);
 }
 
-$itemsPerPage = 25; 
+$itemsPerPage = 10; 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage; 
 
@@ -64,7 +67,7 @@ debuggeri($users);
     <td class="wide"><?= puhdista($user['lastname']) ?></td>
     <td><?= puhdista($user['firstname']) ?></td>
     <td class="narrow px-4"><input name="is_active[]" value=<?= puhdista($user['id']) ?> type="checkbox" <?php if ($user['is_active']) echo "checked" ?>></td>
-    <td class="narrow px-4"><input name="name[]" value=<?= puhdista($user['id']) ?> type="checkbox" <?php if ($user['name'] == 'mainuser') echo "checked" ?>></td> 
+    <td class="narrow px-4"><input name="role[]" value=<?= puhdista($user['id']) ?> type="checkbox" <?php if ($user['name'] == 'mainuser') echo "checked" ?>></td> 
     </tr>    
     <?php } ?> 
 <tr><td colspan="4" class="p-3">

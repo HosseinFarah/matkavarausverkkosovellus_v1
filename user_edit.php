@@ -8,8 +8,8 @@ ini_set('display_errors', '1');
 $title = 'Profiili';
 $css = 'profiili.css';
 
-$kentat = ['firstname', 'lastname', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];
-$kentat_suomi = ['etunimi', 'sukunimi', 'salasana', 'salasana', 'katuosoite', 'postinumero', 'kaupunki', 'puhelinnumero',];
+$kentat = ['firstname', 'lastname', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber','is_active'];
+$kentat_suomi = ['etunimi', 'sukunimi', 'salasana', 'salasana', 'katuosoite', 'postinumero', 'kaupunki', 'puhelinnumero','aktiivinen'];
 $pakolliset = ['firstname', 'lastname', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];
 $js = "script.js";
 $kentat_tiedosto = ['image'];
@@ -35,6 +35,7 @@ if ($id) {
         $mobilenumber = $row['mobilenumber'];
         $password = $row['password'];
         $image = $row['image']; // Existing image
+        $is_active = $row['is_active'];
     }
 } else {
     header("Location: index.php");
@@ -128,7 +129,7 @@ if($loggedIn=='admin'){
                     <div class="input-group mb-3">
                         <span class="input-group-text">Salasana:</span>
                         <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
-                            pattern="<?= pattern('password'); ?>" required autofocus />
+                            pattern="<?= pattern('password'); ?>"  autofocus />
                         <div class="invalid-feedback">
                             <?= $errors['password'] ?? ""; ?>
                         </div>
@@ -137,7 +138,7 @@ if($loggedIn=='admin'){
                     <div class="input-group mb-3">
                         <span class="input-group-text">Vahvista salasana:</span>
                         <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
-                            pattern="<?= pattern('password2'); ?>" required autofocus />
+                            pattern="<?= pattern('password2'); ?>"  autofocus />
                         <div class="invalid-feedback">
                             <?= $errors['password2'] ?? ""; ?>
                         </div>
@@ -154,10 +155,15 @@ if($loggedIn=='admin'){
                         <!-- Preview the uploaded image -->
                     </div>
 
+                    <!-- is_active -->
+                    <div class="input-group mb-3">
+                        <label for="is_active" class="form-label">Aktiivinen:</label>
+                        <input type="checkbox" name="is_active" id="is_active" <?= $is_active ? 'checked' : ''; ?> />
+                    </div>
+
                     <div>
                         <button type="submit" name="painike" class="btn btn-primary">Päivitä</button>
-                        <button type="button" class="btn btn-secondary" onclick="window.history.back()"> Peruuta </button>
-                    </div>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='users.php'">Peruuta</button>                    </div>
                 </fieldset>
             </form>
         </div>
@@ -167,6 +173,6 @@ if($loggedIn=='admin'){
 </body>
 <?php
 } else {
-    include '404.html';
-    include 'footer.php';
+   header("Location: index.php");
+    exit;
 }

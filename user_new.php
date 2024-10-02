@@ -133,7 +133,7 @@ if($loggedIn == 'admin') {
                                                                <?= $errors['image'] ?? ""; ?>
                                                         </div>
                                                         <div class="previewDiv mt-1 col-sm-8 d-none" id="previewDiv">
-                                                               <img class="previewImage" src="" id="previewImage" width="" height="">
+                                                               <img class="previewImage" src="" id="previewImage" width="300px" height="">
                                                                <button type="button" class="btn btn-outline-secondary btn-sm float-end mt-1" onclick="tyhjennaKuva('image')">Poista</button>
                                                         </div>
                                                  </div>

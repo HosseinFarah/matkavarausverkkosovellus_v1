@@ -16,14 +16,10 @@ if (isset($_SESSION['user_id'])) {
     $email = $row['email'];
     $name = $row['firstname'] . " " . $row['lastname'];
     $phone = $row['mobilenumber'];
+    $photo = $row['image'];
     $kaupunki = $row['city'];
     $katuosoite = $row['address'];
     $postinumero = $row['postcode'];
-    if ($row['image'] == NULL || $row['image'] == "") {
-        $photo = "default.jpg";
-    } else {
-        $photo = $row['image'];
-    }
 }
 ?>
 
@@ -34,7 +30,7 @@ if ($loggedIn === 'user') { ?>
     <body>
         <!-- Main Content -->
         <div class="row">
-            <div class="col-md-3 mt-2">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="d-flex justify-content-center align-items-center mt-3">
                         <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . $photo ?>" style="width: 300px ;" class="card-img-top rounded" alt="<?= $photo ?>">
@@ -54,7 +50,7 @@ if ($loggedIn === 'user') { ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 mt-2">
+            <div class="col-md-8">
                 <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
                 <div class="row flex-nowrap overflow-x-scroll">
                     <!-- show this users all reviews for tours -->
@@ -149,7 +145,6 @@ if ($loggedIn === 'user') { ?>
                 ?>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <hr>
         <?php
@@ -157,7 +152,7 @@ if ($loggedIn === 'user') { ?>
         ?>
 
     <?php
-} elseif ($loggedIn === 'admin' || $loggedIn === 'guide') {
+} elseif ($loggedIn === 'admin') {
     ?>
         <div class="container mt-5 mb-5">
             <div class="row">
@@ -186,3 +181,31 @@ if ($loggedIn === 'user') { ?>
 }
     ?>
 
+    <!-- Bootstrap JS (for collapse functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        content.classList.toggle('collapsed');
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const contentId = e.target.closest('.nav-link').getAttribute('data-content');
+
+            contentSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            document.getElementById(contentId).style.display = 'block';
+        });
+    });
+</script>

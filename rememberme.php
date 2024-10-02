@@ -75,7 +75,9 @@ function token_is_valid(string $token)
     // parse the token to get the selector and validator [$selector, $validator] = parse_token($token);
     [$selector, $validator] = parse_token($token);
     $tokens = find_rememberme_token($selector);
-    if (!$tokens) return false;
+    if (!$tokens || empty($tokens['hashed_validator'])) {
+        return false; // Return false if no token is found or if hashed_validator is null/empty
+    }
     $verified_token = password_verify($validator, $tokens['hashed_validator']);
     return $verified_token ? $tokens['user_id'] : false;
 }
@@ -138,8 +140,12 @@ function loggedIn()
         if ($token = $_COOKIE['rememberme'] ?? '') {
             $token = htmlspecialchars($token);
             if ($user_id = token_is_valid($token)) {
+                // update in 27.9.2024 korjattu rememberme
+
                 // $loggedIn = hae_rooli($user_id);
-                $loggedIn = $user_id;
+                // $loggedIn = $user_id;
+                $loggedIn = hae_rooli($user_id);
+
                 $_SESSION['loggedIn'] = $loggedIn;
             }
         }

@@ -5,3 +5,5 @@ tunnukset.*
 profiilikuvat/*
 tunnukset.php
 sidebar.php
+tour_edit_beforeSave.php
+newheader.php

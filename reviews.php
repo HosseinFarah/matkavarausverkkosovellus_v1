@@ -16,7 +16,7 @@ if ($loggedIn == 'admin') {
     <div class="content">
         <div class="container mt-5 mb-5">
             <div class="row d-flex align-items-center">
-                <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
+                <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
                 <div class="col-md-8>
                 <!-- Start Pagination Part-1 -->
                 <?php
@@ -113,9 +113,12 @@ if ($loggedIn == 'admin') {
             </div>
         </div>
     </div>
+    <?php
+    include 'footer.php';
+    ?>
 <?php
 } else {
-    echo "<h1 class='text-center'>Ei oikeuksia</h1>";
+    header("Location: index.php");
+    exit;
 }
-include "footer.php";
 ?>

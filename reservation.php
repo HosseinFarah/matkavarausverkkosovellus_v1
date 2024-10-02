@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "header.php";
 $PALVELIN = $_SERVER['HTTP_HOST'];
 $title = "kaikki tilaukset";
@@ -37,8 +38,8 @@ if ($loggedIn == 'admin') {
     <body>
         <div class="content">
             <div class="container mt-5 mb-5">
-                <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
-
+                <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a>
+ -->
                 <!-- search for a reservation by fullname or tour name or reservation_id or price or created date -->
                 <form method="post">
                     <div class="row">
@@ -96,6 +97,9 @@ if ($loggedIn == 'admin') {
     </body>
 
 <?php
+ob_end_flush();
+
 } else {
     header("Location: index.php");
+    exit();
 }

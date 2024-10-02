@@ -20,7 +20,7 @@ include "header.php";
 ?>
 <div class="content">
 
-  <div class="container login-bg shadow-effect">
+  <div class="login-bg shadow-effect">
     <div class="container">
       <div class="row g-3 align-items-center mt-1 d-flex justify-content-center">
         <h1 class="text-center m-4 fs-1 text-light">Tervetuloa</h1>
