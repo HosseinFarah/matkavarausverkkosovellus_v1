@@ -29,15 +29,14 @@ if (isset($_POST['reviewBtn'])) {
             $query = "UPDATE reviews SET review = '$review', rating = $rating WHERE tour_id = $tour_id AND user_id = $user_id";
             $result = $yhteys->query($query);
             $lahetetty = null;
-            $message = "Arvostelusi on päivitetty!";
+            $message = translate('review_updated');
             $success = "light";
         }
     }
 
     if ($lisays) {
-        $msg = "Kiitos arvostelustasi!<br><br>";
-        $msg .= "Arvostelusi : $review<br> ja arvosanasi : $rating<br> Kiitos palautteestasi!";
-        $subject = "Arvostelusi on vastaanotettu";
+        $msg = translate('review_thanks')."<br><br>".translate('your_review').": $review<br>".translate('your_rating').": $rating<br>".translate('thank_you');
+        $subject = translate('review_received');
         $sql = "SELECT email FROM users WHERE id = $user_id";
         $result = $yhteys->query($sql);
         $row = $result->fetch_assoc();
@@ -45,13 +44,13 @@ if (isset($_POST['reviewBtn'])) {
         $lahetetty = posti($email, $msg, $subject);
     }
     if ($lahetetty) {
-        $message = "Tallennus onnistui! Vahvistuspyyntö on lähetetty sähköpostiisi.";
+        $message = translate('review_success');
         $success = "light";
     } else if ($lahetetty == null) {
-        $message = "Taas onnistui! Arvostelusi on päivitetty.";
+        $message = translate('review_updated_again');
         $success = "light";
     } else {
-        $message = "Tallennus epäonnistui!";
+        $message = translate('save_failed');
         $success = "danger";
     }
     $display = "d-block";

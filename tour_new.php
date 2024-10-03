@@ -75,10 +75,10 @@ if (isset($_POST['painike'])) {
     $name = $_POST["name"] ?? "";
     $kentta_1 = "name";
     if (in_array($kentta_1, $pakolliset) and empty($title)) {
-        $errors[$kentta_1] = "Etuni on pakollinen tieto!";
+        $errors[$kentta_1] = translate('firstname_required');
     } else {
         if (isset($patterns[$kentta_1]) and !preg_match($patterns[$kentta_1], $name)) {
-            $errors[$kentta_1] = "Etunimi ei ole kelvollinen!";
+            $errors[$kentta_1] = translate('firstname_invalid');
         } else {
             $name = $yhteys->real_escape_string(strip_tags(trim($name)));
         }
@@ -87,10 +87,10 @@ if (isset($_POST['painike'])) {
     $title = $_POST["title"] ?? "";
     $kentta_2 = "title";
     if (in_array($kentta_2, $pakolliset) and empty($title)) {
-        $errors[$kentta_2] = "Otsikko on pakollinen tieto!";
+        $errors[$kentta_2] = translate('title_required');
     } else {
         if (isset($patterns[$kentta_2]) and !preg_match($patterns[$kentta_2], $title)) {
-            $errors[$kentta_2] = "Otsikko ei ole kelvollinen!";
+            $errors[$kentta_2] = translate('title_invalid');
         } else {
             $title = $yhteys->real_escape_string(strip_tags(trim($title)));
         }
@@ -99,10 +99,10 @@ if (isset($_POST['painike'])) {
     $summary = $_POST["summary"] ?? "";
     $kentta_3 = "summary";
     if (in_array($kentta_3, $pakolliset) and empty($summary)) {
-        $errors[$kentta_3] = "Yhteenveto on pakollinen tieto!";
+        $errors[$kentta_3] = translate('summary_required');
     } else {
         if (isset($patterns[$kentta_3]) and !preg_match($patterns[$kentta_3], $summary)) {
-            $errors[$kentta_3] = "Yhteenveto ei ole kelvollinen!";
+            $errors[$kentta_3] = translate('summary_invalid');
         } else {
             $summary = $yhteys->real_escape_string(strip_tags(($summary)));
         }
@@ -111,10 +111,10 @@ if (isset($_POST['painike'])) {
     $description = $_POST["description"] ?? "";
     $kentta_4 = "description";
     if (in_array($kentta_4, $pakolliset) and empty($description)) {
-        $errors[$kentta_4] = "Kuvaus on pakollinen tieto!";
+        $errors[$kentta_4] = translate('description_required');
     } else {
         if (isset($patterns[$kentta_4]) and !preg_match($patterns[$kentta_4], $description)) {
-            $errors[$kentta_4] = "Kuvaus ei ole kelvollinen!";
+            $errors[$kentta_4] = translate('description_invalid');
         } else {
             $description = $yhteys->real_escape_string(strip_tags(($description)));
         }
@@ -123,10 +123,10 @@ if (isset($_POST['painike'])) {
     $location = $_POST["location"] ?? "";
     $kentta_5 = "location";
     if (in_array($kentta_5, $pakolliset) and empty($location)) {
-        $errors[$kentta_5] = "Paikka on pakollinen tieto!";
+        $errors[$kentta_5] = translate('location_required');
     } else {
         if (isset($patterns[$kentta_5]) and !preg_match($patterns[$kentta_5], $location)) {
-            $errors[$kentta_5] = "Paikka ei ole kelvollinen!";
+            $errors[$kentta_5] = translate('location_invalid');
         } else {
             $location = $yhteys->real_escape_string(strip_tags(trim($location)));
         }
@@ -137,10 +137,10 @@ if (isset($_POST['painike'])) {
     $startDate = $_POST["startDate"] ?? "";
     $kentta_6 = "startDate";
     if (in_array($kentta_6, $pakolliset) and empty($startDate)) {
-        $errors[$kentta_6] = "Aloituspäivä on pakollinen tieto!";
+        $errors[$kentta_6] = translate('start_date_required');
     } else {
         if (isset($patterns[$kentta_6]) and !preg_match($patterns[$kentta_6], $startDate)) {
-            $errors[$kentta_6] = "Aloituspäivä ei ole kelvollinen!";
+            $errors[$kentta_6] = translate('start_date_invalid');
         } else {
             $startDate = $yhteys->real_escape_string(strip_tags(trim($startDate)));
         }
@@ -149,10 +149,10 @@ if (isset($_POST['painike'])) {
     $groupSize = $_POST["groupSize"] ?? "";
     $kentta_7 = "groupSize";
     if (in_array($kentta_7, $pakolliset) and empty($groupSize)) {
-        $errors[$kentta_7] = "Ryhmäkoko on pakollinen tieto!";
+        $errors[$kentta_7] = translate('group_size_required');
     } else {
         if (isset($patterns[$kentta_7]) and !preg_match($patterns[$kentta_7], $groupSize)) {
-            $errors[$kentta_7] = "Ryhmäkoko ei ole kelvollinen!";
+            $errors[$kentta_7] = translate('group_size_invalid');
         } else {
             $groupSize = $yhteys->real_escape_string(strip_tags(trim($groupSize)));
         }
@@ -161,10 +161,10 @@ if (isset($_POST['painike'])) {
     $price = $_POST["price"] ?? "";
     $kentta_8 = "price";
     if (in_array($kentta_8, $pakolliset) and empty($price)) {
-        $errors[$kentta_8] = "Hinta on pakollinen tieto!";
+        $errors[$kentta_8] = translate('price_required');
     } else {
         if (isset($patterns[$kentta_8]) and !preg_match($patterns[$kentta_8], $price)) {
-            $errors[$kentta_8] = "Hinta ei ole kelvollinen!";
+            $errors[$kentta_8] = translate('price_invalid');
         } else {
             $price = $yhteys->real_escape_string(strip_tags(trim($price)));
         }
@@ -173,10 +173,10 @@ if (isset($_POST['painike'])) {
     $places = $_POST["places"] ?? "";
     $kentta_9 = "places";
     if (in_array($kentta_9, $pakolliset) and empty($places)) {
-        $errors[$kentta_9] = "Paikkoja on pakollinen tieto!";
+        $errors[$kentta_9] = translate('places_required');
     } else {
         if (isset($patterns[$kentta_9]) and !preg_match($patterns[$kentta_9], $places)) {
-            $errors[$kentta_9] = "Paikkoja ei ole kelvollinen!";
+            $errors[$kentta_9] = translate('places_invalid');
         } else {
             $places = $yhteys->real_escape_string(strip_tags(trim($places)));
         }
@@ -185,10 +185,10 @@ if (isset($_POST['painike'])) {
     $duration = $_POST["duration"] ?? "";
     $kentta_10 = "duration";
     if (in_array($kentta_10, $pakolliset) and empty($duration)) {
-        $errors[$kentta_10] = "Kesto on pakollinen tieto!";
+        $errors[$kentta_10] = translate('duration_required');
     } else {
         if (isset($patterns[$kentta_10]) and !preg_match($patterns[$kentta_10], $duration)) {
-            $errors[$kentta_10] = "Kesto ei ole kelvollinen!";
+            $errors[$kentta_10] = translate('duration_invalid');
         } else {
             $duration = $yhteys->real_escape_string(strip_tags(trim($duration)));
         }
@@ -197,10 +197,10 @@ if (isset($_POST['painike'])) {
     $tourImage = $_FILES["tourImage"]["name"] ?? "";
     $kentta_11 = "tourImage";
     if (in_array($kentta_11, $pakolliset) and empty($tourImage)) {
-        $errors[$kentta_11] = "Kuva on pakollinen tieto!";
+        $errors[$kentta_11] = translate('tour_image_required');
     } else {
         if (isset($patterns[$kentta_11]) and !preg_match($patterns[$kentta_11], $tourImage)) {
-            $errors[$kentta_11] = "Kuva ei ole kelvollinen!";
+            $errors[$kentta_11] = translate('tour_image_invalid');
         } else {
             $tourImage = $yhteys->real_escape_string(strip_tags(trim($tourImage)));
         }
@@ -209,10 +209,10 @@ if (isset($_POST['painike'])) {
     $locations = $_POST["locations"] ?? "";
     $kentta_12 = "locations";
     if (in_array($kentta_12, $pakolliset) and empty($locations)) {
-        $errors[$kentta_12] = "Kohteet on pakollinen tieto!";
+        $errors[$kentta_12] = translate('locations_required');
     } else {
         if (isset($patterns[$kentta_12]) and !preg_match($patterns[$kentta_12], $locations)) {
-            $errors[$kentta_12] = "Kohteet ei ole kelvollinen!";
+            $errors[$kentta_12] = translate('locations_invalid');
         } else {
             $locations = $yhteys->real_escape_string(strip_tags(trim($locations)));
         }
@@ -230,12 +230,12 @@ if (isset($_POST['painike'])) {
         $result = my_query($sql);
         if ($result) {
             $success = "success";
-            $message = "Matka lisätty onnistuneesti!";
+            $message = translate('tour_added');
             header("Location: tours.php");
             exit;
         } else {
             $success = "danger";
-            $message = "Matkan lisääminen epäonnistui!";
+            $message = translate('tour_add_failed');
         }
     }
 }
@@ -253,10 +253,10 @@ if ($loggedIn == 'admin') {
                                 <?= $message ?>
                             </div>
                         <?php } ?>
-                        <h1 class="text-center">Lisää uusi matka</h1>
+                        <h1 class="text-center"><?= translate('add_new_tour') ?></h1>
                         <form method="post" enctype="multipart/form-data" novalidate>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan nimi:</span>
+                                <span class="input-group-text"><?= translate('tour_name') ?>:</span>
                                 <input pattern="<?= pattern('name'); ?>" type="text" id="name" name="name" class="form-control <?= is_invalid('name'); ?> "
                                     title="Matkan nimi"
                                     value="<?= arvo("name"); ?>" required autofocus />
@@ -266,7 +266,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan otsikko:</span>
+                                <span class="input-group-text"><?= translate('tour_title') ?>:</span>
                                 <input pattern="<?= pattern('title'); ?>" type="text" id="title" name="title" class="form-control <?= is_invalid('title'); ?> "
                                     title="Matkan otsikko"
                                     value="<?= arvo("title"); ?>" required autofocus />
@@ -276,7 +276,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan yhteenveto:</span>
+                                <span class="input-group-text"><?= translate('tour_summary') ?>:</span>
                                 <textarea pattern="<?= pattern('summary'); ?>" id="summary" name="summary" class="form-control <?= is_invalid('summary'); ?>" title="Matkan yhteenveto" required autofocus><?= arvo("summary"); ?></textarea>
                                 <div class="invalid-feedback">
                                     <?= $errors['summary'] ?? ""; ?>
@@ -285,7 +285,7 @@ if ($loggedIn == 'admin') {
 
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan kuvaus:</span>
+                                <span class="input-group-text"><?= translate('tour_description') ?>:</span>
                                 <textarea pattern="<?= pattern('description'); ?>" id="description" name="description" class="form-control <?= is_invalid('description'); ?>" title="Matkan kuvaus" required autofocus><?= arvo("description"); ?></textarea>
                                 <div class="invalid-feedback">
                                     <?= $errors['description'] ?? ""; ?>
@@ -294,7 +294,7 @@ if ($loggedIn == 'admin') {
 
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan paikka:</span>
+                                <span class="input-group-text"><?php echo translate('tour_location') ?>:</span>
                                 <input pattern="<?= pattern('location'); ?>" type="text" id="location" name="location" class="form-control <?= is_invalid('location'); ?> "
                                     title="Matkan paikka"
                                     value="<?= arvo("location"); ?>" required autofocus />
@@ -305,7 +305,7 @@ if ($loggedIn == 'admin') {
 
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan aloituspäivä:</span>
+                                <span class="input-group-text"><?= translate('tour_start_date') ?>:</span>
                                 <input pattern="<?= pattern('startDate'); ?>" type="date" id="startDate" name="startDate" class="form-control <?= is_invalid('startDate'); ?> "
                                     title="Matkan aloituspäivä"
                                     value="<?= arvo("startDate"); ?>" required autofocus />
@@ -315,7 +315,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan ryhmäkoko:</span>
+                                <span class="input-group-text"><?= translate('tour_group_size') ?>:</span>
                                 <input pattern="<?= pattern('groupSize'); ?>" type="number" id="groupSize" name="groupSize" class="form-control <?= is_invalid('groupSize'); ?> "
                                     title="Matkan ryhmäkoko"
                                     value="<?= arvo("groupSize"); ?>" required autofocus />
@@ -325,7 +325,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan hinta:</span>
+                                <span class="input-group-text"><?= translate('tour_price') ?>:</span>
                                 <input pattern="<?= pattern('price'); ?>" type="number" id="price" name="price" class="form-control <?= is_invalid('price'); ?> "
                                     title="Matkan hinta"
                                     value="<?= arvo("price"); ?>" required autofocus />
@@ -335,7 +335,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan paikkoja:</span>
+                                <span class="input-group-text"><?= translate('tour_places') ?>:</span>
                                 <input pattern="<?= pattern('places'); ?>" type="number" id="places" name="places" class="form-control <?= is_invalid('places'); ?> "
                                     title="Matkan paikkoja"
                                     value="<?= arvo("places"); ?>" required autofocus />
@@ -345,7 +345,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan kesto:</span>
+                                <span class="input-group-text"><?= translate('tour_duration') ?>:</span>
                                 <input pattern="<?= pattern('duration'); ?>" type="number" id="duration" name="duration" class="form-control <?= is_invalid('duration'); ?> "
                                     title="Matkan kesto"
                                     value="<?= arvo("duration"); ?>" required autofocus />
@@ -355,7 +355,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan kuva:</span>
+                                <span class="input-group-text"><?= translate('tour_image') ?>:</span>
                                 <input type="file" id="tourImage" name="tourImage" class="form-control <?= is_invalid('tourImage'); ?> "
                                     title="Matkan kuva"
                                     required autofocus />
@@ -366,12 +366,12 @@ if ($loggedIn == 'admin') {
 
                             <!-- make upload multiple images max 5 images -->
                             <div class="mb-3">
-                                <label for="images" class="form-label">Matkan kuvat</label>
+                                <label for="images" class="form-label"><?= translate('tour_images') ?>:</label>
                                 <input type="file" class="form-control" id="images" name="images[]" multiple>
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Matkan kohteet:</span>
+                                <span class="input-group-text"><?= translate('tour_places') ?>:</span>
                                 <textarea pattern="<?= pattern('locations'); ?>" id="locations" name="locations" class="form-control <?= is_invalid('locations'); ?>" title="Matkan kohteet" required autofocus><?= arvo("locations"); ?></textarea>
                                 <div class="invalid-feedback">
                                     <?= $errors['locations'] ?? ""; ?>
@@ -380,9 +380,9 @@ if ($loggedIn == 'admin') {
 
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary" name="painike">Tallenna</button>
+                                <button type="submit" class="btn btn-primary" name="painike"><?= translate('save') ?></button>
                                 <!-- cancelled -->
-                                <a href="tours.php" class="btn btn-secondary fs-5">Peruuta</a>
+                                <a href="tours.php" class="btn btn-secondary fs-5"><?= translate('cancel') ?></a>
                             </div>
                         </form>
                     </div>

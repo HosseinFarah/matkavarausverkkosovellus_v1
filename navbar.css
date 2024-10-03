@@ -51,11 +51,11 @@ nav .close {
   display: none;
 } */
 
-/*nav .nav-suojaus {
+/* nav .topnav .nav-suojaus {
   display: flex;
   flex:1 0 auto;
   justify-content: flex-end;
-}*/
+} */
 
 #toggle-btn {
   position: absolute;

@@ -1,5 +1,6 @@
 <?php
 return [
+    'lang' => 'fi',
     'index_title' => 'Etusivu',
     'main_page' => 'Etusivu',
     'about_us' => 'Tietoa meistä',
@@ -33,6 +34,8 @@ return [
     'contact_us_message' => 'Voit ottaa yhteyttä meihin alla olevalla lomakkeella. Vastaamme mahdollisimman pian.',
     // Etunimi ja sukunimi
     'fullname' => 'Etunimi ja sukunimi',
+    // Täältä löydät kaikki käyttäjät
+    'users_desc'=> 'Täältä löydät kaikki käyttäjät',
     'full_name' => 'Koko nimi',
     // Otsikko
     'title' => 'Otsikko',
@@ -61,7 +64,16 @@ return [
     // puuttuu
     'missing' => 'puuttuu',
     'new_user' => 'Uusi käyttäjä',
+    // Lisää uusi käyttäjä
+    'add_new_user' => 'Lisää uusi käyttäjä',
+    'seach_user_by'=>'Hae käyttäjää sähköpostin, etunimen, sukunimen, kaupungin tai käyttäjäryhmän perusteella',
     'tour_edit' => 'Matkan muokkaus',
+    // Tyhjennä
+    'clear' => 'Tyhjennä',
+    // Käyttäjäryhmä
+    'role' => 'Käyttäjäryhmä',
+    // Asetukset
+    'settings' => 'Asetukset',
     'all_reviews' => 'Kaikki arvostelut',
     // Hae matkaa
     'search_tour' => 'Hae matkaa',
@@ -114,6 +126,7 @@ return [
     'save_success' => 'Tallennus onnistui',
     // Tallennus epäonnistui!
     'save_failed' => 'Tallennus epäonnistui!',
+    'tour_info' => 'Matkan tiedot',
 
     // Muokkaa profiilia
     'edit_profile' => 'Muokkaa profiilia',
@@ -126,6 +139,28 @@ return [
     'cancel' => 'Peruuta',
     // Arvostelut
     'reviews' => 'Arvostelut',
+    // Arvostelu
+    'review' => 'Arvostelu',
+    // Käyttäjä
+    'user'=> 'Käyttäjä',
+    // Matka
+    'tour' => 'Matka',
+    // Täältä löydät kaikki tilaukset
+    'rservation_info' => 'Täältä löydät kaikki tilaukset',
+    // ID
+    'id' => 'ID',
+    // Asiakas
+    'customer' => 'Asiakas',
+    // Matka
+    'trip' => 'Matka',
+    // Tilauksen koodi
+    'order_code' => 'Tilauksen koodi',
+    // Hinta
+    'price' => 'Hinta',
+    // Tilauksen päivämäärä
+    'order_date' => 'Tilauksen päivämäärä',
+    // Hae tilausta asikkaan nimen, matkan nimen, tilauksen koodin, hinnan tai tilaus päivämäärän perusteella
+    'search_placeholder' => 'Hae tilausta asikkaan nimen, matkan nimen, tilauksen koodin, hinnan tai tilaus päivämäärän perusteella',
     // Et ole tehnyt yhtään arvostelua
     'no_reviews' => 'Et ole tehnyt yhtään arvostelua',
     // Näytä matka
@@ -190,10 +225,17 @@ return [
     'postal_code' => 'Postinumero',
     'city' => 'Kaupunki',
     'phone_number' => 'Puhelinnumero',
+    'edit_user' => 'Muokkaa käyttäjää',
     'confirm_password' => 'Vahvista salasana',
+    // Poista
+    'delete' => 'Poista',
+    // Käyttäjä lisätty onnistuneesti.
+    'user_added' => 'Käyttäjä lisätty onnistuneesti.',
     'photo' => 'Kuva',
     // Profiilikuva
     'profile_image' => 'Profiilikuva',
+    // Aktiivinen
+    'active' => 'Aktiivinen',
     'accept_terms' => 'Hyväksyn toimitusehdot',
     // Kuva ei kelpaa.
     'invalid_image' => 'Kuva ei kelpaa.',
@@ -208,11 +250,146 @@ return [
     // Vahvista sähköpostiosoitteesi alla olevasta linkistä
     'confirm_email_link' => 'Vahvista sähköpostiosoitteesi alla olevasta linkistä',
     'confirm_email'=>'Vahvista sähköpostiosoite',
-
+    // Are you sure you want to proceed?
+    'confirm_delete'=> 'Haluatko varmasti jatkaa?',
     // Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö. Vahvista siinä olevasta linkistä sähköpostiosoitteesi.
     'confirm_email_msg'=> 'Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö.<br> Vahvista siinä olevasta linkistä sähköpostiosoitteesi.',
-
     
 
+    'tour_name' => 'Matkan nimi',
+    'tour_location' => 'Matkan paikka',
+    'tour_duration' => 'Matkan kesto',
+    'tour_price' => 'Matkan hinta',
+    'tour_start_date' => 'Matkan aloituspäivä',
+    'tour_group_size' => 'Matkan ryhmäkoko',
+    'tour_places' => 'Matkan paikkoja',
+    'tour_image' => 'Matkan kuva',
+    // Etuni on pakollinen tieto!
+    'firstname_required' => 'Etunimi on pakollinen tieto!',
+    'tour_image_required' => 'Matkan kuva on pakollinen tieto!',
+    'tour_image_invalid' => 'Matkan kuva ei ole kelvollinen!',
+    // Matka lisätty onnistuneesti
+    'tour_added' => 'Matka lisätty onnistuneesti',
+    // Matkan lisääminen epäonnistui!
+    'tour_add_failed' => 'Matkan lisääminen epäonnistui!',
+    // Etunimi ei ole kelvollinen!
+    'firstname_invalid' => 'Etunimi ei ole kelvollinen!',
+    // Otsikko on pakollinen tieto!
 
+    'title_required' => 'Otsikko on pakollinen tieto!',
+    'summary_required' => 'Yhteenveto on pakollinen tieto!',
+
+    'summary_invalid' => 'Yhteenveto ei ole kelvollinen!',
+    'description_required' => 'Kuvaus on pakollinen tieto!',
+    'description_invalid' => 'Kuvaus ei ole kelvollinen!',
+    'location_required' => 'Paikka on pakollinen tieto!',
+    'location_invalid' => 'Paikka ei ole kelvollinen!',
+    'start_date_required' => 'Aloituspäivä on pakollinen tieto!',
+    'start_date_invalid' => 'Aloituspäivä ei ole kelvollinen!',
+    'group_size_required' => 'Ryhmäkoko on pakollinen tieto!',
+    'group_size_invalid' => 'Ryhmäkoko ei ole kelvollinen!',
+    'price_required' => 'Hinta on pakollinen tieto!',
+    'price_invalid' => 'Hinta ei ole kelvollinen!',
+    'places_required' => 'Paikkoja on pakollinen tieto!',
+    'places_invalid' => 'Paikkoja ei ole kelvollinen!',
+    'duration_required' => 'Kesto on pakollinen tieto!',
+    'duration_invalid' => 'Kesto ei ole kelvollinen!',
+    'places_required' => 'Kohteet on pakollinen tieto!',
+    'places_invalid' => 'Kohteet ei ole kelvollinen!',
+    'update_success' => 'Matka päivitetty onnistuneesti!',
+    'update_failed' => 'Matkan päivitys epäonnistui!',
+    'add_new_tour' => 'Lisää uusi matka',
+    'tour_title' => 'Matkan otsikko:',
+    'tour_summary' => 'Matkan yhteenveto:',
+    'tour_description' => 'Matkan kuvaus:',
+    'tour_location' => 'Matkan paikka:',
+    'tour_start_date' => 'Matkan aloituspäivä:',
+    'tour_group_size' => 'Matkan ryhmäkoko:',
+    'tour_price' => 'Matkan hinta:',
+    'tour_places' => 'Matkan paikkoja:',
+    'tour_duration' => 'Matkan kesto:',
+    'tour_image' => 'Matkan kuva:',
+    'tour_images' => 'Matkan kuvat',
+    'images' => 'Kuvat',
+    'tour_places' => 'Matkan kohteet:',
+    'save' => 'Tallenna',
+    // Matkaoppaat
+    'tour_guides' => 'Matkaoppaat',
+    // Lisää matkaopas
+    'new_guide' => 'Lisää matkaopas',
+    // Matkaopas
+    'guide' => 'Matkaopas',
+    // Kierros
+    'tour_in' => 'Kierros',
+    // Alkaa
+    'start' => 'Alkaa',
+    // Valitse matkaopas
+    'select_guide' => 'Valitse matkaopas',
+    // Valitse matka
+    'select_tour' => 'Valitse matka',
+    'add'=> 'Lisää',
+    // Matkaopas on jo lisätty tälle matkalle
+    'guide_already_added' => 'Matkaopas on jo lisätty tälle matkalle',
+    // Arvostelusi on päivitetty!
+    'review_updated' => 'Arvostelusi on päivitetty!',
+    'review_thanks' => 'Kiitos arvostelustasi!',
+    // Arvostelusi :
+    'your_review' => 'Arvostelusi :',
+    'your_rating' => 'Arvostelusi :',
+    'thank_you' => 'Kiitos!',
+    // Arvostelusi on vastaanotettu
+    'review_received' => 'Arvostelusi on vastaanotettu',
+    // Tallennus onnistui! Vahvistuspyyntö on lähetetty sähköpostiisi.
+    'review_success' => 'Tallennus onnistui! Vahvistuspyyntö on lähetetty sähköpostiisi.',
+    // Taas onnistui! Arvostelusi on päivitetty.
+    'review_updated_again' => 'Taas onnistui! Arvostelusi on päivitetty.',
+
+    // Arvostelu on pakollinen
+    'review_required' => 'Arvostelu on pakollinen',
+    // Arvostelu saa sisältää vain kirjaimia, numeroita ja välilyöntejä
+    'review_invalid' => 'Arvostelu saa sisältää vain kirjaimia, numeroita ja välilyöntejä',
+    // Arvosana on pakollinen
+    'rating_required' => 'Arvosana on pakollinen',
+    // Arvosana on virheellinen
+    'rating_invalid' => 'Arvosanan tulee olla väliltä 1-5',
+    // Päivitä kierros
+    'update_tour' => 'Päivitä kierros',
+    // Ei arvosteluja
+    'no_reviews' => 'Ei arvosteluja',
+    // Olet jo varannut tämän kierroksen
+    'already_reserved' => 'Olet jo varannut tämän kierroksen',
+    // varausnumero
+    'reservation_number' => 'varausnumero',
+    // Päivämäärä
+    'date' => 'Päivämäärä',
+    // Arvostele kierros
+    'review_tour' => 'Arvostele kierros',
+    // Arvosana
+    'rating' => 'Arvosana',
+    // Arvostelusi on lähetetty:
+    'review_sent' => 'Arvostelusi on lähetetty:',
+    // Näytä arvostelusi
+    'show_review' => 'Näytä arvostelusi',
+    // Vapaita paikkoja:
+    'free_places' => 'Vapaita paikkoja:',
+    // Varaa nyt
+    'book_now' => 'Varaa nyt',
+    // Kaikki paikat varattu
+    'all_places_reserved' => 'Kaikki paikat varattu',
+    // Varaukisa on päättynyt
+    'reservations_ended' => 'Varaukisa on päättynyt',
+    // Kirjaudu sisään varataksesi kierroksen
+    'login_to_book' => 'Kirjaudu sisään varataksesi kierroksen',
+    // Rekisteröityneet käyttäjät
+    'registered_users' => 'Rekisteröityneet käyttäjät',
+    // Yhteenveto
+    'summary' => 'Yhteenveto',
+    // Kuvaus
+    'description' => 'Kuvaus',
+    // Sijainti
+    'location' => 'Sijainti',
+    // Varaa matka
+    'book_tour' => 'Varaa matka',
+    // Matkaa ei löytynyt
+    'tour_not_found' => 'Matkaa ei löytynyt',
 ];

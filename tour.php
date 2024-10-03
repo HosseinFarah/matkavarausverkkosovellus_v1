@@ -6,6 +6,8 @@ $kentat_suomi = array('Arvostelu', 'Arvosana');
 $pakolliset = array('review', 'rating');
 include 'virheilmoitukset.php';
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
+require_once 'lang.php';
+$title = translate('tour_info');
 include 'header.php';
 $pk =  $map_box;
 include 'posti.php'; // Ensure this file is available and correctly included
@@ -19,10 +21,10 @@ if (isset($_POST['reviewBtn']) && isset($_SESSION['user_id'])) {
     $review = $_POST["review"] ?? "";
     $kentta_1 = "review";
     if (in_array($kentta_1, $pakolliset) and empty($review)) {
-        $errors[$kentta_1] = "Arvostelu on pakollinen";
+        $errors[$kentta_1] = translate('review_required');
     } else {
         if (isset($patterns[$kentta_1]) and !preg_match($patterns[$kentta_1], $review)) {
-            $errors[$kentta_1] = "Arvostelu saa sisältää vain kirjaimia, numeroita ja välilyöntejä";
+            $errors[$kentta_1] = translate('review_invalid');
         } else {
             $review = $yhteys->real_escape_string(strip_tags(trim($review)));
         }
@@ -30,10 +32,10 @@ if (isset($_POST['reviewBtn']) && isset($_SESSION['user_id'])) {
     $rating = $_POST["rating"] ?? "";
     $kentta_2 = "rating";
     if (in_array($kentta_2, $pakolliset) and empty($rating)) {
-        $errors[$kentta_2] = "Arvosana on pakollinen";
+        $errors[$kentta_2] = translate('rating_required');
     } else {
         if (isset($patterns[$kentta_2]) and !preg_match($patterns[$kentta_2], $rating)) {
-            $errors[$kentta_2] = "Arvosanan tulee olla väliltä 1-5";
+            $errors[$kentta_2] = translate('rating_invalid');
         } else {
             $rating = $yhteys->real_escape_string(strip_tags(trim($rating)));
         }
@@ -92,7 +94,7 @@ if ($result && $result->num_rows > 0) {
                 <?php
                 // show update tour button for admin
                 if ($loggedIn == 'admin') {
-                    echo "<div class='col-md-12 text-end'><a href='tour_edit.php?id=$id' class='btn btn-warning'><i class='fas fa-edit fs-5 text-light'></i> Päivitä kierros</a></div>";
+                    echo "<div class='col-md-12 text-end'><a href='tour_edit.php?id=$id' class='btn btn-warning'><i class='fas fa-edit fs-5 text-light'></i> ".translate('update_tour')."</a></div>";
                 }
                 ?>
                 <!-- end -->
@@ -100,12 +102,12 @@ if ($result && $result->num_rows > 0) {
                     <p><?= $message; ?></p>
                 </div>
                 <div class="col-md-6">
-                    <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-1"></i> Etusivu</a>
+                    <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-1"></i> <?= translate('main_page') ?></a>
                     <div class="shadow mb-2 mt-1 rounded" id='map' style='width: 100%; height: 500px;'></div>
                     <img src="profiilikuvat/tours/<?= htmlspecialchars($tourImage) ?>" alt="<?= htmlspecialchars($name) ?>" class="img-fluid rounded">
                     <!-- show tour guide for this tour Start-->
                     <hr>
-                    <h2 class="badge text-bg-success fs-5 mt-1 display-1"><i class="fas fa-user-tie text-light fs-3"></i> Matkaoppaat</h2>
+                    <h2 class="badge text-bg-success fs-5 mt-1 display-1"><i class="fas fa-user-tie text-light fs-3"></i> <?= translate('tour_guides') ?></h2>
                     <?php
                     $guide_sql = "SELECT * FROM tours_guides LEFT JOIN users ON tours_guides.guide_id = users.id WHERE tour_id = $id";
                     $guide_result = my_query($guide_sql);
@@ -136,21 +138,21 @@ if ($result && $result->num_rows > 0) {
                 <div class=" col-md-6">
                     <h1 class="badge text-bg-success fs-5"><?= htmlspecialchars($name) ?></h1>
                     <h2><?= htmlspecialchars($title) ?></h2>
-                    <p><strong class="text-danger">Yhteenveto:</strong><br><?= htmlspecialchars($summary) ?></p>
-                    <p><strong class="text-danger">Kuvaus:</strong> <?= nl2br(htmlspecialchars(str_replace('-', "\n-", $description))) ?></p>
+                    <p><strong class="text-danger"><?= translate('summary') ?>:</strong><br><?= htmlspecialchars($summary) ?></p>
+                    <p><strong class="text-danger"><?= translate('description') ?>:</strong> <?= nl2br(htmlspecialchars(str_replace('-', "\n-", $description))) ?></p>
 
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-6">
-                        <p class="badge text-bg-success fs-6 "><strong>Sijainti:</strong> <?= htmlspecialchars($location) ?></p>
-                        <p><strong class="text-danger"><i class="fas fa-stopwatch text-danger fs-5"></i> Kesto:</strong> <?= htmlspecialchars($duration) ?> hours</p>
-                        <p><strong class="text-danger"><i class="fas fa-map-marker-alt text-danger fs-5"></i> Paikat:</strong> <?= htmlspecialchars($places) ?></p>
-                        <p><strong class="text-danger"><i class="fas fa-users text-danger fs-5"></i> Ryhmän enimmäiskoko:</strong> <span class="badge text-bg-warning fs-6"><?= htmlspecialchars($groupSize) ?></span></p>
+                        <p class="badge text-bg-success fs-6 "><strong> <?= translate('location') ?>:</strong> <?= htmlspecialchars($location) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-stopwatch text-danger fs-5"></i> <?= translate('duration') ?>:</strong> <?= htmlspecialchars($duration) ?> hours</p>
+                        <p><strong class="text-danger"><i class="fas fa-map-marker-alt text-danger fs-5"></i> <?= translate('tour_places') ?>:</strong> <?= htmlspecialchars($places) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-users text-danger fs-5"></i> <?= translate('max_participants') ?>:</strong> <span class="badge text-bg-warning fs-6"><?= htmlspecialchars($groupSize) ?></span></p>
 
                     </div>
                     <div class="col-md-6">
-                        <p><strong class="text-danger"><i class="fas fa-money-check-alt text-danger fs-5"></i> Hinta:</strong> <?= htmlspecialchars($price) ?> €</p>
-                        <p><strong class="text-danger"><i class="fas fa-shuttle-van text-danger fs-5"></i> Aloituspäivämäärä:</strong> <?= htmlspecialchars($startDate) ?></p>
+                        <p><strong class="text-danger"><i class="fas fa-money-check-alt text-danger fs-5"></i> <?= translate('price') ?>:</strong> <?= htmlspecialchars($price) ?> €</p>
+                        <p><strong class="text-danger"><i class="fas fa-shuttle-van text-danger fs-5"></i> <?= translate('tour_start_date') ?>:</strong> <?= htmlspecialchars($startDate) ?></p>
                     </div>
                 </div>
 
@@ -185,7 +187,7 @@ if ($result && $result->num_rows > 0) {
                 <!-- tour-slider -->
                 <hr>
                 <!-- show all reviews for this tour join left for geting user firstname with table reviews and tours -->
-                <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
+                <h2 class="badge text-bg-danger text-light fs-3"><?= translate('reviews') ?></h2>
                 <div class="row flex-nowrap overflow-auto">
                     <?php
                     $tour_id = intval($_GET['id']);
@@ -217,7 +219,7 @@ if ($result && $result->num_rows > 0) {
 
                         }
                     } else {
-                        echo "<p class='badge text-bg-danger fs-6'>Ei arvosteluja</p>";
+                        echo "<p class='badge text-bg-danger fs-6'>".translate('no_reviews')."</p>";
                     }
                     ?>
                 </div>
@@ -234,9 +236,9 @@ if ($result && $result->num_rows > 0) {
                             // Check if the user has already reserved this tour -start
                             if ($result && $result->num_rows > 0) {
                                 $num_rows = $result->fetch_assoc();
-                                echo "<p class='badge text-bg-success fs-6 text-start'>Olet jo varannut tämän kierroksen</p>";
-                                echo "<p class='text-start'><strong>varausnumero:</strong> <span class='badge text-bg-primary fs-6'>" . $num_rows['reservation_id'] . "</span></p>
-                                <p class='text-start'><strong>Päivämäärä:</strong> <span class='badge text-bg-primary fs-6'> " . $num_rows['created'] . "</span></p>";
+                                echo "<p class='badge text-bg-success fs-6 text-start'>".translate('already_reserved')."</p>";
+                                echo "<p class='text-start'><strong>".translate('reservation_number').":</strong> <span class='badge text-bg-primary fs-6'>" . $num_rows['reservation_id'] . "</span></p>
+                                <p class='text-start'><strong>".translate('date').":</strong> <span class='badge text-bg-primary fs-6'> " . $num_rows['created'] . "</span></p>";
                                 // user can add new review for this tour with review textarea and rating value between 1-5
                         ?>
                         </div>
@@ -253,7 +255,7 @@ if ($result && $result->num_rows > 0) {
                             <div class="col-md-6">
                                 <form method="post" class="mb-3 needs-validation" novalidate>
                                     <div class="form-group">
-                                        <label for="review">Arvostele kierros</label>
+                                        <label for="review"><?= translate('review_tour') ?></label>
                                         <textarea pattern="<?= pattern('review'); ?>" id="review" name="review" class="form-control <?= is_invalid('review'); ?>" title="review" required autofocus><?= arvo("review"); ?></textarea>
                                         <div class="invalid-feedback">
                                             <?= $errors['review'] ?? ""; ?>
@@ -261,7 +263,7 @@ if ($result && $result->num_rows > 0) {
                                     </div>
                                     <!-- arvo sana 1-5 combo box -->
                                     <div class="form-group">
-                                        <label for="rating" class="form-label">Arvosana</label>
+                                        <label for="rating" class="form-label"><?= translate('rating') ?></label>
                                         <div class="input-group has-validation">
                                             <select class="form-select <?= is_invalid('rating'); ?>" name="rating" id="rating" required>
                                                 <?php
@@ -277,7 +279,7 @@ if ($result && $result->num_rows > 0) {
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" name="reviewBtn">Lähetä</button>
+                                    <button type="submit" class="btn btn-primary" name="reviewBtn"><?= translate('send') ?></button>
                                 </form>
                             </div>
                         </div>
@@ -292,10 +294,10 @@ if ($result && $result->num_rows > 0) {
                         <!-- If the user has already reviewed this tour, display the review -->
                         <div class="row">
                             <div class="col-md-6">
-                                <h1 class="text-secondary fs-5">Arvostelusi on lähetetty: <?= $created; ?></h1>
+                                <h1 class="text-secondary fs-5"><?= translate('review_sent') . $created; ?></h1>
                                 <!-- Button trigger modal for updating the review -->
                                 <button type="button" class="btn btn-warning w-50 mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Näytä arvostelusi
+                                    <?= translate('show_review') ?>
                                 </button>
 
                                 <!-- Updating the review with Modal -->
@@ -303,13 +305,13 @@ if ($result && $result->num_rows > 0) {
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Arvostelusi</h1>
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel"><?= translate('your_review') ?></h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <form method="post" class="mb-3 needs-validation" novalidate>
                                                     <div class="form-group">
-                                                        <label for="review">Arvostelu</label>
+                                                        <label for="review"><?= translate('review_tour') ?></label>
                                                         <textarea pattern="<?= pattern('review'); ?>" id="review" name="review" class="form-control <?= is_invalid('review'); ?>" title="review" required autofocus><?= $review; ?></textarea>
                                                         <div class="invalid-feedback">
                                                             <?= $errors['review'] ?? ""; ?>
@@ -317,7 +319,7 @@ if ($result && $result->num_rows > 0) {
                                                     </div>
                                                     <!-- arvo sana 1-5 combo box -->
                                                     <div class="form-group">
-                                                        <label for="rating" class="form-label">Arvosana</label>
+                                                        <label for="rating" class="form-label"><?= translate('rating') ?></label>
                                                         <div class="input-group has-validation">
                                                             <select class="form-select <?= is_invalid('rating'); ?>" name="rating" id="rating" required>
                                                                 <?php
@@ -333,7 +335,7 @@ if ($result && $result->num_rows > 0) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary" name="reviewBtn">Päivitä</button>
+                                                    <button type="submit" class="btn btn-primary" name="reviewBtn"><?= translate('update') ?></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -352,14 +354,14 @@ if ($result && $result->num_rows > 0) {
                             else {
 
                                 if ($vapaa > 0 && strtotime($startDate) > strtotime(date('Y-m-d'))) {
-                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
-                                    echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Varaa nyt </a>";
+                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('free_places')."</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                    echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> ".translate('book_now')." </a>";
                                 } else {
                                     if ($vapaa == 0) {
-                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Vapaita paikkoja:</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
-                                        echo "<a href='#' class='btn btn-danger mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> Kaikki paikat varattu</a>";
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('free_places')."</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                        echo "<a href='#' class='btn btn-danger mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> ".translate('all_places_reserved')."</a>";
                                     } else {
-                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> Varaukisa on päättynyt</strong></p>";
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('reservations_ended')."</strong></p>";
                                     }
                                 }
                             }
@@ -367,14 +369,15 @@ if ($result && $result->num_rows > 0) {
                         // If the user is not logged in, display a login button
                         else {
                     ?>
-                    <p class='badge text-bg-danger fs-6 m-1'>Kirjaudu sisään varataksesi kierroksen</p>
-                    <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> Kirjaudu sisään</a>
+                    <p class='badge text-bg-danger fs-6 m-1'><?= translate('login_to_book') ?></p>
+                    <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> <?= translate('login') ?></a>
                 <?php
                         }
                         if ($loggedIn == 'admin'|| $loggedIn == 'guide') {
                 ?>
                     <!-- registered user in this tour -->
-                    <h2 class="badge text-bg-danger text-light fs-3 mt-3">Rekisteröityneet käyttäjät</h2>
+                    <hr>
+                    <h2 class="badge text-bg-danger text-light fs-3 mt-3"><?= translate('registered_users') ?></h2>
                     <div class="row flex-nowrap overflow-auto">
 
                         <?php

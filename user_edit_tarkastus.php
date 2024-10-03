@@ -50,13 +50,13 @@ if (empty($errors['password2']) and empty($errors['password'])) {
         $result_update=my_query($query_update);
         if ($result_update) {
             $success = "success";
-            $message = "Profiili päivitetty onnistuneesti! Kirjaudu uudelleen!";
+            $message = translate('profile_updated_msg');
             //reload the page
             header("Location: users.php"); 
             exit;
         } else {
             $success = "danger";
-            $message = "Profiilin päivitys epäonnistui.";
+            $message = translate('profile_update_failed_msg');
         }
     }
 }

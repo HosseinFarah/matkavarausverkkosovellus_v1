@@ -21,10 +21,38 @@ function active($sivu, $active)
   return $active == $sivu ? 'active' : '';
 }
 
+// Check for the 'lang' parameter in the query string
+// Set the base URL (current page without the query parameters)
+$currentUrl = "http://$PALVELIN" . $_SERVER['REQUEST_URI'];
+// Parse the current URL into components
+$urlComponents = parse_url($currentUrl);
+
+// Parse the query string into an array (if it exists)
+$query = [];
+if (isset($urlComponents['query'])) {
+  parse_str($urlComponents['query'], $query);
+}
+
+// Function to generate a language switch URL
+function generateLangUrl($langCode, $urlComponents, $query)
+{
+  // Update the 'lang' parameter in the query string
+  $query['lang'] = $langCode;
+
+  // Rebuild the query string
+  $newQueryString = http_build_query($query);
+
+  // Rebuild the full URL with the updated query string
+  return $urlComponents['scheme'] . '://' . $urlComponents['host'] . $urlComponents['path'] . '?' . $newQueryString;
+}
+// end of the language change
+
+
 /* Huom. nav-suojaus vie viimeiset linkit oikealle. */
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo isset($_SESSION['lang']) ? $_SESSION['lang'] : 'fi'; ?>">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,8 +82,6 @@ function active($sivu, $active)
   <a href="<?= "http://$PALVELIN/aboutus.php" ?>"><?= translate('about_us') ?></a>
   <a href="<?= "http://$PALVELIN/contact_us.php
       " ?>"><?= translate('contact_us') ?></a>
-      <a href="?lang=en">English</a>
-      <a href="?lang=fi">Suomi</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
@@ -71,7 +97,9 @@ function active($sivu, $active)
 if (!$loggedIn) {
   echo "<a class='nav-suojaus ".active('login',$active)."' href='login.php'>Kirjautuminen</a>";
   }*/
+  ?>
 
+  <?php
   switch ($loggedIn) {
     case 'admin':
       // echo "<a class='" . active('kayttajat', $active) . "' href='kayttajat.php'>Käyttäjät</a>";
@@ -85,7 +113,9 @@ if (!$loggedIn) {
       // echo '<a href="poistu.php">Poistu</a>';
       break;
     default:
-      echo "<a class='nav-suojaus' " . active('login', $active) . "' href='login.php'><i class='fas fa-sign-in-alt'> </i> " . translate('login') . "</a>";
+      echo "<a class='endnav' " . active('login', $active) . "' href='login.php'><i class='fas fa-sign-in-alt'> </i> " . translate('login') . "</a>";
+      echo "<a class='endnav' href=" . generateLangUrl('en', $urlComponents, $query) . "><img src='profiilikuvat/lang/en.png' alt='UK' width='25px'></a>";
+      echo "<a class='endnav' href=" . generateLangUrl('fi', $urlComponents, $query) . "><img src='profiilikuvat/lang/fi.png' alt='FI' width='25px'></a>";
       break;
   }
   // dropdown menu
@@ -103,6 +133,7 @@ if (!$loggedIn) {
   ?>
       <ul class="navbar-nav">
         <li class="nav-item dropdown text-end nav-suojaus-">
+          <!-- add ?lang=en end of the current url to change the language to English if ?lang= not exist -->
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="profiilikuvat/users/<?= $image ?>" alt="Profile" class="rounded-circle" width="40" height="40">
           </a>
@@ -119,6 +150,7 @@ if (!$loggedIn) {
     }
   }
   ?>
+
 </nav>
 
 <body>

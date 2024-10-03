@@ -19,7 +19,7 @@ if (isset($_POST['new_guide'])) {
     $sql_check = "SELECT * FROM tours_guides WHERE guide_id='$guide_id' AND tour_id='$tour_id'";
     $result = my_query($sql_check);
     if (mysqli_num_rows($result) > 0) {
-        echo "<div class='alert alert-danger'>Matkaopas on jo lisätty tälle matkalle</div>";
+        echo "<div class='alert alert-danger'>".translate('guide_already_added')."</div>";
         header("refresh:1;url=tour_guides.php");
         exit;
     } else {
@@ -34,12 +34,12 @@ if ($loggedIn === 'admin') {
     <!-- set new tour guide from availables users for available tours -->
 
     <div class="container mt-3">
-        <h1 class="badge text-bg-danger fs-3">Lisää matkaopas</h1>
+        <h1 class="badge text-bg-danger fs-3"><?php echo translate('new_guide'); ?></h1>
         <form method="post">
             <div class="form-group">
-                <label for="guide_id">Matkaopas</label>
+                <label for="guide_id"><?php echo translate('guide'); ?></label>
                 <select class="form-select" name="guide_id" id="guide_id" required>
-                    <option value="">Valitse matkaopas</option>
+                    <option value=""><?php echo translate('select_guide'); ?></option>
                     <?php
                     $sql = "SELECT users.id AS user_id, users.*, roles.* FROM users LEFT JOIN roles ON users.role=roles.id WHERE roles.name='guide'";
                     $result = my_query($sql);
@@ -55,9 +55,9 @@ if ($loggedIn === 'admin') {
                 </select>
             </div>
             <div class="form-group">
-                <label for="tour_id">Matka</label>
+                <label for="tour_id"><?php echo translate('tour'); ?></label>
                 <select class="form-select" name="tour_id" id="tour_id" required>
-                    <option value="">Valitse matka</option>
+                    <option value=""><?php echo translate('select_tour'); ?></option>
                     <?php
                     $sql = "SELECT * FROM tours";
                     $result = my_query($sql);
@@ -67,7 +67,7 @@ if ($loggedIn === 'admin') {
                     ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" name="new_guide">Lisää</button>
+            <button type="submit" class="btn btn-primary" name="new_guide"><?php echo translate('add'); ?></button>
         </form>
     </div>
 <?php

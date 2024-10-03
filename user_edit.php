@@ -1,11 +1,9 @@
 <?php
 ob_start();
+
+require_once 'lang.php';
+$title = translate('edit_user');
 include "header.php";
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-$title = 'Profiili';
 $css = 'profiili.css';
 
 $kentat = ['firstname', 'lastname', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber', 'is_active', 'role'];
@@ -58,21 +56,20 @@ if ($loggedIn == 'admin') {
                     <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . htmlspecialchars($image, ENT_QUOTES) ?>" class="img-thumbnail" alt="Profiilikuva" />
                     <form method="post" class="mb-3 needs-validation" enctype="multipart/form-data" novalidate>
                         <fieldset>
-                            <legend>Rekisteröityminen</legend>
+                            <legend><?= translate('edit_user')?></legend>
                             <?php if (isset($message)): ?>
                                 <div class='alert alert-<?= $success ?>'><?= $message ?></div>
                             <?php endif; ?>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Etunimi:</span>
+                                <span class="input-group-text"><?= translate('firstname')?></span>
                                 <input pattern="<?= pattern('firstname'); ?>" type="text" id="firstname" name="firstname" class="form-control <?= is_invalid('firstname'); ?>"
-                                    title="Nimen tulee olla vähintään kaksi merkkiä pitkä ja saa sisältää vain kirjaimia, välilyöntejä, viivoja ja heittomerkkejä."
                                     value="<?= htmlspecialchars($firstname ?? $_POST['firstname'] ?? '', ENT_QUOTES) ?>" required autofocus />
                                 <div class="invalid-feedback">
                                     <?= $errors['firstname'] ?? ""; ?>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Sukunimi:</span>
+                                <span class="input-group-text"><?= translate('lastname')?></span>
                                 <input type="text" id="lastname" name="lastname" class="form-control <?= is_invalid('lastname'); ?>"
                                     value="<?= htmlspecialchars($lastname ?? $_POST['lastname'] ?? '', ENT_QUOTES) ?>" pattern="<?= pattern('lastname'); ?>" required autofocus />
                                 <div class="invalid-feedback">
@@ -80,18 +77,17 @@ if ($loggedIn == 'admin') {
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Katuosoite:</span>
+                                <span class="input-group-text"><?= translate('street_address')?></span>
                                 <input type="text" id="address" name="address" value="<?= htmlspecialchars($address ?? $_POST['address'] ?? '', ENT_QUOTES) ?>"
                                     pattern="<?= pattern('address'); ?>" required autofocus
                                     class="form-control <?= is_invalid('address'); ?>"
-                                    title="Katuosoite saa sisältää vain kirjaimia, numeroita, välilyöntejä ja viivoja." />
                                 <div class="invalid-feedback">
                                     <?= $errors['address'] ?? ""; ?>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Postinumero:</span>
+                                <span class="input-group-text"><?= translate('postal_code')?></span>
                                 <input type="text" id="postcode" name="postcode" class="form-control <?= is_invalid('postcode'); ?>"
                                     value="<?= htmlspecialchars($postcode ?? $_POST['postcode'] ?? '', ENT_QUOTES) ?>" pattern="<?= pattern('postcode'); ?>" required autofocus />
                                 <div class="invalid-feedback">
@@ -100,14 +96,13 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Kaupunki:</span>
+                                <span class="input-group-text"><?= translate('city')?></span>
                                 <input
                                     type="text"
                                     id="city"
                                     name="city"
                                     class="form-control <?= is_invalid('city'); ?>"
                                     list="kaupungit"
-                                    title="Kaupungin nimi saa sisältää vain kirjaimia, välilyöntejä ja viivoja."
                                     value="<?= htmlspecialchars($city ?? $_POST['city'] ?? '', ENT_QUOTES) ?>"
                                     pattern="<?= pattern('city'); ?>"
                                     required autofocus />
@@ -120,7 +115,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Puhelinnumero:</span>
+                                <span class="input-group-text"><?= translate('phone_number')?></span>
                                 <input type="text" id="mobilenumber" name="mobilenumber" class="form-control <?= is_invalid('mobilenumber'); ?>"
                                     value="<?= htmlspecialchars($mobilenumber ?? $_POST['mobilenumber'] ?? '', ENT_QUOTES) ?>" pattern="<?= pattern('mobilenumber'); ?>" required autofocus />
                                 <div class="invalid-feedback">
@@ -129,7 +124,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Salasana:</span>
+                                <span class="input-group-text"><?= translate('password')?></span>
                                 <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
                                     pattern="<?= pattern('password'); ?>" autofocus />
                                 <div class="invalid-feedback">
@@ -138,7 +133,7 @@ if ($loggedIn == 'admin') {
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text">Vahvista salasana:</span>
+                                <span class="input-group-text"><?= translate('confirm_password')?></span>
                                 <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
                                     pattern="<?= pattern('password2'); ?>" autofocus />
                                 <div class="invalid-feedback">
@@ -149,7 +144,7 @@ if ($loggedIn == 'admin') {
 
                             <!-- Image upload -->
                             <div class="input-group mb-3">
-                                <label for="image" class="form-label">Profiilikuva:</label>
+                                <label for="image" class="form-label"><?= translate('profile_image')?></label>
                                 <input type="file" name="image" id="image" class="form-control <?= is_invalid('image'); ?>" />
                                 <div class="invalid-feedback">
                                     <?= isset($errors['image']) ? $errors['image'] : ""; ?>
@@ -159,13 +154,13 @@ if ($loggedIn == 'admin') {
 
                             <!-- is_active -->
                             <div class="input-group mb-3">
-                                <label for="is_active" class="form-label">Aktiivinen:</label>
+                                <label for="is_active" class="form-label"><?= translate('active')?></label>
                                 <input type="checkbox" name="is_active" id="is_active" <?= $is_active ? 'checked' : ''; ?> />
                             </div>
 
                             <!-- Role -->
                             <div class="input-group mb-3">
-                                <label for="role" class="form-label">Rooli:</label>
+                                <label for="role" class="form-label"><?= translate('role')?></label>
                                 <select name="role" id="role" class="form-select"
                                     value="<?= htmlspecialchars($role ?? $_POST['role'] ?? '', ENT_QUOTES) ?>">
                                     <?php
@@ -180,8 +175,8 @@ if ($loggedIn == 'admin') {
                             </div>
                             <!-- submit -->
                             <div>
-                                <button type="submit" name="painike" class="btn btn-primary">Päivitä</button>
-                                <button type="button" class="btn btn-secondary" onclick="window.location.href='users.php'">Peruuta</button>
+                                <button type="submit" name="painike" class="btn btn-primary"><?= translate('update')?></button>
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='users.php'"><?= translate('cancel')?></button>
                             </div>
                         </fieldset>
                     </form>

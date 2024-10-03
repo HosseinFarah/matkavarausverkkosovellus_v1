@@ -25,14 +25,15 @@ function hae_kuva($kentta){
        $target_dir = PROFIILIKUVAKANSIO."/users/";
        $target_file = "$target_dir/$image";
        /* Check if image file is a actual image or fake image */
-       if (!$check = getimagesize($temp_file)) $virhe = "Kuva ei kelpaa.";
-       elseif (file_exists($target_file)) $virhe = "Kuvatiedosto on jo olemassa.";
-       elseif (!in_array($filetype,$allowed_images)) $virhe = "Väärä tiedostotyyppi.";
-       elseif ($filesize > $maxsize) $virhe = "Kuvan koon tulee olla korkeintaan 5 MB.";
+       if (!$check = getimagesize($temp_file)) $virhe = translate('invalid_image');
+       elseif (file_exists($target_file)) $virhe = translate('image_exists');
+       elseif (!in_array($filetype,$allowed_images)) $virhe = translate('image_invalid');
+       elseif ($filesize > $maxsize) $virhe = translate('image_size_error');
+          $virhe = false;
        debuggeri("File $image,mime: {$check['mime']}, $filetype, $filesize tavua");
        if (!$virhe){
           if (!move_uploaded_file($temp_file,$target_file)) 
-             $virhe = "Kuvan tallennus ei onnistunut.";
+             $virhe = translate('image_upload_error');
           } 
        }
        }
@@ -78,7 +79,7 @@ if (empty($errors)) {
     debuggeri($query);
     $result = $yhteys->query($query);
     if ($result) {
-        $success = "Käyttäjä lisätty onnistuneesti.";
+        $success = translate('user_added');
         $display = "d-none";
         header("Location: users.php");
         exit;
