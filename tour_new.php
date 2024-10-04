@@ -9,9 +9,9 @@ include "rememberme.php";
 $loggedIn = secure_page();
 include 'header.php';
 
-$kentat = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration', 'tourImage', 'locations');
-$kentat_suomi = array('Matkan nimi', 'Matkan otsikko', 'Matkan yhteenveto', 'Matkan kuvaus', 'Matkan paikka', 'Matkan aloituspäivä', 'Matkan ryhmäkoko', 'Matkan hinta', 'Matkan paikkoja', 'Matkan kesto', 'Matkan kuva', 'Matkan kohteet');
-$pakolliset = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations', 'tourImage');
+$kentat = array('name', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration', 'tourImage', 'locations', 'images');
+$kentat_suomi = array('Matkan nimi',  'Matkan paikka', 'Matkan aloituspäivä', 'Matkan ryhmäkoko', 'Matkan hinta', 'Matkan paikkoja', 'Matkan kesto', 'Matkan kuva', 'Matkan kohteet', 'Matkan kuvat');
+$pakolliset = array('name', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations', 'tourImage', 'images');
 
 include 'virheilmoitukset.php';
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
@@ -81,42 +81,6 @@ if (isset($_POST['painike'])) {
             $errors[$kentta_1] = translate('firstname_invalid');
         } else {
             $name = $yhteys->real_escape_string(strip_tags(trim($name)));
-        }
-    }
-
-    $title = $_POST["title"] ?? "";
-    $kentta_2 = "title";
-    if (in_array($kentta_2, $pakolliset) and empty($title)) {
-        $errors[$kentta_2] = translate('title_required');
-    } else {
-        if (isset($patterns[$kentta_2]) and !preg_match($patterns[$kentta_2], $title)) {
-            $errors[$kentta_2] = translate('title_invalid');
-        } else {
-            $title = $yhteys->real_escape_string(strip_tags(trim($title)));
-        }
-    }
-
-    $summary = $_POST["summary"] ?? "";
-    $kentta_3 = "summary";
-    if (in_array($kentta_3, $pakolliset) and empty($summary)) {
-        $errors[$kentta_3] = translate('summary_required');
-    } else {
-        if (isset($patterns[$kentta_3]) and !preg_match($patterns[$kentta_3], $summary)) {
-            $errors[$kentta_3] = translate('summary_invalid');
-        } else {
-            $summary = $yhteys->real_escape_string(strip_tags(($summary)));
-        }
-    }
-
-    $description = $_POST["description"] ?? "";
-    $kentta_4 = "description";
-    if (in_array($kentta_4, $pakolliset) and empty($description)) {
-        $errors[$kentta_4] = translate('description_required');
-    } else {
-        if (isset($patterns[$kentta_4]) and !preg_match($patterns[$kentta_4], $description)) {
-            $errors[$kentta_4] = translate('description_invalid');
-        } else {
-            $description = $yhteys->real_escape_string(strip_tags(($description)));
         }
     }
 
@@ -226,12 +190,16 @@ if (isset($_POST['painike'])) {
     //  extract($values);
 
     if (empty($errors)) {
-        $sql = "INSERT INTO tours (name, title, summary, description, location, startDate, groupSize, price, places, duration, tourImage, locations,images) VALUES ('$name', '$title', '$summary', '$description', '$location', '$startDate', '$groupSize', '$price', '$places', '$duration', '$tourImage', '$locations','$images')";
+        $sql = "INSERT INTO tours (name, location, startDate, groupSize, price, places, duration, tourImage, locations,images) VALUES ('$name', '$location', '$startDate', '$groupSize', '$price', '$places', '$duration', '$tourImage', '$locations','$images')";
         $result = my_query($sql);
         if ($result) {
             $success = "success";
             $message = translate('tour_added');
-            header("Location: tours.php");
+            $sql2 = "SELECT * FROM tours WHERE name = '$name'";
+            $result2 = my_query($sql2);
+            $row = $result2->fetch_assoc();
+            $tour_id = $row['id'];
+            header("Location: tour_translate.php?tourname=$tour_id$&language=fi");
             exit;
         } else {
             $success = "danger";
@@ -262,33 +230,6 @@ if ($loggedIn == 'admin') {
                                     value="<?= arvo("name"); ?>" required autofocus />
                                 <div class="invalid-feedback">
                                     <?= $errors['name'] ?? ""; ?>
-                                </div>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_title') ?>:</span>
-                                <input pattern="<?= pattern('title'); ?>" type="text" id="title" name="title" class="form-control <?= is_invalid('title'); ?> "
-                                    title="Matkan otsikko"
-                                    value="<?= arvo("title"); ?>" required autofocus />
-                                <div class="invalid-feedback">
-                                    <?= $errors['title'] ?? ""; ?>
-                                </div>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_summary') ?>:</span>
-                                <textarea pattern="<?= pattern('summary'); ?>" id="summary" name="summary" class="form-control <?= is_invalid('summary'); ?>" title="Matkan yhteenveto" required autofocus><?= arvo("summary"); ?></textarea>
-                                <div class="invalid-feedback">
-                                    <?= $errors['summary'] ?? ""; ?>
-                                </div>
-                            </div>
-
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_description') ?>:</span>
-                                <textarea pattern="<?= pattern('description'); ?>" id="description" name="description" class="form-control <?= is_invalid('description'); ?>" title="Matkan kuvaus" required autofocus><?= arvo("description"); ?></textarea>
-                                <div class="invalid-feedback">
-                                    <?= $errors['description'] ?? ""; ?>
                                 </div>
                             </div>
 
@@ -367,7 +308,7 @@ if ($loggedIn == 'admin') {
                             <!-- make upload multiple images max 5 images -->
                             <div class="mb-3">
                                 <label for="images" class="form-label"><?= translate('tour_images') ?>:</label>
-                                <input type="file" class="form-control" id="images" name="images[]" multiple>
+                                <input type="file" class="form-control" id="images" name="images[]" multiple required autofocus> 
                             </div>
 
                             <div class="input-group mb-3">

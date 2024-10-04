@@ -282,6 +282,10 @@ return [
     'location' => 'Location',
     'book_tour' => 'Book tour',
     'tour_not_found' => 'Tour not found',
+    'language' => 'Language',
+    'select_language' => 'Select language',
+    'translate' => 'Translate',
+    'new_translation' => 'New translation',
 
 
 ];

@@ -187,6 +187,11 @@ if (!$loggedIn) {
         <i class="fas fa-book"></i> <?= translate('all_reservations') ?>
       </a>
 
+      <!-- tour translate -->
+      <a href="tour_translate.php">
+        <i class="fas fa-language"></i>  <?= translate('translate') ?>
+      </a>
+
       <!-- tour guides -->
       <a href="tour_guides.php">
         <i class="fas fa-user-tie"></i> <?= translate('all_guides') ?>

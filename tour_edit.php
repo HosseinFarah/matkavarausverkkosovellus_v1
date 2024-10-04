@@ -9,9 +9,9 @@ include "rememberme.php";
 $loggedIn = secure_page();
 include 'header.php';
 
-$kentat = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration', 'tourImage', 'locations');
-$kentat_suomi = array('Matkan nimi', 'Matkan otsikko', 'Matkan yhteenveto', 'Matkan kuvaus', 'Matkan paikka', 'Matkan aloituspäivä', 'Matkan ryhmäkoko', 'Matkan hinta', 'Matkan paikkoja', 'Matkan kesto', 'Matkan kuva', 'Matkan kohteet');
-$pakolliset = array('name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations');
+$kentat = array('name',  'location', 'startDate', 'groupSize', 'price', 'places', 'duration', 'tourImage', 'locations');
+$kentat_suomi = array('Matkan nimi', 'Matkan paikka', 'Matkan aloituspäivä', 'Matkan ryhmäkoko', 'Matkan hinta', 'Matkan paikkoja', 'Matkan kesto', 'Matkan kuva', 'Matkan kohteet');
+$pakolliset = array('name', 'location', 'startDate', 'groupSize', 'price', 'places', 'duration',  'locations');
 
 include 'virheilmoitukset.php';
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
@@ -26,9 +26,6 @@ if ($id) {
     } else {
         $row = $result->fetch_assoc();
         $name = $row['name'];
-        $title = $row['title'];
-        $summary = $row['summary'];
-        $description = $row['description'];
         $location = $row['location'];
         $startDate = $row['startDate'];
         $groupSize = $row['groupSize'];
@@ -98,41 +95,6 @@ if (isset($_POST['painike'])) {
         }
     }
 
-    $title = $_POST["title"] ?? "";
-    $kentta_2 = "title";
-    if (in_array($kentta_2, $pakolliset) and empty($title)) {
-        $errors[$kentta_2] = translate('title_required');
-    } else {
-        if (isset($patterns[$kentta_2]) and !preg_match($patterns[$kentta_2], $title)) {
-            $errors[$kentta_2] = translate('title_invalid');
-        } else {
-            $title = $yhteys->real_escape_string(strip_tags(trim($title)));
-        }
-    }
-
-    $summary = $_POST["summary"] ?? "";
-    $kentta_3 = "summary";
-    if (in_array($kentta_3, $pakolliset) and empty($summary)) {
-        $errors[$kentta_3] = translate('summary_required');
-    } else {
-        if (isset($patterns[$kentta_3]) and !preg_match($patterns[$kentta_3], $summary)) {
-            $errors[$kentta_3] = translate('summary_invalid');
-        } else {
-            $summary = $yhteys->real_escape_string(strip_tags(($summary)));
-        }
-    }
-
-    $description = $_POST["description"] ?? "";
-    $kentta_4 = "description";
-    if (in_array($kentta_4, $pakolliset) and empty($description)) {
-        $errors[$kentta_4] = translate('description_required');
-    } else {
-        if (isset($patterns[$kentta_4]) and !preg_match($patterns[$kentta_4], $description)) {
-            $errors[$kentta_4] = translate('description_invalid');
-        } else {
-            $description = $yhteys->real_escape_string(strip_tags(($description)));
-        }
-    }
 
     $location = $_POST["location"] ?? "";
     $kentta_5 = "location";
@@ -240,7 +202,7 @@ if (isset($_POST['painike'])) {
 
 
     if (empty($errors)) {
-        $query = "UPDATE tours SET name = '$name', title = '$title', summary = '$summary', description = '$description', location = '$location', startDate = '$startDate', groupSize = '$groupSize', price = '$price', places = '$places', duration = '$duration', tourImage = '$tourImage' ,locations= '$locations', images='$images' WHERE id = $id";
+        $query = "UPDATE tours SET name = '$name',  location = '$location', startDate = '$startDate', groupSize = '$groupSize', price = '$price', places = '$places', duration = '$duration', tourImage = '$tourImage' ,locations= '$locations', images='$images' WHERE id = $id";
         $result = my_query($query);
         if ($result) {
             $success = "success";
@@ -279,35 +241,6 @@ if ($loggedIn == 'admin') {
                                     <?= $errors['name'] ?? ""; ?>
                                 </div>
                             </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_title') ?>:</span>
-                                <input pattern="<?= pattern('title'); ?>" type="text" id="title" name="title" class="form-control <?= is_invalid('title'); ?> "
-                                    title="Matkan otsikko"
-                                    value="<?= htmlspecialchars($title ?? $_POST['title'] ?? '', ENT_QUOTES) ?>"
-                                    required autofocus />
-                                <div class="invalid-feedback">
-                                    <?= $errors['title'] ?? ""; ?>
-                                </div>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_summary') ?>:</span>
-                                <textarea pattern="<?= pattern('summary'); ?>" id="summary" name="summary" class="form-control <?= is_invalid('summary'); ?>" title="Matkan yhteenveto" required autofocus><?= htmlspecialchars($summary ?? $_POST['summary'] ?? '', ENT_QUOTES) ?></textarea>
-                                <div class="invalid-feedback">
-                                    <?= $errors['summary'] ?? ""; ?>
-                                </div>
-                            </div>
-
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><?= translate('tour_description') ?>:</span>
-                                <textarea pattern="<?= pattern('description'); ?>" id="description" name="description" class="form-control <?= is_invalid('description'); ?>" title="Matkan kuvaus" required autofocus><?= htmlspecialchars($description ?? $_POST['description'] ?? '', ENT_QUOTES) ?></textarea>
-                                <div class="invalid-feedback">
-                                    <?= $errors['description'] ?? ""; ?>
-                                </div>
-                            </div>
-
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><?= translate('tour_location') ?>:</span>

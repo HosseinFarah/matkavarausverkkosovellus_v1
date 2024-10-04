@@ -254,7 +254,7 @@ return [
     'confirm_delete'=> 'Haluatko varmasti jatkaa?',
     // Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö. Vahvista siinä olevasta linkistä sähköpostiosoitteesi.
     'confirm_email_msg'=> 'Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö.<br> Vahvista siinä olevasta linkistä sähköpostiosoitteesi.',
-    
+
 
     'tour_name' => 'Matkan nimi',
     'tour_location' => 'Matkan paikka',
@@ -392,4 +392,12 @@ return [
     'book_tour' => 'Varaa matka',
     // Matkaa ei löytynyt
     'tour_not_found' => 'Matkaa ei löytynyt',
+    // language
+    'language' => 'Kieli',
+    // Valitse kieli
+    'select_language' => 'Valitse kieli',
+    // translate
+    'translate' => 'Käännä',
+    // new_translation
+    'new_translation' => 'Uusi käännös',
 ];
