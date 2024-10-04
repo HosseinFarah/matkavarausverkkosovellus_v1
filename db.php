@@ -30,19 +30,3 @@ function my_query($sql) {
     }
 }
 
-// Function to fetch dynamic content based on language
-function getDynamicContent($key, $lang) {
-    global $yhteys;
-    
-    $query = $yhteys->prepare("SELECT content_value FROM content WHERE content_key = ? LIMIT 1");
-    $query->bind_param('s', $key); // Use bind_param for MySQLi
-    $query->execute();
-    $result = $query->get_result()->fetch_assoc();
-
-    if ($result) {
-        $content = json_decode($result['content_value'], true);
-        return $content[$lang] ?? $content['en']; // Fallback to English
-    }
-    return 'Content not found';
-}
-?>

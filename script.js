@@ -36,6 +36,16 @@ function setActiveLink() {
       x.className = "topnav";
     }
   }
+
+  
+  // Automatically reset layout when resizing to desktop view
+  window.addEventListener('resize', function() {
+    var x = document.getElementById("myTopnav");
+    if (window.innerWidth > 900) {
+      x.className = "topnav"; // Reset to flex layout
+    }
+  });
+  
   
   (() => {
     "use strict";

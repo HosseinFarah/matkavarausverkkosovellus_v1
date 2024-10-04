@@ -58,10 +58,13 @@ $result = my_query($sql);
 // Ensure the query was successful and data is retrieved
 if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $name = htmlspecialchars($row['name']);
-    $title = htmlspecialchars($row['title']);
-    $summary = htmlspecialchars($row['summary']);
-    $description = htmlspecialchars($row['description']);
+    $sql2 = "SELECT * FROM translations WHERE language = '$_SESSION[lang]' AND tour_id = $id";
+    $result2 = my_query($sql2);
+    $row2 = $result2->fetch_assoc();
+    $name = getTranslation($id, 'name', $_SESSION['lang']);
+    $title = getTranslation($id, 'title', $_SESSION['lang']);
+    $summary = getTranslation($id, 'summary', $_SESSION['lang']);
+    $description = getTranslation($id, 'description', $_SESSION['lang']);
     $location = htmlspecialchars($row['location']);
     $startDate = htmlspecialchars($row['startDate']);
     $groupSize = htmlspecialchars($row['groupSize']);

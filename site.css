@@ -342,10 +342,8 @@ li {
 /* END ------------------------------------------------------*/
 
 .topnav {
+  display: flex;
   background-color: #555;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position-y: center;
   z-index: 100;
 }
 
@@ -358,7 +356,7 @@ li {
   text-decoration: none;
   font-size: 22px;
 }
-.topnav a.endnav {
+.topnav a.endnav ,.navbar-nav{
   float: right;
 }
 
@@ -553,6 +551,16 @@ a>span:hover {
 /* Product Full Screen ------------------------------- End */
 
 @media screen and (max-width: 900px) {
+  .dropdown-menu {
+    position: relative;
+    width: 100%; /* Make it full width on small screens */
+    text-align: center;
+}
+.dropdown-item {
+    display: block;
+    padding: 10px; /* Adjust padding for easier clicking */
+}
+
   .topnav a .fa.fa-bars{
     display: flex;
   }
@@ -560,6 +568,9 @@ a>span:hover {
     display: flex;
   }
 
+  .navbar-nav a{
+    display: flex;
+  }
   .topnav a,
   .topnav .dropdownmenu {
     display: none;

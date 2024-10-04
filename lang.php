@@ -32,3 +32,21 @@ function translate($key) {
     global $lang;
     return $lang[$key] ?? $key;  // Return the translation or the key if not found
 }
+
+
+
+// Function to fetch dynamic content based on language
+function getTranslation($tourId, $fieldName, $lang) {
+    global $yhteys;
+    
+    $query = $yhteys->prepare("SELECT content FROM translations WHERE tour_id = ? AND field_name = ? AND language = ? LIMIT 1");
+    $query->bind_param('iss', $tourId, $fieldName, $lang);
+    $query->execute();
+    $result = $query->get_result()->fetch_assoc();
+    
+    if ($result) {
+        return $result['content'];
+    }
+    
+    return 'Content not found'; // Handle cases where translation doesn't exist
+}

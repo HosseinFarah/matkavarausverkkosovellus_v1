@@ -98,14 +98,20 @@ if (!$loggedIn) {
   echo "<a class='nav-suojaus ".active('login',$active)."' href='login.php'>Kirjautuminen</a>";
   }*/
   ?>
-
+<div class="sm-auto">
   <?php
   switch ($loggedIn) {
     case 'admin':
+      echo "<a class='endnav' href=" . generateLangUrl('en', $urlComponents, $query) . "><img src='profiilikuvat/lang/en.png' alt='UK' width='25px'></a>";
+      echo "<a class='endnav' href=" . generateLangUrl('fi', $urlComponents, $query) . "><img src='profiilikuvat/lang/fi.png' alt='FI' width='25px'></a>";
+
       // echo "<a class='" . active('kayttajat', $active) . "' href='kayttajat.php'>Käyttäjät</a>";
       // echo '<a href="poistu.php">Poistu</a>';
       break;
     case true:
+      echo "<a class='endnav' href=" . generateLangUrl('en', $urlComponents, $query) . "><img src='profiilikuvat/lang/en.png' alt='UK' width='25px'></a>";
+      echo "<a class='endnav' href=" . generateLangUrl('fi', $urlComponents, $query) . "><img src='profiilikuvat/lang/fi.png' alt='FI' width='25px'></a>";
+
       // echo "<a class='" . active('profiili', $active) . "' href='profiili.php'>Profiili</a>";
       /* Huom. tästä oikeaan laitaan. */
       // echo "<a class='nav-suojaus " . active('phpinfo', $active) . "' href='phpinfo.php'>phpinfo</a>";
@@ -132,13 +138,13 @@ if (!$loggedIn) {
       }
   ?>
       <ul class="navbar-nav">
-        <li class="nav-item dropdown text-end nav-suojaus-">
+        <li class="nav-item dropdown">
           <!-- add ?lang=en end of the current url to change the language to English if ?lang= not exist -->
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="profiilikuvat/users/<?= $image ?>" alt="Profile" class="rounded-circle" width="40" height="40">
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class='dropdown-item text-primary " . active(' profiili', $active) . "' href='profiili.php'><?= translate('profile') ?></a></li>
+            <li><a class='dropdown-item text-primary <?= active('profiili', $active) ?>' href='profiili.php'><?= translate('profile') ?></a></li>
               <li>
                 <hr class=" dropdown-divider">
             </li>
@@ -150,7 +156,7 @@ if (!$loggedIn) {
     }
   }
   ?>
-
+</div>
 </nav>
 
 <body>
