@@ -139,6 +139,9 @@ if ($loggedIn === 'user') { ?>
                                         <p class="card-text"><small class="text-body-secondary">Hinta: <?= $tour_price ?> €</small></p>
                                         <p class="card-text"><small class="text-body-secondary">Päivämäärä: <?= $tour_start_date ?></small></p>
                                         <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-success"><?= translate('show_tour') ?></a>
+                                        <!-- // print reservation invoice based on user_id and tour_id and reservation_id -->
+                                        <a target="_blank" href="invoice.php?id=<?= $reservation_id ?>&tour_id=<?= $tour_id ?>&user_id=<?= $user_id ?>" class="btn btn-warning"><i class="fas fa-file-invoice"></i> <?= translate('show_invoice') ?></a>
+                                        
                                     </div>
                                 </div>
                             </div>

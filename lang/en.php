@@ -286,6 +286,7 @@ return [
     'select_language' => 'Select language',
     'translate' => 'Translate',
     'new_translation' => 'New translation',
+    'show_invoice' => 'Show invoice',
 
 
 ];

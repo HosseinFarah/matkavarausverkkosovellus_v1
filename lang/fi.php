@@ -400,4 +400,6 @@ return [
     'translate' => 'Käännä',
     // new_translation
     'new_translation' => 'Uusi käännös',
+    // show_invoice
+    'show_invoice' => 'Näytä lasku',
 ];

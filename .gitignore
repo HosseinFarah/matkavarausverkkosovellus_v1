@@ -13,3 +13,5 @@ newheader.php
 /vendor
 .DS_Store
 Thumbs.db
+/makefont/
+/too many atempts for login-js/
