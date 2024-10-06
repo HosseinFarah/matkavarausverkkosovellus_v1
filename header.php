@@ -155,6 +155,7 @@ if (!$loggedIn) {
   <?php
     }
   }
+
   ?>
 </div>
 </nav>

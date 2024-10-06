@@ -402,4 +402,8 @@ return [
     'new_translation' => 'Uusi käännös',
     // show_invoice
     'show_invoice' => 'Näytä lasku',
+    'highest_price' => 'Korkein hinta',
+    'lowest_price' => 'Alhaisin hinta',
+    'sort_by' => 'Lajittele',
+    'sort' => 'Lajittele',
 ];

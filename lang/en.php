@@ -287,6 +287,10 @@ return [
     'translate' => 'Translate',
     'new_translation' => 'New translation',
     'show_invoice' => 'Show invoice',
+    'highest_price' => 'Highest price',
+    'lowest_price' => 'Lowest price',
+    'sort_by' => 'Sort by',
+    'sort' => 'Sort',
 
 
 ];
