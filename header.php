@@ -143,7 +143,7 @@ if (!$loggedIn) {
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="profiilikuvat/users/<?= $image ?>" alt="Profile" class="rounded-circle" width="40" height="40">
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class='dropdown-item text-primary <?= active('profiili', $active) ?>' href='profiili.php'><?= translate('profile') ?></a></li>
               <li>
                 <hr class=" dropdown-divider">

@@ -552,13 +552,9 @@ a>span:hover {
 
 @media screen and (max-width: 900px) {
   .dropdown-menu {
-    position: relative;
+    float: none;
     width: 100%; /* Make it full width on small screens */
     text-align: center;
-}
-.dropdown-item {
-    display: block;
-    padding: 10px; /* Adjust padding for easier clicking */
 }
 
   .topnav a .fa.fa-bars{
@@ -574,6 +570,10 @@ a>span:hover {
   .topnav a,
   .topnav .dropdownmenu {
     display: none;
+  }
+  .topnav a.dropdown-item{
+    display: block;
+    
   }
 }
 
@@ -667,4 +667,4 @@ a>span:hover {
   .morephoto{
     flex-direction: column;
   }
-}
+

@@ -5,7 +5,8 @@ $message = "";
 $attempt_msg = "";
 $success = "success";
 $ilmoitukset['errorMsg'] = translate('login_failed');
-debuggeri("POST:" . var_export($_POST, true));
+// hfk get debuge for login information
+// debuggeri("POST:" . var_export($_POST, true));
 
 if (isset($_POST['painike'])) {
    //////////////////////////////////////// check for login attempts - Start
@@ -58,7 +59,11 @@ if (isset($_POST['painike'])) {
          [$id, $password_hash, $is_active, $role] = $result->fetch_row();
          if (password_verify($password, $password_hash)) {
             if ($is_active) {
-               if (!session_id()) session_start();
+               if (!session_id()){
+                  // logout user if session is not active after 10 min
+                  session_set_cookie_params(REMEMBERMEDURATION);
+                  session_start();
+               }
                $_SESSION["loggedIn"] = $role;
                $_SESSION["user_id"] = $id;
                if ($rememberme) rememberme($id);

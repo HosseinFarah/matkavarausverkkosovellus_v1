@@ -9,6 +9,8 @@ $PALVELUOSOITE = "asiakaspalvelu@huvimatka.fi";
 define("OLETUSSIVU", "profiili.php");
 define("PROFIILIKUVAKANSIO", "profiilikuvat");
 define("PROFIILIKUVAKOKO", 5242880);
+// logout user if session is not active after 10 min
+define("REMEMBERMEDURATION", 600);
 
 
 $DB = "tourdb";

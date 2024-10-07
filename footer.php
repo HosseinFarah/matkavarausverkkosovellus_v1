@@ -83,3 +83,29 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- logout user if session is not active after 10 min -->
+<script>
+    let inactivityTime = function () {
+        let timeout;
+
+        // Function to reset the inactivity timer
+        const resetTimer = () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(logoutUser, 600000); // 10 min
+        };
+
+        // Function to log out the user
+        const logoutUser = () => {
+            window.location.href = 'poistu.php'; // Redirect to logout page
+        };
+
+        // Events that will reset the inactivity timer
+        window.onload = resetTimer;
+        window.onmousemove = resetTimer;
+        window.onkeydown = resetTimer;
+        window.onclick = resetTimer;
+        window.ontouchstart = resetTimer;
+    };
+
+    inactivityTime();
+</script>

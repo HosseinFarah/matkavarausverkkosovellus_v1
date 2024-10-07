@@ -97,7 +97,7 @@ if ($result && $result->num_rows > 0) {
                 <?php
                 // show update tour button for admin
                 if ($loggedIn == 'admin') {
-                    echo "<div class='col-md-12 text-end'><a href='tour_edit.php?id=$id' class='btn btn-warning'><i class='fas fa-edit fs-5 text-light'></i> ".translate('update_tour')."</a></div>";
+                    echo "<div class='col-md-12 text-end'><a href='tour_edit.php?id=$id' class='btn btn-warning'><i class='fas fa-edit fs-5 text-light'></i> " . translate('update_tour') . "</a></div>";
                 }
                 ?>
                 <!-- end -->
@@ -222,7 +222,7 @@ if ($result && $result->num_rows > 0) {
 
                         }
                     } else {
-                        echo "<p class='badge text-bg-danger fs-6'>".translate('no_reviews')."</p>";
+                        echo "<p class='badge text-bg-danger fs-6'>" . translate('no_reviews') . "</p>";
                     }
                     ?>
                 </div>
@@ -239,9 +239,9 @@ if ($result && $result->num_rows > 0) {
                             // Check if the user has already reserved this tour -start
                             if ($result && $result->num_rows > 0) {
                                 $num_rows = $result->fetch_assoc();
-                                echo "<p class='badge text-bg-success fs-6 text-start'>".translate('already_reserved')."</p>";
-                                echo "<p class='text-start'><strong>".translate('reservation_number').":</strong> <span class='badge text-bg-primary fs-6'>" . $num_rows['reservation_id'] . "</span></p>
-                                <p class='text-start'><strong>".translate('date').":</strong> <span class='badge text-bg-primary fs-6'> " . $num_rows['created'] . "</span></p>";
+                                echo "<p class='badge text-bg-success fs-6 text-start'>" . translate('already_reserved') . "</p>";
+                                echo "<p class='text-start'><strong>" . translate('reservation_number') . ":</strong> <span class='badge text-bg-primary fs-6'>" . $num_rows['reservation_id'] . "</span></p>
+                                <p class='text-start'><strong>" . translate('date') . ":</strong> <span class='badge text-bg-primary fs-6'> " . $num_rows['created'] . "</span></p>";
                                 // user can add new review for this tour with review textarea and rating value between 1-5
                         ?>
                         </div>
@@ -357,14 +357,14 @@ if ($result && $result->num_rows > 0) {
                             else {
 
                                 if ($vapaa > 0 && strtotime($startDate) > strtotime(date('Y-m-d'))) {
-                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('free_places')."</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
-                                    echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> ".translate('book_now')." </a>";
+                                    echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> " . translate('free_places') . "</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                    echo "<a href='reserve.php?id=" . $id . "' class='btn btn-success mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> " . translate('book_now') . " </a>";
                                 } else {
                                     if ($vapaa == 0) {
-                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('free_places')."</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
-                                        echo "<a href='#' class='btn btn-danger mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> ".translate('all_places_reserved')."</a>";
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> " . translate('free_places') . "</strong> <span class='badge text-bg-warning fs-6'>" . $vapaa . "</span></p>";
+                                        echo "<a href='#' class='btn btn-danger mt-1'><i class='fas fa-cart-plus fs-5 text-light'></i> " . translate('all_places_reserved') . "</a>";
                                     } else {
-                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> ".translate('reservations_ended')."</strong></p>";
+                                        echo "<p><strong class='text-danger'><i class='fas fa-users text-danger fs-5'></i> " . translate('reservations_ended') . "</strong></p>";
                                     }
                                 }
                             }
@@ -376,7 +376,7 @@ if ($result && $result->num_rows > 0) {
                     <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> <?= translate('login') ?></a>
                 <?php
                         }
-                        if ($loggedIn == 'admin'|| $loggedIn == 'guide') {
+                        if ($loggedIn == 'admin' || $loggedIn == 'guide') {
                 ?>
                     <!-- registered user in this tour -->
                     <hr>
@@ -418,7 +418,9 @@ if ($result && $result->num_rows > 0) {
                 var map = new mapboxgl.Map({
                     container: 'map',
                     style: 'mapbox://styles/mapbox/streets-v11',
-                    scrollZoom: false
+                    // scrollZoom: false,
+                    dragPan: false, // Disable panning
+
                 });
                 var locationsString = '<?php echo $locations; ?>';
                 var locations = locationsString.split(',').map(function(item) {
