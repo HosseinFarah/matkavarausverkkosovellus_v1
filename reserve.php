@@ -42,11 +42,12 @@ if ($_SESSION['user_id'] == null) {
         // Get the tour information
         $sql = "SELECT * FROM tours WHERE id = $tourId";
         $result = my_query($sql);
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
+            // get data from translations table
+            $title = getTranslation($tourId, 'title', $_SESSION['lang']);
+            $summary = getTranslation($tourId, 'summary', $_SESSION['lang']);
             $name = htmlspecialchars($row['name']);
-            $title = htmlspecialchars($row['title']);
-            $summary = htmlspecialchars($row['summary']);
             $location = htmlspecialchars($row['location']);
             $startDate = htmlspecialchars($row['startDate']);
             $price = htmlspecialchars($row['price']);
@@ -111,7 +112,7 @@ if ($_SESSION['user_id'] == null) {
                 </div>
     <?php
         } else {
-            echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>".translate('tour_not_found')."</h2></div></div></div>";
+            echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>" . translate('tour_not_found') . "</h2></div></div></div>";
         }
     }
 }

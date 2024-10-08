@@ -124,7 +124,7 @@ if ($loggedIn === 'user') { ?>
                             $tour_id = $row2['id'];
                             $tour_name = $row2['name'];
                             $tour_image = $row2['tourImage'];
-                            $tour_summary = $row2['summary'];
+                            $tour_summary = getTranslation($tour_id, 'summary',$_SESSION['lang']);
                             $tour_price = $row2['price'];
                             $tour_start_date = $row2['startDate'];
                             $tour_start_date = date("d.m.Y", strtotime($tour_start_date));

@@ -47,7 +47,7 @@ include "header.php";
               <div class="input-group ">
                 <span class="input-group-text mb-1"><?= translate('password'); ?>:</span>
                 <input type="password" class="mb-1 form-control <?= is_invalid('password'); ?>" name="password" id="password"
-                  placeholder="<?= translate('password')?>" pattern="<?= pattern('password'); ?>" required>
+                  placeholder="<?= translate('password') ?>" pattern="<?= pattern('password'); ?>" required>
                 <div class="invalid-feedback text-warning fs-5">
                   <?= $errors['password'] ?? ""; ?>
                 </div>
@@ -80,6 +80,15 @@ include "header.php";
           </div>
       </div>
       </form>
+
+      <!-- login with google -->
+      <!-- <div class="row g-3 align-items-center mt-1 d-flex justify-content-center">
+        <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=656915444750-jencm5pb6chr7gri8547p9qrmp6iilqq.apps.googleusercontent.com&redirect_uri=http://localhost/google_login.php&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&access_type=offline" class="btn btn-danger">
+          <i class="fab fa-google"></i> <?= translate('login_with_google'); ?>
+        </a>
+      </div> -->
+
+
       <div id="ilmoitukset" class="alert alert-<?= $success; ?> alert-dismissible fade show <?= $display ?? ""; ?>" role="alert">
         <p><?= $message; ?></p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -102,7 +111,7 @@ include "header.php";
       // Create a countdown element
       let countdownElement = document.createElement("p");
       countdownElement.id = "countdown";
-      countdownElement.classList.add("text-secondary", "fs-4", "mt-1","text-center");
+      countdownElement.classList.add("text-secondary", "fs-4", "mt-1", "text-center");
       document.querySelector('#atempts').appendChild(countdownElement);
 
       // Start the countdown

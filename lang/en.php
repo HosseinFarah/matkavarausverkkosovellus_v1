@@ -291,6 +291,7 @@ return [
     'lowest_price' => 'Lowest price',
     'sort_by' => 'Sort by',
     'sort' => 'Sort',
+    
 
 
 ];

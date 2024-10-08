@@ -12,6 +12,9 @@ body {
 .navbar-nav{
   z-index: 1100;
 }
+.modal {
+  --bs-modal-width: 1024px; /* Change modal width to 1024px */
+}
 
 .sidebar {
   background-color: #343a40;

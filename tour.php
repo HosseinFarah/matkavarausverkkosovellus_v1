@@ -247,7 +247,7 @@ if ($result && $result->num_rows > 0) {
                         </div>
                     </div>
                     <hr>
-                    <h3>Arvostele kierros</h3>
+                    <h3><?= translate('review_tour') ?></h3>
                     <!-- check if user does not have a review for this tour -->
                     <?php
                                 $sql = "SELECT * FROM `reviews` WHERE `tour_id` = $id AND `user_id` = $userId";
@@ -302,56 +302,56 @@ if ($result && $result->num_rows > 0) {
                                 <button type="button" class="btn btn-warning w-50 mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <?= translate('show_review') ?>
                                 </button>
-
-                                <!-- Updating the review with Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel"><?= translate('your_review') ?></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" class="mb-3 needs-validation" novalidate>
-                                                    <div class="form-group">
-                                                        <label for="review"><?= translate('review_tour') ?></label>
-                                                        <textarea pattern="<?= pattern('review'); ?>" id="review" name="review" class="form-control <?= is_invalid('review'); ?>" title="review" required autofocus><?= $review; ?></textarea>
-                                                        <div class="invalid-feedback">
-                                                            <?= $errors['review'] ?? ""; ?>
-                                                        </div>
-                                                    </div>
-                                                    <!-- arvo sana 1-5 combo box -->
-                                                    <div class="form-group">
-                                                        <label for="rating" class="form-label"><?= translate('rating') ?></label>
-                                                        <div class="input-group has-validation">
-                                                            <select class="form-select <?= is_invalid('rating'); ?>" name="rating" id="rating" required>
-                                                                <?php
-                                                                $ratings = array("", "1", "2", "3", "4", "5");
-                                                                foreach ($ratings as $rating_option) {
-                                                                    $selected = ($rating_option == $rating) ? 'selected' : '';
-                                                                    echo "<option value='$rating_option' $selected>$rating_option</option>";
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                <?= $errors['rating'] ?? ""; ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary" name="reviewBtn"><?= translate('update') ?></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                        <?php
-                                }
-                        ?>
                         </div>
 
+                        <!-- Updating the review with Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel"><?= translate('your_review') ?></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" class="mb-3 needs-validation" novalidate>
+                                            <div class="form-group">
+                                                <label for="review"><?= translate('review_tour') ?></label>
+                                                <textarea pattern="<?= pattern('review'); ?>" id="review" name="review" class="form-control <?= is_invalid('review'); ?>" title="review" rows="10" cols="3" required autofocus><?= $review; ?></textarea>
+                                                <div class="invalid-feedback">
+                                                    <?= $errors['review'] ?? ""; ?>
+                                                </div>
+                                            </div>
+                                            <!-- arvo sana 1-5 combo box -->
+                                            <div class="form-group">
+                                                <label for="rating" class="form-label"><?= translate('rating') ?></label>
+                                                <div class="input-group has-validation">
+                                                    <select class="form-select <?= is_invalid('rating'); ?>" name="rating" id="rating" required>
+                                                        <?php
+                                                        $ratings = array("", "1", "2", "3", "4", "5");
+                                                        foreach ($ratings as $rating_option) {
+                                                            $selected = ($rating_option == $rating) ? 'selected' : '';
+                                                            echo "<option value='$rating_option' $selected>$rating_option</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        <?= $errors['rating'] ?? ""; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" name="reviewBtn"><?= translate('update') ?></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php
+                                }
+                    ?>
+                </div>
+
+            <?php
                             }
                             // END-  if user has not reserved this tour, display the reservation button
                             else {
@@ -371,77 +371,77 @@ if ($result && $result->num_rows > 0) {
                         }
                         // If the user is not logged in, display a login button
                         else {
-                    ?>
-                    <p class='badge text-bg-danger fs-6 m-1'><?= translate('login_to_book') ?></p>
-                    <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> <?= translate('login') ?></a>
-                <?php
+            ?>
+            <p class='badge text-bg-danger fs-6 m-1'><?= translate('login_to_book') ?></p>
+            <a href='/login.php' class='btn btn-primary m-1'><i class='fas fa-sign-in-alt fs-5 text-light'></i> <?= translate('login') ?></a>
+        <?php
                         }
                         if ($loggedIn == 'admin' || $loggedIn == 'guide') {
-                ?>
-                    <!-- registered user in this tour -->
-                    <hr>
-                    <h2 class="badge text-bg-danger text-light fs-3 mt-3"><?= translate('registered_users') ?></h2>
-                    <div class="row flex-nowrap overflow-auto">
+        ?>
+            <!-- registered user in this tour -->
+            <hr>
+            <h2 class="badge text-bg-danger text-light fs-3 mt-3"><?= translate('registered_users') ?></h2>
+            <div class="row flex-nowrap overflow-auto">
 
-                        <?php
+                <?php
                             $sql = "SELECT * FROM `reservations` LEFT JOIN `users` ON `reservations`.`user_id` = `users`.`id` WHERE `tour_id` = $id";
                             $result = my_query($sql);
                             if ($result && $result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     $user_firstname = $row['firstname'];
-                        ?>
-                                <div class="card mb-3 col-md-6 m-2">
-                                    <div class="card-body">
-                                        <img src="profiilikuvat/users/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
-                                        <h5 class="card-title"><?= $user_firstname . $row['lastname'] ?></h5>
-                                        <h5 class="card-text"><?= $row['email'] ?></h5>
-                                        <h5 class="card-text"><?= $row['mobilenumber'] ?></h5>
-                                    </div>
+                ?>
+                        <div class="card mb-3 col-md-6 m-2">
+                            <div class="card-body">
+                                <img src="profiilikuvat/users/<?= $row['image'] ?>" alt="<?= $user_firstname ?>" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                <h5 class="card-title"><?= $user_firstname . $row['lastname'] ?></h5>
+                                <h5 class="card-text"><?= $row['email'] ?></h5>
+                                <h5 class="card-text"><?= $row['mobilenumber'] ?></h5>
+                            </div>
 
-                                </div>
+                        </div>
 
-                    <?php
+            <?php
                                 }
                             }
                         }
-                    ?>
-                    </div>
-                </div>
-
-                <?php
-                include 'footer.php';
-                ?>
+            ?>
+            </div>
             </div>
 
-            <script>
-                mapboxgl.accessToken = "<?= $pk ?>";
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    // scrollZoom: false,
-                    dragPan: false, // Disable panning
+            <?php
+            include 'footer.php';
+            ?>
+        </div>
 
-                });
-                var locationsString = '<?php echo $locations; ?>';
-                var locations = locationsString.split(',').map(function(item) {
-                    var parts = item.split('-');
-                    return [parseFloat(parts[0]), parseFloat(parts[1])];
-                });
-                var bounds = new mapboxgl.LngLatBounds();
-                locations.forEach(function(location) {
-                    new mapboxgl.Marker({
-                            color: 'red',
-                            draggable: false,
-                            scale: 1,
-                        })
-                        .setLngLat(location)
-                        .addTo(map);
-                    bounds.extend(location);
-                });
+        <script>
+            mapboxgl.accessToken = "<?= $pk ?>";
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                // scrollZoom: false,
+                dragPan: false, // Disable panning
 
-                map.fitBounds(bounds, {
-                    padding: 50,
-                    duration: 2000
-                });
-            </script>
+            });
+            var locationsString = '<?php echo $locations; ?>';
+            var locations = locationsString.split(',').map(function(item) {
+                var parts = item.split('-');
+                return [parseFloat(parts[0]), parseFloat(parts[1])];
+            });
+            var bounds = new mapboxgl.LngLatBounds();
+            locations.forEach(function(location) {
+                new mapboxgl.Marker({
+                        color: 'red',
+                        draggable: false,
+                        scale: 1,
+                    })
+                    .setLngLat(location)
+                    .addTo(map);
+                bounds.extend(location);
+            });
+
+            map.fitBounds(bounds, {
+                padding: 50,
+                duration: 2000
+            });
+        </script>
 </body>
