@@ -1,47 +1,70 @@
-# Tour Guide Reservation System
+# Tour Management System
 
-This is a comprehensive web application for managing and reserving tour guides for various tours. It features user authentication, tour management, guide assignment, reservation and payment systems, user reviews, and administrative functions.
+## Overview
+
+This system is a comprehensive web application designed to facilitate user authentication, tour bookings, payments, reviews, and management. It provides three user access levels (Admin, Tour Guide, and User) and supports multilingual content, online payments, and user feedback.
 
 ## Features
 
-### 1. User Authentication
-- **Account Registration & Login**: Users can register, log in, and reset their passwords.
-- **Password Reset**: The system emails a reset link when requested.
+### 1. User Authentication and Security
+- User registration and login.
+- Password recovery via email for forgotten passwords.
+- Session timeout: users are logged out after 10 minutes of inactivity.
+
+### 2. Multilingual Support
+- Full multilingual site with static and dynamic content translation based on user-selected language.
+
+### 3. User Access Levels
+- **Admin**: Complete control over the system, including user and tour management.
+- **Tour Guide**: Access to assigned tours and buyer details.
+- **User**: Can book tours, submit reviews, and manage personal profile.
+
+### 4. Tour Booking and Payment
+- Integrated with **Stripe** for secure online payments.
+- Automatic disabling of the payment button when tour registration is full or the tour date has passed.
+- Invoice and transaction details sent via email after a successful purchase.
+- PDF invoice generation using the **FPDF** library.
+
+### 5. Tour Reviews and Ratings
+- Registered users can submit reviews and ratings for booked tours.
+- Visitors can view all reviews and the average rating for each tour.
+- Users can update their reviews, and the system sends a notification email with the submitted review.
+
+### 6. Interactive Map Display
+- Tour locations are displayed using **Mapbox**, providing an interactive and detailed map view.
+
+### 7. Admin Dashboard
+- View and manage all users, update their profiles, reset passwords, and change access levels (User, Guide, Admin).
+- Manage all tours (create, update, or delete tours).
+- Manage user reviews and remove inappropriate reviews if necessary.
+- View all reservations and transaction details for each tour.
+- Translate tour details into multiple languages.
+
+### 8. Profile Management
+- Users can update their personal information and change their password after verifying the current one.
+- Purchased tours and submitted reviews are available in the user profile, with the option to download invoices in PDF format.
+
+### 9. Additional Features
+- Google login enabled for quick access.
+- After 7 incorrect login attempts, the login system is disabled for 1 minute with a live countdown displayed to the user.
+- Contact form with server and client-side validation, sending email notifications to both the admin and the user.
   
-### 2. Tour Management
-- **Database-Driven Tours**: Tours are dynamically generated from a MySQL database.
-- **Map Integration**: Tour locations are shown using Mapbox for better user experience.
-- **Availability Control**: Tours are automatically marked unavailable if fully booked or if the date has passed.
+## Technology Stack
 
-### 3. Tour Reservation and Payment
-- **Stripe Payment Gateway**: Users can pay for tours using Stripe.
-- **Reservation Invoice**: Upon successful booking, users receive a reservation invoice by email.
-- **Tour Date Validation**: Only tours within the current available dates can be reserved.
-
-### 4. User Reviews
-- **Submit & Update Reviews**: Users who book tours can write and update reviews.
-- **One Review Per User Per Tour**: A user can only review a tour once.
-- **Email Confirmation**: After review submission, users receive a confirmation email.
-
-### 5. User Profile
-- **Personal Information Management**: Users can update their profile details and password.
-- **View Reservations & Reviews**: Users can view their tour reservations (with reservation date and transaction ID) and reviews.
-  
-### 6. Guide Role
-- **Tour Access**: Guides can view the tours they are assigned to.
-- **Participant Overview**: Guides can see the users registered for their assigned tours.
-
-### 7. Admin Role
-- **User Management**: Administrators can activate/deactivate, view, update, and delete users.
-- **Tour Management**: Admins can add, update, delete tours and assign guides to tours.
-- **Review & Booking Management**: Admins can view and delete all user reviews and bookings.
-- **Search & Filter**: Admins can search users, bookings, and filter users by roles.
-  
-### 8. Form Validation
-- **Frontend & Server-Side Validation**: Ensures data integrity and prevents invalid submissions.
+- **PHP**: Backend development and server-side processing.
+- **MySQL**: Database for storing user, tour, review, and transaction data.
+- **Stripe**: Online payment processing.
+- **Mapbox**: Interactive map integration for tour locations.
+- **FPDF**: PDF generation for invoices.
+- **HTML/CSS/JavaScript**: Frontend development.
+- **Bootstrap**: Responsive design for mobile-first UI.
+- **Multilingual Support**: Static and dynamic content translation.
 
 ## Installation
 
-1. **Clone the Repository**:
+1. Clone the repository:
    ```bash
    git clone git@github.com:HosseinFarah/matkavarausverkkosovellus_v1.git
+   cd tour-management-system
+
+   
