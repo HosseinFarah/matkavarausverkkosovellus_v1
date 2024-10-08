@@ -16,6 +16,7 @@ define("REMEMBERMEDURATION", 600);
 $DB = "tourdb";
 $LOCAL = in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'REMOTE_ADDR' => '::1'));
 if ($LOCAL) {
+    $port='';
     $tunnukset = "tunnukset.php";
     if (file_exists($tunnukset)) {
         include_once("tunnukset.php");
@@ -28,6 +29,7 @@ if ($LOCAL) {
     $db_password = $db_password_local;
 } elseif (strpos($_SERVER['HTTP_HOST'], "azurewebsites") !== false) {
     // define("DEBUG", false);
+    $port='6002';
     $debug = $_ENV['PHP_DEBUG'] ?? getenv('PHP_DEBUG');
     define("DEBUG", $debug ? true : false);
     $db_server = $_ENV['MYSQL_HOSTNAME'] ?? getenv('MYSQL_HOSTNAME');

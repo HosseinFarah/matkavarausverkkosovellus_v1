@@ -1,7 +1,7 @@
 <?php
 // Database connection setup
 try {
-   $yhteys = new mysqli($db_server, $db_username, $db_password, $DB);
+   $yhteys = new mysqli($db_server, $db_username, $db_password, $DB,$port);
    if ($yhteys->connect_error) {
        die("Yhteyden muodostaminen epäonnistui: " . $yhteys->connect_error);
    }
