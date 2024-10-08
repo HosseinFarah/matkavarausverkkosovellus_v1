@@ -54,7 +54,10 @@ if (isset($_POST['painike'])) {
         
         $sql = "INSERT INTO translations (tour_id, language, field_name, content) VALUES ($tour_id, '$language', 'description', '$tour_description')";
         my_query($sql);
+
     }
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit();
 }
 
 
