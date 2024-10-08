@@ -13,12 +13,22 @@ if (isset($_POST['painike'])) {
     // Handle image upload
     if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
         $image = $_FILES['image']['name'];
+
+        // add user id to the image name
+        $image = $id . "_" . $image;
         $target_file = $target_dir . basename($image);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $extensions_arr = ["jpg", "jpeg", "png", "gif"];
 
         if (in_array($imageFileType, $extensions_arr)) {
-            move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+            // Delete the old image
+            if ($row['image'] != "default.jpg") {
+                unlink($target_dir . $row['image']);
+                move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+            }
+            else {
+                $image = "default.jpg";
+            }
         } else {
             $errors['image'] = "Invalid file type.";
         }
@@ -35,13 +45,13 @@ if (isset($_POST['painike'])) {
         $result_update=my_query($query_update);
         if ($result_update) {
             $success = "success";
-            $message = "Profiili päivitetty onnistuneesti!";
+            $message = translate('profile_updated');
             //reload the page
             header("Location: profiili.php");
             exit;
         } else {
             $success = "danger";
-            $message = "Profiilin päivitys epäonnistui.";
+            $message = translate('profile_update_failed');
         }
     }
 }

@@ -12,6 +12,7 @@ $pakolliset = ['email'];
 include "virheilmoitukset.php";
 $virheilmoitukset_json = json_encode($virheilmoitukset);
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
+include_once 'lang.php';
 include('header.php');
 // include('db.php');
 include('posti.php');
@@ -21,22 +22,22 @@ include('kasittelija_forgotpassword.php');
 
   <form method="post" autocomplete="on" novalidate class="needs-validation mt-5">
     <fieldset>
-      <legend>Unohtunut salasana</legend>
+      <legend><?= translate('forgot_password'); ?></legend>
 
       <div class="row">
-        <label for="email" class="col-sm-4 form-label">Sähköpostiosoite</label>
+        <label for="email" class="col-sm-4 form-label"><?= translate('email'); ?></label>
         <div class="col-sm-8">
           <input type="email" class="mb-1 form-control <?= is_invalid('email'); ?>" name="email" id="email"
             placeholder="etunimi.sukunimi@palvelu.fi" value="<?= arvo("email"); ?>"
             pattern="<?= pattern('email'); ?>" autofocus required>
           <div class="invalid-feedback">
-            <?= $errors['email'] ?? ""; ?>
+            <?= $errors['email'] ?? translate('invalid_field') . ' ' . translate('email'); ?>
           </div>
         </div>
       </div>
 
       <div class="div-button">
-        <input type="submit" name="painike" class="offset-sm-4 mt-3 mb-2 btn btn-primary" value="Lähetä linkki">
+        <input type="submit" name="painike" class="offset-sm-4 mt-3 mb-2 btn btn-primary" value="<?= translate('send'); ?>">
       </div>
     </fieldset>
   </form>

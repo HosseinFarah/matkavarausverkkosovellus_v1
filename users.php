@@ -1,6 +1,7 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kaikki käyttäjät";
+include_once 'lang.php';
+$title = translate('all_users');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -19,26 +20,26 @@ if ($loggedIn == 'admin') {
                 <div class="row">
                     <div class="col-md-12">
                         <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
-                        <h1 class="text-center">Kaikki käyttäjät</h1>
-                        <p class="text-center">Täältä löydät kaikki käyttäjät</p>
+                        <h1 class="text-center"><?= translate('all_users')?></h1>
+                        <p class="text-center"><?= translate('users_desc')?></p>
                     </div>
                 </div>
             </div>
             <div class="container overflow-x-auto">
                 <div class="row">
                     <div class="col-md-12 mb-5">
-                        <a href="user_new.php" class="btn btn-primary"><i class="fas fa-plus"></i> Lisää uusi käyttäjä</a>
+                        <a href="user_new.php" class="btn btn-primary"><i class="fas fa-plus"></i> <?= translate('add_new_user')?></a>
                     </div>
                     <form method="post" action="users_search.php">
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="text" name="search" class="form-control" placeholder="Hae tilausta">
-                                <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> Hae käyttäjää sähköpostin, etunimen, sukunimen, kaupungin tai käyttäjäryhmän perusteella</p>
+                                <input type="text" name="search" class="form-control" placeholder="<?= translate('search')?>">
+                                <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> <?= translate('seach_user_by')?></p>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary m-2" name="reservationBtn">Hae</button>
+                                <button type="submit" class="btn btn-primary m-2" name="reservationBtn"><?= translate('search')?></button>
                                 <!-- make button for clear search -->
-                                <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>>Tyhjennä</button>
+                                <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>><?php echo translate('clear')?></button>
                             </div>
                         </div>
                         <?php
@@ -73,13 +74,13 @@ if ($loggedIn == 'admin') {
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>Sähköposti</th>
-                                    <th>Etunimi</th>
-                                    <th>Sukunimi</th>
-                                    <th>Kaupunki</th>
-                                    <th>Käyttäjäryhmä</th>
-                                    <th>Kuva</th>
-                                    <th>Asetukset</th>
+                                    <th><?= translate('email')?></th>
+                                    <th><?= translate('firstname')?></th>
+                                    <th><?= translate('lastname')?></th>
+                                    <th><?= translate('city')?></th>
+                                    <th><?= translate('role')?></th>
+                                    <th><?= translate('photo')?></th>
+                                    <th><?= translate('settings')?></th>
                                 </tr>
                             </thead>
                             <tbody>

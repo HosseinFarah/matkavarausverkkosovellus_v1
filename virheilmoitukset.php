@@ -4,7 +4,7 @@
 2. Tietokannan tai muut palvelimen virheilmoitukset, jotka näytetään lomakkeella
 3. Muut palvelimen virheilmoitukset, jotka näytetään esim. lomakkeen alla
 */
-
+include_once 'lang.php';
 
 $errors ??= [];
 $kentat ??= ['firstname', 'lastname', 'email', 'mobilenumber', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber', 'feedback', 'payment_method', 'departments', 'terms_of_delivery', 'name', 'title', 'summary', 'description', 'location', 'startDate', 'groupSize', 'price', 'tourImage', 'locations'];
@@ -59,22 +59,22 @@ function kaannos($kentta)
 
 function validationMessages($kentat)
 {
+    $validationMessage = [];
     foreach ($kentat as $input) {
-        $kentta = kaannos($input);
-        $validationMessage[$input]['customError'] = "Virheellinen $kentta";
-        $validationMessage[$input]['patternMismatch'] = "Virheellinen $kentta";
-        $validationMessage[$input]['rangeOverflow'] = "Liian suuri $kentta";
-        $validationMessage[$input]['rangeUnderflow'] = "Liian pieni $kentta";
-        $validationMessage[$input]['stepMismatch'] = "Väärän kokoinen muutos";
-        $validationMessage[$input]['tooShort'] = "Liian lyhyt $kentta";
-        $validationMessage[$input]['tooLong'] = "Liian pitkä $kentta";
-        $validationMessage[$input]['typeMismatch'] = "Väärän tyyppinen $kentta";
-        $validationMessage[$input]['valueMissing'] = ucfirst($kentta) . " puuttuu";
-        $validationMessage[$input]['valid'] = "Oikea arvo";
+        $kentta = translate($input);  // Use translate() for field names
+        $validationMessage[$input]['customError'] = translate("invalid_field") . " $kentta";
+        $validationMessage[$input]['patternMismatch'] = translate("invalid_pattern") . " $kentta";
+        $validationMessage[$input]['rangeOverflow'] = translate("too_large") . " $kentta";
+        $validationMessage[$input]['rangeUnderflow'] = translate("too_small") . " $kentta";
+        $validationMessage[$input]['stepMismatch'] = translate("invalid_step");
+        $validationMessage[$input]['tooShort'] = translate("too_short") . " $kentta";
+        $validationMessage[$input]['tooLong'] = translate("too_long") . " $kentta";
+        $validationMessage[$input]['typeMismatch'] = translate("wrong_type") . " $kentta";
+        $validationMessage[$input]['valueMissing'] = ucfirst($kentta) . " " . translate("missing");
+        $validationMessage[$input]['valid'] = translate("valid_value");
     }
     return $validationMessage;
 }
-
 function pattern($kentta)
 {
     return trim($GLOBALS['patterns'][$kentta], "/");
@@ -100,17 +100,17 @@ function is_invalid($kentta)
 }
 
 $virheilmoitukset = validationMessages($kentat);
-$virheilmoitukset['password']['patternMismatch'] = "Salasanan pitää olla vähintään 12 merkkiä pitkä";
-$virheilmoitukset['password2']['valueMissing'] = "Anna salasana uudestaan";
-$virheilmoitukset['password2']['customError'] = "Salasanat eivät täsmää";
-$virheilmoitukset['email']['emailExistsError'] = "Sähköpostiosoite on jo käytössä";
-$virheilmoitukset['firstname']['nameExistsError'] = "Nimi on jo käytössä";
-$virheilmoitukset['lastname']['nameExistsError'] = "Nimi on jo käytössä";
-$virheilmoitukset['accountNotExistErr'] = "Tuntematon sähköpostiosoite";
-$virheilmoitukset['accountExistsMsg'] = "Sähköposti on lähetetty antamaasi sähköpostiosoitteeseen";
-$virheilmoitukset['verificationRequiredErr'] = "Vahvista sähköpostiosoite ensin";
-$virheilmoitukset['emailPwdErr'] = "Väärä käyttäjätunnus tai salasana";
-$virheilmoitukset['emailErr'] = "Sähköpostin lähetys epäonnistui, yritä myöhemmin uudelleen";
+$virheilmoitukset['password']['patternMismatch'] = translate('password_invalid');
+$virheilmoitukset['password2']['valueMissing'] = translate('password2');
+$virheilmoitukset['password2']['customError'] = translate('password2_error');
+$virheilmoitukset['email']['emailExistsError'] = translate('emailExistsError');
+$virheilmoitukset['firstname']['nameExistsError'] = translate('nameExistsError');
+$virheilmoitukset['lastname']['nameExistsError'] = translate('nameExistsError');
+$virheilmoitukset['accountNotExistErr'] = translate('accountNotExistErr');
+$virheilmoitukset['accountExistsMsg'] = translate('accountExistsMsg');
+$virheilmoitukset['verificationRequiredErr'] = translate('verificationRequiredErr');
+$virheilmoitukset['emailPwdErr'] = translate('emailPwdErr');
+$virheilmoitukset['emailErr'] = translate('emailErr');
 $virheilmoitukset_json = json_encode($virheilmoitukset);
 
 function validointi($kentat)
@@ -142,8 +142,6 @@ function validointi($kentat)
         "locations" => "Kohteet saa sisältää vain numeroita ja pilkkuja.",
         "review" => "Arvostelu saa sisältää vain kirjaimia, numeroita, välilyöntejä ja viivoja.",
         "fullname" => "Nimi saa sisältää vain kirjaimia, välilyöntejä ja viivoja.",
-
-
     );
 
 

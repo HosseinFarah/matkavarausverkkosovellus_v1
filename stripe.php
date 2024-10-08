@@ -47,7 +47,6 @@ try {
         $tour_sql = "SELECT * FROM tours WHERE id = '$tourId'";
         $tour_result = my_query($tour_sql);
         $tour_row = mysqli_fetch_assoc($tour_result);
-        $title = $tour_row['title'];
         $subject = "Kiitos varauksestasi";
         // create html invoice and send it to user with bootstrap for $fullname, $reservation_id, $date, $price, $title
         $message = "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>Kiitos varauksestasi</h2></div></div><div class='row'><div class='col-md-12'><p>Hei $full_name,</p><p>Varauksesi on vastaanotettu. Tässä varauksesi tiedot:</p><p>Varausnumero: $reservation_id</p><p>Päivämäärä: $date</p><p>Hinta: $price €</p><p>Kohde: $title</p></div></div></div>";        

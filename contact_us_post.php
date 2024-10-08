@@ -9,10 +9,10 @@ if (isset($_POST['btn'])) {
     $fullname = $_POST['fullname'] ?? '';
     $kenta_1 = "fullname";
     if (in_array($kenta_1, $pakolliset) && empty($fullname)) {
-        $virheilmoitukset[$kenta_1] = "Etunimi ja sukunimi on pakollinen";
+        $virheilmoitukset[$kenta_1] = translate('fullname_required');
     } else {
         if (isset($patterns[$kenta_1]) && !preg_match($patterns[$kenta_1], $fullname)) {
-            $virheilmoitukset[$kenta_1] = "Etunimi ja sukunimi on virheellinen";
+            $virheilmoitukset[$kenta_1] = translate('fullname_invalid');
         } else {
             $fullname = mysqli_real_escape_string($yhteys, $fullname);
         }
@@ -21,10 +21,10 @@ if (isset($_POST['btn'])) {
     $title = $_POST['title'] ?? '';
     $kenta_2 = "title";
     if (in_array($kenta_2, $pakolliset) && empty($title)) {
-        $virheilmoitukset[$kenta_2] = "Otsikko on pakollinen";
+        $virheilmoitukset[$kenta_2] = translate('title_required');
     } else {
         if (isset($patterns[$kenta_2]) && !preg_match($patterns[$kenta_2], $title)) {
-            $virheilmoitukset[$kenta_2] = "Otsikko on virheellinen";
+            $virheilmoitukset[$kenta_2] = translate('title_invalid');
         } else {
             $title = mysqli_real_escape_string($yhteys, $title);
         }
@@ -33,10 +33,10 @@ if (isset($_POST['btn'])) {
     $message = $_POST['message'] ?? '';
     $kenta_3 = "message";
     if (in_array($kenta_3, $pakolliset) && empty($message)) {
-        $virheilmoitukset[$kenta_3] = "Viesti on pakollinen";
+        $virheilmoitukset[$kenta_3] = translate('message_required');
     } else {
         if (isset($patterns[$kenta_3]) && !preg_match($patterns[$kenta_3], $message)) {
-            $virheilmoitukset[$kenta_3] = "Viesti on virheellinen";
+            $virheilmoitukset[$kenta_3] = translate('message_invalid');
         } else {
             $message = mysqli_real_escape_string($yhteys, $message);
         }
@@ -45,10 +45,10 @@ if (isset($_POST['btn'])) {
     $email = $_POST['email'] ?? '';
     $kenta_4 = "email";
     if (in_array($kenta_4, $pakolliset) && empty($email)) {
-        $virheilmoitukset[$kenta_4] = "Sähköposti on pakollinen";
+        $virheilmoitukset[$kenta_4] = translate('email_required');
     } else {
         if (isset($patterns[$kenta_4]) && !preg_match($patterns[$kenta_4], $email)) {
-            $virheilmoitukset[$kenta_4] = "Sähköposti on virheellinen";
+            $virheilmoitukset[$kenta_4] = translate('email_invalid');
         } else {
             $email = mysqli_real_escape_string($yhteys, $email);
         }
@@ -66,7 +66,7 @@ if (isset($_POST['btn'])) {
     }
 
     if ($lahetetty) {
-        $message = "Viesti lähetetty onnistuneesti";
+        $message = translate('message_sent');
         $success = "success";
         // clear form fields after successful submission and redirect to the same page after 5 seconds
         $fullname = $title = $message = $email = "";
@@ -76,7 +76,7 @@ if (isset($_POST['btn'])) {
 
      
     } else {
-        $message = "Viestin lähetys epäonnistui";
+        $message = translate('message_failed');
         $success = "danger";
     }
     $display = "d-block";

@@ -1,8 +1,9 @@
 <?php
 ob_start();
+include_once "lang.php";
+$title = translate('all_users');
 include "header.php";
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "kaikki tilaukset";
 $loggedIn = secure_page();
 
 // filter usres by role with combo box with values admin guide user
@@ -53,13 +54,13 @@ if ($loggedIn == 'admin') {
                 <form method="post">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="text" name="search" class="form-control" placeholder="Hae tilausta">
-                            <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> Hae käyttäjää sähköpostin, etunimen, sukunimen, kaupungin tai käyttäjäryhmän perusteella</p>
+                            <input type="text" name="search" class="form-control" placeholder="<?= translate('search') ?>">
+                            <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> <?= translate('seach_user_by') ?>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary m-2" name="reservationBtn">Hae</button>
+                            <button type="submit" class="btn btn-primary m-2" name="reservationBtn"><?= translate('search') ?></button>
                             <!-- make button for clear search -->
-                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>>Tyhjennä</button>
+                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>><?php echo translate('clear') ?></button>
 
                         </div>
                     </div>
@@ -70,12 +71,12 @@ if ($loggedIn == 'admin') {
                         <div class="col-md-4 text-start">
                             <select name="role" class="form-select" aria-label="Default select example">
                                 <option value="0" disabled selected></option>
-                                <option value="1">Käyttäjä</option>
-                                <option value="2">Opas</option>
+                                <option value="1">user</option>
+                                <option value="2">guide</option>
                                 <option value="3">Admin</option>
                             </select>
-                            <button type="submit" class="btn btn-primary m-2" name="roleBtn">Hae</button>
-                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($_POST['role'])) echo "disabled"; ?>>Tyhjennä</button>
+                            <button type="submit" class="btn btn-primary m-2" name="roleBtn"><?= translate('search') ?></button>
+                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($_POST['role'])) echo "disabled"; ?>><?php echo translate('clear') ?></button>
 
                         </div>
                     </div>
@@ -87,12 +88,12 @@ if ($loggedIn == 'admin') {
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Sähköposti</th>
-                                    <th scope="col">Etunimi</th>
-                                    <th scope="col">Sukunimi</th>
-                                    <th scope="col">Kaupunki</th>
-                                    <th scope="col">Rooli</th>
-                                    <th scope="col">Asetukset</th>
+                                    <th scope="col"><?= translate('email') ?></th>
+                                    <th scope="col"><?= translate('firstname') ?></th>
+                                    <th scope="col"><?= translate('lastname') ?></th>
+                                    <th scope="col"><?= translate('city') ?></th>
+                                    <th scope="col"><?= translate('role') ?></th>
+                                    <th scope="col"><?= translate('settings') ?></th>
 
                                 </tr>
                             </thead>

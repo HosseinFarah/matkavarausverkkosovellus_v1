@@ -1,8 +1,9 @@
 <?php
 ob_start();
-include "header.php";
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "kaikki tilaukset";
+include_once 'lang.php';
+$title = translate('all_reservations');
+include "header.php";
 $loggedIn = secure_page();
 
 
@@ -44,13 +45,13 @@ if ($loggedIn == 'admin') {
                 <form method="post">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="text" name="search" class="form-control" placeholder="Hae tilausta">
-                            <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> Hae tilausta asikkaan nimen, matkan nimen, tilauksen koodin, hinnan tai tilaus päivämäärän perusteella</p>
+                            <input type="text" name="search" class="form-control" placeholder="<?= translate('search') ?>">
+                            <p class="fs-6 mt-2"><i class="fas fa-info text-warning mb-3"></i> <?= translate('search_placeholder') ?></p>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary m-2" name="reservationBtn">Hae</button>
+                            <button type="submit" class="btn btn-primary m-2" name="reservationBtn"><?= translate('search') ?></button>
                             <!-- make button for clear search -->
-                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>>Tyhjennä</button>
+                            <button type="submit" class="btn btn-danger m-2" name="clearBtn" <?php if (empty($search)) echo "disabled"; ?>><?php echo translate('clear'); ?></button>
 
                         </div>
                     </div>
@@ -61,13 +62,13 @@ if ($loggedIn == 'admin') {
                         <table class="table table-striped table-hover mb-5">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Asiakas</th>
-                                    <th scope="col">Matka</th>
-                                    <th scope="col">Tilauksen koodi</th>
-                                    <th scope="col">Hinta</th>
-                                    <th scope="col">Tilaus päivämäärä</th>
-                                    <th scope="col">Poista</th>
+                                    <th scope="col"><?= translate('id') ?></th>
+                                    <th scope="col"><?= translate('customer') ?></th>
+                                    <th scope="col"><?= translate('trip') ?></th>
+                                    <th scope="col"><?= translate('order_code') ?></th>
+                                    <th scope="col"><?= translate('price') ?></th>
+                                    <th scope="col"><?= translate('order_date') ?></th>
+                                    <th scope="col"><?= translate('delete') ?></th>
                                 </tr>
                             </thead>
                             <?php
@@ -80,7 +81,7 @@ if ($loggedIn == 'admin') {
                                     echo "<td>" . $row['reservation_id'] . "</td>";
                                     echo "<td>" . $row['price'] . "</td>";
                                     echo "<td>" . $row['created'] . "</td>";
-                                    echo "<td><a href='reservation_pois.php?id=" . $row['id'] . "' onclick='return confirm(\"Haluatko varmasti poistaa tämän tilauksen?\")'><i class='fas fa-trash-alt text-danger'></i></a></td>";
+                                    echo "<td><a href='reservation_pois.php?id=" . $row['id'] . "' onclick='return confirm(\"" . translate('confirm_delete') . "\")'><i class='fas fa-trash-alt text-danger'></i></a></td>";
                                     echo "</tr>";
                                     echo "</thead>";
                                 }
@@ -97,8 +98,7 @@ if ($loggedIn == 'admin') {
     </body>
 
 <?php
-ob_end_flush();
-
+    ob_end_flush();
 } else {
     header("Location: index.php");
     exit();

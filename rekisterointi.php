@@ -23,16 +23,16 @@ function hae_kuva($kentta){
        $filetype = strtolower($pathinfo['extension']);
        $image = $pathinfo['filename']."_$random.$filetype";
        $target_dir = PROFIILIKUVAKANSIO;
-       $target_file = "$target_dir/$image";
+       $target_file = "$target_dir/users/$image";
        /* Check if image file is a actual image or fake image */
-       if (!$check = getimagesize($temp_file)) $virhe = "Kuva ei kelpaa.";
-       elseif (file_exists($target_file)) $virhe = "Kuvatiedosto on jo olemassa.";
-       elseif (!in_array($filetype,$allowed_images)) $virhe = "Väärä tiedostotyyppi.";
-       elseif ($filesize > $maxsize) $virhe = "Kuvan koon tulee olla korkeintaan 5 MB.";
+       if (!$check = getimagesize($temp_file)) $virhe = translate('invalid_image');
+       elseif (file_exists($target_file)) $virhe = translate('image_exists');
+       elseif (!in_array($filetype,$allowed_images)) $virhe = translate('wrong_type');
+       elseif ($filesize > $maxsize) $virhe = translate('image_size_error');
        debuggeri("File $image,mime: {$check['mime']}, $filetype, $filesize tavua");
        if (!$virhe){
           if (!move_uploaded_file($temp_file,$target_file)) 
-             $virhe = "Kuvan tallennus ei onnistunut.";
+             $virhe = translate('image_upload_error');
           } 
        }
        }
@@ -114,28 +114,27 @@ if ($lisays) {
     }
 
 if ($lisattiin_token) {
-    $msg = "Vahvista sähköpostiosoitteesi alla olevasta linkistä:<br><br>";
-    $msg.= "<a href='http://$PALVELIN/$LINKKI_VERIFICATION?token=$token'>Vahvista sähköpostiosoite</a>";
+    $msg = translate('confirm_email_link')."<br><br>";
+    $msg.= "<a href='http://$PALVELIN/$LINKKI_VERIFICATION?token=$token'>" . translate('confirm_email') . "</a>";
     // $msg.= "<a href='http://$PALVELIN/$PALVELU/$LINKKI_VERIFICATION?token=$token'>Vahvista sähköpostiosoite</a>";
     $msg.= "<br><br>t. $PALVELUOSOITE";
-    $subject = "Vahvista sähköpostiosoite";
+    $subject = translate('confirm_email');
     $lahetetty = posti($email,$msg,$subject);
     }   
 
 if ($lahetetty){
-    $message = "Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen ";
-    $message.= "vahvistuspyyntö. Vahvista siinä olevasta linkistä sähköpostiosoitteesi.";
+    $message = translate('confirm_email_msg');
     $success = "success";
     //header("Location: ./rekisterointikuittaus.php?message=$message&success=$success");
     //exit;
     }
 elseif ($lisays) {
     /* Huom. oikeammin ohjataan vahvistuspyyntöön */    
-    $message = "Tallennus onnistui!";
+    $message = translate('save_success');
     $success = "light";
     }
 else {
-    $message = "Tallennus epäonnistui!";
+    $message = translate('save_failed');
     $success = "danger";
     }
 $display = "d-block";

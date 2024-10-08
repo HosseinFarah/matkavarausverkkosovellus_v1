@@ -1,13 +1,15 @@
 <?php
+include_once "lang.php";     
+$title = translate('about_us');
+$_SESSION['lang'] ??= 'fi';
 include 'header.php';
-
 ?>
 <div class="container my-5">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Tietoa meistä</h1>
-            <p class="text-center">Huvimatkat on suomalainen matkatoimisto, joka järjestää matkoja ympäri maailmaa. Meillä on yli 20 vuoden kokemus matkailualalta ja olemme erikoistuneet järjestämään matkoja yksin matkustaville, pariskunnille ja perheille. Tarjoamme laajan valikoiman matkoja, joista voit valita mieleisesi. Tervetuloa Huvimatkojen sivuille!</p>
-            <p class="text-center">Aloita matkasi kanssamme ja varaa matkasi jo tänään!</p>
+            <h1 class="text-center"><?php echo translate('about_us'); ?></h1>
+            <p class="text-center"><?php echo translate('about_us_desc_2'); ?></p>
+            <p class="text-center"><?php echo translate('start_your_journey'); ?></p>
         </div>
 
     </div>

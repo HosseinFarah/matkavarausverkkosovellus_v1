@@ -12,6 +12,9 @@ body {
 .navbar-nav{
   z-index: 1100;
 }
+.modal {
+  --bs-modal-width: 1024px; /* Change modal width to 1024px */
+}
 
 .sidebar {
   background-color: #343a40;
@@ -104,9 +107,12 @@ a.registeration{
 }
 
 .topnav {
+  display: flex; /* Make sure the navbar uses flexbox */
+  justify-content: space-between; /* Space out the elements */
   grid-column: span 3;
   align-content: center;
 }
+
 
 .morephoto {
   display: flex;
@@ -339,10 +345,8 @@ li {
 /* END ------------------------------------------------------*/
 
 .topnav {
+  display: flex;
   background-color: #555;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position-y: center;
   z-index: 100;
 }
 
@@ -354,6 +358,9 @@ li {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 22px;
+}
+.topnav a.endnav ,.navbar-nav{
+  float: right;
 }
 
 .topnav a:hover {
@@ -367,6 +374,10 @@ li {
 }
 
 .topnav .icon {
+  display: none;
+}
+
+.topnav a .fa.fa-bars{
   display: none;
 }
 
@@ -543,13 +554,41 @@ a>span:hover {
 /* Product Full Screen ------------------------------- End */
 
 @media screen and (max-width: 900px) {
-  .topnav a:not(:first-child),
+  .dropdown-menu {
+    float: none;
+    width: 100%; /* Make it full width on small screens */
+    text-align: center;
+}
+
+  .topnav a .fa.fa-bars{
+    display: flex;
+  }
+  .topnav a.brand-logo{
+    display: flex;
+  }
+
+  .navbar-nav a{
+    display: flex;
+  }
+  .topnav a,
   .topnav .dropdownmenu {
     display: none;
   }
+  .topnav a.dropdown-item{
+    display: block;
+    
+  }
+}
+
   .carousel-item img {
     height: 400px;
     object-fit: cover;
+  }
+  .topnav {
+    display: block; /* Make sure the navbar uses flexbox */
+    justify-content: space-around; /* Space out the elements */
+    grid-column: span 3;
+    align-content: center;
   }
   .carousel-control-prev, .carousel-control-next {
     display: flex;
@@ -631,4 +670,4 @@ a>span:hover {
   .morephoto{
     flex-direction: column;
   }
-}
+

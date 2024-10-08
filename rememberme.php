@@ -136,7 +136,8 @@ function loggedIn()
     /* Huom. loggedIn voi olla 'user', 'admin', jne. 
    loggedIn voi olla tässä user_id ja eväste vanhentunut.
    Ilman roolin hakua muista minut vie käyttäjän peruskäyttäjän rooliin. */
-    if (!$loggedIn || is_int($loggedIn)) {
+    // if (!$loggedIn || is_int($loggedIn)) {
+        if (!$loggedIn) {
         if ($token = $_COOKIE['rememberme'] ?? '') {
             $token = htmlspecialchars($token);
             if ($user_id = token_is_valid($token)) {
@@ -147,6 +148,7 @@ function loggedIn()
                 $loggedIn = hae_rooli($user_id);
 
                 $_SESSION['loggedIn'] = $loggedIn;
+                $_SESSION['user_id'] = $user_id;
             }
         }
     }

@@ -3,7 +3,9 @@ include "asetukset.php";
 include "db.php";
 include "rememberme.php";
 $loggedIn = secure_page();
-$title = 'Profiili';
+include_once 'lang.php';
+$title = translate('profile');
+
 include "header.php";
 $css = 'site.css';
 
@@ -40,22 +42,22 @@ if ($loggedIn === 'user') { ?>
                         <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . $photo ?>" style="width: 300px ;" class="card-img-top rounded" alt="<?= $photo ?>">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Nimi: <?= $name ?></h5>
-                        <p class="card-text">Sähköposti: <?= $email ?></p>
-                        <p class="card-text">Puhelinnumero: <?= $phone ?></p>
-                        <p class="card-text">kaupunki: <?= $kaupunki ?></p>
-                        <p class="card-text">katuosoite: <?= $katuosoite ?></p>
-                        <p class="card-text">postinumero: <?= $postinumero ?></p>
-                        <a href="muokkaaprofiilia.php?id=<?= $user_id ?>" class="btn btn-primary">Muokkaa profiilia</a>
-                        <a href="poistu.php" class="btn btn-primary">Kirjaudu ulos</a>
+                        <h5 class="card-title"><?= translate('full_name') ?>: <?= $name ?></h5>
+                        <p class="card-text"><?= translate('email') ?>: <?= $email ?></p>
+                        <p class="card-text"><?= translate('phone_number') ?>: <?= $phone ?></p>
+                        <p class="card-text"><?= translate('city') ?>: <?= $kaupunki ?></p>
+                        <p class="card-text"><?= translate('street_address') ?>: <?= $katuosoite ?></p>
+                        <p class="card-text"><?= translate('postal_code') ?>: <?= $postinumero ?></p>
+                        <a href="muokkaaprofiilia.php?id=<?= $user_id ?>" class="btn btn-primary"><?= translate('edit_profile') ?></a>
+                        <a href="poistu.php" class="btn btn-primary"><?= translate('logout') ?></a>
                         <div>
-                            <a href="update_password.php?id=<?= $user_id ?>" class="btn btn-warning mt-1">Päivitä salasanasi</a>
+                            <a href="update_password.php?id=<?= $user_id ?>" class="btn btn-warning mt-1"><?= translate('update_password') ?></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 mt-2">
-                <h2 class="badge text-bg-danger text-light fs-3">Arvostelut</h2>
+                <h2 class="badge text-bg-danger text-light fs-3"><?= translate('reviews') ?></h2>
                 <div class="row flex-nowrap overflow-x-scroll">
                     <!-- show this users all reviews for tours -->
                     <?php
@@ -88,13 +90,13 @@ if ($loggedIn === 'user') { ?>
 
 
                                     <p class="card-text"><?= $comment ?></p>
-                                    <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-primary">Näytä matka</a>
+                                    <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-primary"><?= translate('show_tour') ?></a>
                                 </div>
                             </div>
                     <?php
                         }
                     } else {
-                        echo "<p class='badge text-bg-danger fs-6'>Et ole tehnyt yhtään arvostelua</p>";
+                        echo "<p class='badge text-bg-danger fs-6'>" . translate('no_reviews') . "</p>";
                     }
                     ?>
 
@@ -105,7 +107,7 @@ if ($loggedIn === 'user') { ?>
         <hr>
         <!-- show this users all reservations -->
         <div class="col-md-12 mt-3 mb-3">
-            <h2 class="badge text-bg-danger text-light fs-3">Tilaukset</h2>
+            <h2 class="badge text-bg-danger text-light fs-3"><?= translate('reservations') ?></h2>
             <div class='row flex-nowrap overflow-x-scroll'>
 
                 <?php
@@ -122,7 +124,7 @@ if ($loggedIn === 'user') { ?>
                             $tour_id = $row2['id'];
                             $tour_name = $row2['name'];
                             $tour_image = $row2['tourImage'];
-                            $tour_summary = $row2['summary'];
+                            $tour_summary = getTranslation($tour_id, 'summary',$_SESSION['lang']);
                             $tour_price = $row2['price'];
                             $tour_start_date = $row2['startDate'];
                             $tour_start_date = date("d.m.Y", strtotime($tour_start_date));
@@ -136,7 +138,10 @@ if ($loggedIn === 'user') { ?>
                                         <h5 class="card-title"><?= $tour_name ?></h5>
                                         <p class="card-text"><small class="text-body-secondary">Hinta: <?= $tour_price ?> €</small></p>
                                         <p class="card-text"><small class="text-body-secondary">Päivämäärä: <?= $tour_start_date ?></small></p>
-                                        <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-success">Näytä matka</a>
+                                        <a href="tour.php?id=<?= $tour_id ?>" class="btn btn-success"><?= translate('show_tour') ?></a>
+                                        <!-- // print reservation invoice based on user_id and tour_id and reservation_id -->
+                                        <a target="_blank" href="invoice.php?id=<?= $reservation_id ?>&tour_id=<?= $tour_id ?>&user_id=<?= $user_id ?>" class="btn btn-warning"><i class="fas fa-file-invoice"></i> <?= translate('show_invoice') ?></a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +149,7 @@ if ($loggedIn === 'user') { ?>
                         }
                     }
                 } else {
-                    echo "<p class='badge text-bg-danger fs-6'>Et ole tehnyt yhtään varausta</p>";
+                    echo "<p class='badge text-bg-danger fs-6'>".translate('no_reservations')."</p>";
                 }
                 ?>
             </div>
@@ -167,15 +172,15 @@ if ($loggedIn === 'user') { ?>
                             <img src="<?= "http://$PALVELIN/profiilikuvat/users/" . $photo ?>" style="width: 300px ;" class="card-img-top rounded" alt="<?= $photo ?>">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Nimi: <?= $name ?></h5>
-                            <p class="card-text">Sähköposti: <?= $email ?></p>
-                            <p class="card-text">Puhelinnumero: <?= $phone ?></p>
-                            <p class="card-text">kaupunki: <?= $kaupunki ?></p>
-                            <p class="card-text">katuosoite: <?= $katuosoite ?></p>
-                            <p class="card-text">postinumero: <?= $postinumero ?></p>
-                            <a href="muokkaaprofiilia.php?id=<?= $user_id ?>" class="btn btn-primary">Muokkaa profiilia</a>
-                            <a href="update_password.php?id=<?= $user_id ?>" class="btn btn-primary">Päivitä salasanasi</a>
-                            <a href="poistu.php" class="btn btn-primary mt-1">Kirjaudu ulos</a>
+                            <h5 class="card-title"><?= translate('full_name') ?>: <?= $name ?></h5>
+                            <p class="card-text"><?= translate('email') ?>: <?= $email ?></p>
+                            <p class="card-text"><?= translate('phone_number') ?>: <?= $phone ?></p>
+                            <p class="card-text"><?= translate('city') ?>: <?= $kaupunki ?></p>
+                            <p class="card-text"><?= translate('street_address') ?>: <?= $katuosoite ?></p>
+                            <p class="card-text"><?= translate('postal_code') ?>: <?= $postinumero ?></p>
+                            <a href="muokkaaprofiilia.php?id=<?= $user_id ?>" class="btn btn-primary"><?= translate('edit_profile') ?></a>
+                            <a href="update_password.php?id=<?= $user_id ?>" class="btn btn-primary"><?= translate('update_password') ?></a>
+                            <a href="poistu.php" class="btn btn-primary mt-1"><?= translate('logout') ?></a>
                         </div>
                     </div>
                 </div>

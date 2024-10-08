@@ -3,7 +3,8 @@ ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "matkaopas";
+include_once 'lang.php';
+$title = translate('all_guides');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -13,19 +14,19 @@ include 'header.php';
 if ($loggedIn === 'admin') {
 ?>
 <div class="container mt-3">
-    <h1 class="badge text-bg-danger fs-3">Matkaoppaat</h1>
+    <h1 class="badge text-bg-danger fs-3"><?= translate('all_guides') ?></h1>
     <!-- create a new tour guide for available tours -->
     <div class="mt-3">
-        <a href="tour_guide_new.php" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Lisää matkaopas</a>
+        <a href="tour_guide_new.php" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> <?= translate('new_guide') ?></a>
     </div>
     <!-- display all tour guides -->
     <table class='table table-striped table-hover table-sm mt-3'>
         <thead class='thead-dark'>
             <tr>
-                <th>Matkaopas</th>
-                <th>Kierros</th>
-                <th>Alkaa</th>
-                <th>Asetukset</th>
+                <th><?= translate('guide') ?></th>
+                <th><?= translate('tour_in') ?></th>
+                <th><?= translate('start') ?></th>
+                <th><?= translate('delete') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +46,7 @@ if ($loggedIn === 'admin') {
                 echo "<td>$tour_name</td>";
                 echo "<td>$start_date</td>";
                 // delete with confirmation
-                echo "<td><a href='tour_guide_pois.php?id=$id' class='btn btn-danger btn-sm' onclick='return confirm(\"Haluatko varmasti poistaa matkaoppaan?\")'><i class='fas fa-trash text-light fs-5'></i></a></td>";
+                echo "<td><a href='tour_guide_pois.php?id=" . $id . "' onclick='return confirm(\"" . translate('confirm_delete') . "\")'><i class='fas fa-trash-alt text-danger'></i></a></td>";
                 echo "</tr>";
             }
 

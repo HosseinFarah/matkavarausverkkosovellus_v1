@@ -46,17 +46,17 @@ if (empty($errors['password2']) and empty($errors['password'])) {
             $password = $row['password'];
         }
         $is_active = isset($_POST['is_active']) ? 1 : 0;
-        $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  password='$password', image='$image' , updated='$updated' , is_active='$is_active' WHERE id='$id'";
+        $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  password='$password', image='$image' , updated='$updated' , is_active='$is_active' ,role='$role' WHERE id='$id'";
         $result_update=my_query($query_update);
         if ($result_update) {
             $success = "success";
-            $message = "Profiili päivitetty onnistuneesti! Kirjaudu uudelleen!";
+            $message = translate('profile_updated_msg');
             //reload the page
             header("Location: users.php"); 
             exit;
         } else {
             $success = "danger";
-            $message = "Profiilin päivitys epäonnistui.";
+            $message = translate('profile_update_failed_msg');
         }
     }
 }

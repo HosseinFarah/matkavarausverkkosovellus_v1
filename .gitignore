@@ -7,3 +7,11 @@ tunnukset.php
 sidebar.php
 tour_edit_beforeSave.php
 newheader.php
+.idea
+.vscode
+/too many atempts for login-js/*
+/vendor
+.DS_Store
+Thumbs.db
+/makefont/
+/too many atempts for login-js/

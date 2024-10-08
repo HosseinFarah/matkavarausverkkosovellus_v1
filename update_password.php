@@ -1,11 +1,8 @@
 <?php
 ob_start();
+include_once "lang.php";
+$title = translate('update_password');
 include "header.php";
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-$title = 'Päivitä salasanasi';
 
 $kentat = ['password', 'password2', 'currentPassword'];
 $kentat_suomi = ['salasana', 'salasana','nykyinen salasana'];
@@ -52,7 +49,7 @@ include 'update_Password_tarkistus.php';
                             <div class='alert alert-<?= $success ?>'><?= $message ?></div>
                         <?php endif; ?>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Nykyinen salasana:</span>
+                            <span class="input-group-text"><?= translate('currentPassword') ?>:</span>
                             <input type="password" id="currentPassword" name="currentPassword" class="form-control <?= is_invalid('currentPassword'); ?>"
                              autofocus />
                             <div class="invalid-feedback">
@@ -61,7 +58,7 @@ include 'update_Password_tarkistus.php';
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Salasana:</span>
+                            <span class="input-group-text"><?= translate('password') ?>:</span>
                             <input type="password" id="password" name="password" class="form-control <?= is_invalid('password'); ?>"
                                 pattern="<?= pattern('password'); ?>" autofocus />
                             <div class="invalid-feedback">
@@ -70,7 +67,7 @@ include 'update_Password_tarkistus.php';
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Vahvista salasana:</span>
+                            <span class="input-group-text"><?= translate('password2') ?>:</span>
                             <input type="password" id="password2" name="password2" class="form-control <?= is_invalid('password2'); ?>"
                                 pattern="<?= pattern('password2'); ?>" autofocus />
                             <div class="invalid-feedback">
@@ -78,8 +75,8 @@ include 'update_Password_tarkistus.php';
                             </div>
                         </div>
                         <div>
-                            <button type="submit" name="painike" class="btn btn-primary">Päivitä</button>
-                            <button type="button" class="btn btn-secondary" onclick="window.location.href='profiili.php'"> Peruuta </button>
+                            <button type="submit" name="painike" class="btn btn-primary"><?= translate('update') ?></button>
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='profiili.php'"> <?= translate('cancel') ?></button>
                         </div>
                     </fieldset>
                 </form>

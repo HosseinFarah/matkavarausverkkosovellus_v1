@@ -1,6 +1,7 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kaikki matkat";
+include_once 'lang.php';
+$title = translate('all_tours');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -24,15 +25,15 @@ if ($loggedIn == 'admin') {
                     <div class="col-md-12">
                         <!-- back to main page -->
                         <!-- <a href="profiili.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Asetukset</a> -->
-                        <h1 class="text-center">Kaikki matkat</h1>
-                        <p class="text-center">Täältä löydät kaikki matkat</p>
+                        <h1 class="text-center"><?= translate('all_tours') ?></h1>
+                        <p class="text-center"><?= translate('desc_1') ?></p>
                     </div>
                 </div>
             </div>
             <div class="container overflow-x-auto">
                 <div class="row">
                     <div class="col-md-12 mb-5">
-                        <a href="tour_new.php" class="btn btn-primary"><i class="fas fa-plus"></i> Lisää uusi matka</a>
+                        <a href="tour_new.php" class="btn btn-primary"><i class="fas fa-plus"></i> <?= translate('add_tour') ?></a>
                     </div>
                     <!-- Start Pagination Part-1 -->
                     <?php
@@ -68,15 +69,15 @@ if ($loggedIn == 'admin') {
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Matkan nimi</th>
-                                <th>Matkan paikka</th>
-                                <th>Matkan kesto</th>
-                                <th>Matkan hinta</th>
-                                <th>Matkan aloituspäivä</th>
-                                <th>Matkan ryhmäkoko</th>
-                                <th>Matkan paikkoja</th>
-                                <th>Matkan kuva</th>
-                                <th>Asetukset</th>
+                                <th><?= translate('tour_name') ?></th>
+                                <th><?= translate('tour_location') ?></th>
+                                <th><?= translate('tour_duration') ?></th>
+                                <th><?= translate('tour_price') ?></th>
+                                <th><?= translate('tour_start_date') ?></th>
+                                <th><?= translate('tour_group_size') ?></th>
+                                <th><?= translate('tour_places') ?></th>
+                                <th><?= translate('tour_image') ?></th>
+                                <th><?= translate('settings') ?></th>
                             </tr>
                         </thead>
                         <?php

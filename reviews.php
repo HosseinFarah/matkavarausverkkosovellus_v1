@@ -1,6 +1,7 @@
 <?php
 $PALVELIN = $_SERVER['HTTP_HOST'];
-$title = "Kaikki arvostelut";
+include_once 'lang.php';
+$title = translate('all_reviews');
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -45,15 +46,15 @@ if ($loggedIn == 'admin') {
                 }
                 ?>
                 <!-- End Pagination Part-1 -->
-                <h5 class=" card-title">Kaikki arvostelut</h5>
+                <h5 class=" card-title"><?= translate('all_reviews') ?></h5>
                     <!-- show all reviews with user and tour in table with delete button -->
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Arvostelu</th>
-                                <th scope="col">Käyttäjä</th>
-                                <th scope="col">Matka</th>
-                                <th scope="col">Poista</th>
+                                <th scope="col"><?= translate('review') ?></th>
+                                <th scope="col"><?= translate('user') ?></th>
+                                <th scope="col"><?= translate('tour') ?></th>
+                                <th scope="col"><?= translate('delete') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +78,7 @@ if ($loggedIn == 'admin') {
                                     <td><?= $user ?></td>
                                     <td><?= $tour ?></td>
                                     <td><div class='row mt-3'>
-                                            <a href='review_pois.php?id=<?= $review_id ?>' onclick="return confirm('Are you sure you want to proceed?');" name='pois'>
+                                            <a href='review_pois.php?id=<?= $review_id ?>' onclick="return confirm('<?=translate('confirm_delete') ?>');" name='pois'>
                                                 <i class='text-danger fs-4 fas fa-trash-alt'></i>
                                             </a>
                                         </div></td>

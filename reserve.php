@@ -1,8 +1,9 @@
 <?php
 
+include_once 'lang.php';
+$title = translate('book_tour');
 include 'header.php';
-$tourId = intval($_GET['id']);
-
+$tourId = (isset($_GET['id']) && !empty($_GET['id'])) ? intval($_GET['id']) : 0;
 $user_Id = intval($_SESSION['user_id']);
 
 
@@ -28,10 +29,10 @@ if ($_SESSION['user_id'] == null) {
         <div class='container my-5'>
             <div class='row'>
                 <div class='col-md-12'>
-                    <h2 class='text-center'>Olet jo varannut tämän matkan :</h2>
+                    <h2 class='text-center'><?= translate('already_reserved') ?>: </h2>
                     <hr>
-                    <h2 class='text-center'>varausnumero: <?= $num_rows['reservation_id'] ?></h2>
-                    <p class='text-center'><strong>Päivämäärä:</strong> <span class="badge text-bg-success fs-5"> <?= $num_rows['created'] ?></span></p>
+                    <h2 class='text-center'><?= translate('reservation_number') ?>: <?= $num_rows['reservation_id'] ?></h2>
+                    <p class='text-center'><strong><?= translate('date') ?>:</strong> <span class="badge text-bg-success fs-5"> <?= $num_rows['created'] ?></span></p>
 
                 </div>
             </div>
@@ -41,11 +42,12 @@ if ($_SESSION['user_id'] == null) {
         // Get the tour information
         $sql = "SELECT * FROM tours WHERE id = $tourId";
         $result = my_query($sql);
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
+            // get data from translations table
+            $title = getTranslation($tourId, 'title', $_SESSION['lang']);
+            $summary = getTranslation($tourId, 'summary', $_SESSION['lang']);
             $name = htmlspecialchars($row['name']);
-            $title = htmlspecialchars($row['title']);
-            $summary = htmlspecialchars($row['summary']);
             $location = htmlspecialchars($row['location']);
             $startDate = htmlspecialchars($row['startDate']);
             $price = htmlspecialchars($row['price']);
@@ -56,7 +58,7 @@ if ($_SESSION['user_id'] == null) {
             <div class='container'>
                 <div class='row'>
                     <div class='col-md-12'>
-                        <h2 class='text-center'>Varaa matka</h2>
+                        <h2 class='text-center'><?= translate('book_tour') ?></h2>
                     </div>
                 </div>
             </div>
@@ -64,17 +66,17 @@ if ($_SESSION['user_id'] == null) {
                 <!-- back to home page -->
                 <div class='row'>
                     <div class='col-md-12'>
-                        <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> Etusivu</a>
+                        <a href="index.php" class="fs-3"><i class="fas fa-home text-warning mb-3"></i> <?= translate('main_page') ?></a>
                     </div>
                     <div class='row d-flex alig-item-center'>
                         <div class='col-md-5'>
                             <div class='card mb-3'><img src="profiilikuvat/tours/<?= $tourImage ?>" class='card-img-top' alt='$name'>
                                 <div class='card-body'>
                                     <h5 class='card-title'><?= $title ?></h5>
-                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-map-marker-alt"></i> Paikka:<strong class="badge text-bg-secondary fs-6"> <?= $location ?></strong> </small></p>
-                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-clock"></i> Aloituspäivämäärä:<strong class="badge text-bg-secondary fs-6"> <?= $startDate ?> </strong></small></p>
-                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-money-check-alt"></i> Hinta: <strong class="badge text-bg-secondary fs-6"><?= $price ?> </strong></small></p>
-                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-hourglass-half"></i> Kesto: <strong class="badge text-bg-secondary fs-6"><?= $duration ?></strong> </small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-map-marker-alt"></i> <?= translate('tour_location') ?>: <strong class="badge text-bg-secondary fs-6"> <?= $location ?></strong> </small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-clock"></i> <?= translate('tour_start_date') ?>: <strong class="badge text-bg-secondary fs-6"> <?= $startDate ?> </strong></small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-money-check-alt"></i> <?= translate('price') ?>: <strong class="badge text-bg-secondary fs-6"><?= $price ?> </strong></small></p>
+                                    <p class='card-text'><small class='text-muted fs-5'><i class="fas fa-hourglass-half"></i> <?= translate('duration') ?>: <strong class="badge text-bg-secondary fs-6"><?= $duration ?></strong> </small></p>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +112,7 @@ if ($_SESSION['user_id'] == null) {
                 </div>
     <?php
         } else {
-            echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>Matkaa ei löytynyt</h2></div></div></div>";
+            echo "<div class='container my-5'><div class='row'><div class='col-md-12'><h2 class='text-center'>" . translate('tour_not_found') . "</h2></div></div></div>";
         }
     }
 }

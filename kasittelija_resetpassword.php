@@ -3,8 +3,8 @@ $display = "d-none";
 $message = "";
 $success = "success";
 $muutettu = $poistettu_token = false;
-$virheet_palvelin['invalidLink'] = "Salasanan aktivointilinkki ei ole voimassa.";
-$virheet_palvelin['invalidToken'] = "Linkki on virheellinen.";
+$virheet_palvelin['invalidLink'] = translate('invalidLink');
+$virheet_palvelin['invalidToken'] = translate('invalidToken');
 
 $token = $_GET['token'] ?? '';
 if ($token) {
