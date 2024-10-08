@@ -23,7 +23,7 @@ function hae_kuva($kentta){
        $filetype = strtolower($pathinfo['extension']);
        $image = $pathinfo['filename']."_$random.$filetype";
        $target_dir = PROFIILIKUVAKANSIO;
-       $target_file = "$target_dir/$image";
+       $target_file = "$target_dir/users/$image";
        /* Check if image file is a actual image or fake image */
        if (!$check = getimagesize($temp_file)) $virhe = translate('invalid_image');
        elseif (file_exists($target_file)) $virhe = translate('image_exists');
