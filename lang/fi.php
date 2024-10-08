@@ -406,4 +406,6 @@ return [
     'lowest_price' => 'Alhaisin hinta',
     'sort_by' => 'Lajittele',
     'sort' => 'Lajittele',
+    // Et ole tehnyt yhtään varausta
+    'no_reservations' => 'Et ole tehnyt yhtään varausta',
 ];

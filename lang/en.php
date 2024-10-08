@@ -291,7 +291,8 @@ return [
     'lowest_price' => 'Lowest price',
     'sort_by' => 'Sort by',
     'sort' => 'Sort',
-    
+    // Et ole tehnyt yhtään varausta
+    'no_reservations' => 'You have not made any reservations',
 
 
 ];

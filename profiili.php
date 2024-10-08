@@ -149,7 +149,7 @@ if ($loggedIn === 'user') { ?>
                         }
                     }
                 } else {
-                    echo "<p class='badge text-bg-danger fs-6'>Et ole tehnyt yhtään varausta</p>";
+                    echo "<p class='badge text-bg-danger fs-6'>".translate('no_reservations')."</p>";
                 }
                 ?>
             </div>
