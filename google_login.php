@@ -19,6 +19,13 @@ if (isset($_GET['code'])) {
         'grant_type' => 'authorization_code'
     );
 
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $data['redirect_uri'] = 'http://localhost/google_login.php';
+    } else {
+        $data['redirect_uri'] = 'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php';
+    }
+
+
     $options = array(
         'http' => array(
             'header' => "Content-type: application/x-www-form-urlencoded\r\n",
