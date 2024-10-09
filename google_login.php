@@ -15,15 +15,15 @@ if (isset($_GET['code'])) {
         'code' => $code,
         'client_id' => '656915444750-jencm5pb6chr7gri8547p9qrmp6iilqq.apps.googleusercontent.com', // Your Client ID
         'client_secret' => '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', // Your Client Secret
-        'redirect_uri' => 'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php', // Must match the URI in your Google Cloud project
+        // 'redirect_uri' => 'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php', // Must match the URI in your Google Cloud project
         'grant_type' => 'authorization_code'
     );
 
-    // if ($_SERVER['HTTP_HOST'] == 'localhost') {
-    //     $data['redirect_uri'] = 'http://localhost/google_login.php';
-    // } else {
-    //     $data['redirect_uri'] = 'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php';
-    // }
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $data['redirect_uri'] = 'http://localhost/google_login.php';
+    } else {
+        $data['redirect_uri'] = 'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php';
+    }
 
 
     $options = array(
@@ -112,12 +112,11 @@ if (isset($_GET['code'])) {
         die('Error: Access token not received.'); // Log error in production
     }
 } else {
-    // <input type="hidden" name="redirect_uri" value="'.($_SERVER['HTTP_HOST']=='localhost' ? "http://localhost/google_login.php" : "https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php").'">
     // Display Google login button
     echo '<form action="https://accounts.google.com/o/oauth2/auth" method="get">
         <input type="hidden" name="response_type" value="code">
         <input type="hidden" name="client_id" value="656915444750-jencm5pb6chr7gri8547p9qrmp6iilqq.apps.googleusercontent.com">
-        <input type="hidden" name="redirect_uri" value="https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php">
+        <input type="hidden" name="redirect_uri" value="'.($_SERVER['HTTP_HOST']=='localhost' ? "http://localhost/google_login.php" : "https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php").'">
         <input type="hidden" name="scope" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">
         <input type="hidden" name="approval_prompt" value="force">
         <input type="hidden" name="access_type" value="offline">
