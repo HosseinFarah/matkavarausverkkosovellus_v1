@@ -4,12 +4,12 @@ include_once 'lang.php';
 $title = translate('book_tour');
 include 'header.php';
 $tourId = (isset($_GET['id']) && !empty($_GET['id'])) ? intval($_GET['id']) : 0;
-$user_Id = intval($_SESSION['user_id']);
+$user_Id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
-    header("Location: login.php");
+if ($user_Id == 0 || empty($user_Id)) {
+   header("Location: login.php");
     exit();
 } else {
     // Fetch user details
