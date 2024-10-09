@@ -408,4 +408,5 @@ return [
     'sort' => 'Lajittele',
     // Et ole tehnyt yhtään varausta
     'no_reservations' => 'Et ole tehnyt yhtään varausta',
+    'login_with_google' => 'Kirjaudu Googlella',
 ];

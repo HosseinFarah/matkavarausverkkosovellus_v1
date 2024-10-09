@@ -52,10 +52,12 @@ if (isset($_GET['code'])) {
         $response = json_decode($result);
 
         // Validate user info response
-        if (isset($response->email) && isset($response->name) && isset($response->id)) {
+        if (isset($response->email) && isset($response->given_name) && isset($response->id)  && isset($response->family_name)) {
             $email = $response->email;
-            $name = $response->name;
+            $firstname = $response->given_name;
+            $lastname = $response->family_name;
             $google_id = $response->id;
+
 
             // Check if user already exists in the database using prepared statements
             $stmt = db_connect()->prepare("SELECT * FROM users WHERE email = ?");
@@ -68,15 +70,15 @@ if (isset($_GET['code'])) {
                 // User exists, set session variables
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "success";
-                $_SESSION['message'] = "Welcome back " . htmlspecialchars($user['name']); // Sanitize output
+                $_SESSION['message'] = "Welcome back " . htmlspecialchars($user['firstname']); // Sanitize output
                 $is_active = $user['is_active'];
                 $_SESSION["loggedIn"] = $user['role'];
                 $_SESSION["user_id"] = $user['id'];
             } else {
                 // New user, insert into database using prepared statements
                 $is_active = '1';
-                $stmt = db_connect()->prepare("INSERT INTO users (firstname, email, google_id,is_active) VALUES (?, ?, ?,?)");
-                $stmt->bind_param("ssss", $name, $email, $google_id,$is_active); // Bind the parameters
+                $stmt = db_connect()->prepare("INSERT INTO users (firstname, lastname, email, google_id,is_active) VALUES (?,?,?,?,?)");
+                $stmt->bind_param("sssss", $firstname, $lastname, $email, $google_id, $is_active); // Bind the parameters
                 $stmt->execute();
 
                 // Fetch the newly created user
@@ -89,11 +91,11 @@ if (isset($_GET['code'])) {
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "success";
                 $_SESSION['message'] = "Welcome " . htmlspecialchars($user['name']); // Sanitize output
-                if($user['is_active'] == 1){
+                if ($user['is_active'] == 1) {
                     $_SESSION["loggedIn"] = $user['role'];
                     $_SESSION["user_id"] = $user['id'];
+                }
             }
-        }
             header("Location: index.php");
             exit();
         } else {
@@ -114,4 +116,3 @@ if (isset($_GET['code'])) {
         <button type="submit">Login with Google</button>
     </form>';
 }
-?>

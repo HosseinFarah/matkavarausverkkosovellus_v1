@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -8,7 +11,6 @@ $title = translate('profile');
 
 include "header.php";
 $css = 'site.css';
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $query = "SELECT * FROM users WHERE id = $user_id";
@@ -31,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- profile page -->
 <?php
-if ($loggedIn === 'user') { ?>
+if ($loggedIn === 'user' || $_SESSION['user']) { ?>
 
     <body>
         <!-- Main Content -->

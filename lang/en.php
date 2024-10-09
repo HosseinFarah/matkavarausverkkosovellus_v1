@@ -293,6 +293,8 @@ return [
     'sort' => 'Sort',
     // Et ole tehnyt yhtään varausta
     'no_reservations' => 'You have not made any reservations',
+    // login_with_google
+    'login_with_google' => 'Login with Google',
 
 
 ];
