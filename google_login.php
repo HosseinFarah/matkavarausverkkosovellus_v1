@@ -81,6 +81,8 @@ if (isset($_GET['code'])) {
                 $is_active = $user['is_active'];
                 $_SESSION["loggedIn"] = $user['role'];
                 $_SESSION["user_id"] = $user['id'];
+                header("Location: index.php");
+                exit();
             } else {
                 // New user, insert into database using prepared statements
                 $is_active = '1';
@@ -102,6 +104,8 @@ if (isset($_GET['code'])) {
                     $_SESSION["loggedIn"] = $user['role'];
                     $_SESSION["user_id"] = $user['id'];
                 }
+                header("Location: index.php");
+                exit();
             }
             header("Location: index.php");
             exit();
