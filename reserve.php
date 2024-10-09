@@ -8,8 +8,9 @@ $user_Id = intval($_SESSION['user_id']);
 
 
 // Check if the user is logged in
-if ($_SESSION['user_id'] == null || $_SESSION['user_id'] == 0 || empty($_SESSION['user_id'])) {
-    header('Location: login.php');
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
 } else {
     // Fetch user details
     $userQuery = "SELECT firstname,lastname, mobilenumber,email FROM users WHERE id = $user_Id";
