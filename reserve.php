@@ -9,8 +9,8 @@ $user_Id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
 // Check if the user is logged in
 if ($user_Id == 0 || empty($user_Id)) {
-   header("Location: login.php");
-    exit();
+    echo "<div class='container my-5'><div class='row d-flex align-items-center justify-content-center'><div class='col-md-12'><h2 class='text-center badge text-bg-danger fs-3'>" . translate('login_required') . "</h2></div></div></div>";
+    echo "<script>setTimeout(function(){window.location.href='login.php'},2000);</script>";
 } else {
     // Fetch user details
     $userQuery = "SELECT firstname,lastname, mobilenumber,email FROM users WHERE id = $user_Id";

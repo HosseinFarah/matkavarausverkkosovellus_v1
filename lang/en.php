@@ -295,6 +295,8 @@ return [
     'no_reservations' => 'You have not made any reservations',
     // login_with_google
     'login_with_google' => 'Login with Google',
+    // login required before booking
+    'login_required' => 'Login required before booking',
 
 
 ];
