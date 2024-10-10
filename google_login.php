@@ -2,10 +2,7 @@
 session_start(); // Start the session to manage user sessions
 
 // Database connection
-include "asetukset.php";
-include "db.php";
-include "rememberme.php";
-
+include 'header.php';
 // Login with Google
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
