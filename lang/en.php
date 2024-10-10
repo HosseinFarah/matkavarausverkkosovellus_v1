@@ -133,7 +133,7 @@ return [
     'accept_terms' => 'Accept terms',
     'invalid_image' => 'Invalid image',
     'image_exists' => 'Image already exists',
-    'image_size_error' => 'Image size must be less than 5MB',
+    'image_size_error' => 'Image size must be less than 2MB',
     'image_upload_error' => 'Image upload failed',
     'confirm_email_link' => 'Confirm your email address by clicking this link',
     'confirm_email' => 'Confirm email',

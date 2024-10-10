@@ -244,7 +244,7 @@ return [
     // Väärä tiedostotyyppi.
     'wrong_type' => 'Väärä tiedostotyyppi.',
     // Kuvan koon tulee olla korkeintaan 5 MB.
-    'image_size_error' => 'Kuvan koon tulee olla korkeintaan 5 MB.',
+    'image_size_error' => 'Kuvan koon tulee olla korkeintaan 2 MB.',
     // Kuvan tallennus ei onnistunut.
     'image_upload_error' => 'Kuvan tallennus ei onnistunut.',
     // Vahvista sähköpostiosoitteesi alla olevasta linkistä
@@ -410,4 +410,5 @@ return [
     'no_reservations' => 'Et ole tehnyt yhtään varausta',
     'login_with_google' => 'Kirjaudu Googlella',
     'login_required' => 'Kirjaudu sisään ennen varaamista',
+
 ];

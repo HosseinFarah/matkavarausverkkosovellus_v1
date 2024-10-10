@@ -21,7 +21,7 @@ if (isset($_POST['painike'])) {
         $extensions_arr = ["jpg", "jpeg", "png", "gif"];
         // check image size if more than 2MB
         if ($_FILES['image']['size'] > 2097152) {
-            $errors['image'] = "Image file size must be less than 2MB.";
+            $errors['image'] = translate('image_size_error');
         }
        
 
