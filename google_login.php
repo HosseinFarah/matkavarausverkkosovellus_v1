@@ -32,6 +32,7 @@ if (isset($_GET['code'])) {
 
     // Check for errors in the response
     if ($result === FALSE) {
+        error_log("Token exchange error: " . print_r($http_response_header, true));
         die('Error occurred during token exchange.'); // Log error in production
     }
 
