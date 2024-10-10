@@ -43,6 +43,7 @@ if (isset($_POST['painike'])) {
         $updated = date('Y-m-d H:i:s');
         $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  image='$image' , updated='$updated' WHERE id='$id'";
         $result_update=my_query($query_update);
+        debuggeri('muokkaaprofiiliatarkistus.php', $result_update);
         if ($result_update) {
             $success = "success";
             $message = translate('profile_updated');

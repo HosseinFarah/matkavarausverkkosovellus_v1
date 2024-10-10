@@ -15,7 +15,7 @@ $kentat_tiedosto = ['image'];
 
 include "virheilmoitukset.php";
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
-
+include 'debuggeri.php';
 // Fetch user data
 $id = intval($_GET['id']);
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
