@@ -297,6 +297,7 @@ return [
     'login_with_google' => 'Login with Google',
     // login required before booking
     'login_required' => 'Login required before booking',
-
+    // logged in with google account
+    'google_logged_in' => 'Logged in with Google',
 
 ];

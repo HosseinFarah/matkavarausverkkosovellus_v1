@@ -35,7 +35,7 @@ return [
     // Etunimi ja sukunimi
     'fullname' => 'Etunimi ja sukunimi',
     // Täältä löydät kaikki käyttäjät
-    'users_desc'=> 'Täältä löydät kaikki käyttäjät',
+    'users_desc' => 'Täältä löydät kaikki käyttäjät',
     'full_name' => 'Koko nimi',
     // Otsikko
     'title' => 'Otsikko',
@@ -66,7 +66,7 @@ return [
     'new_user' => 'Uusi käyttäjä',
     // Lisää uusi käyttäjä
     'add_new_user' => 'Lisää uusi käyttäjä',
-    'seach_user_by'=>'Hae käyttäjää sähköpostin, etunimen, sukunimen, kaupungin tai käyttäjäryhmän perusteella',
+    'seach_user_by' => 'Hae käyttäjää sähköpostin, etunimen, sukunimen, kaupungin tai käyttäjäryhmän perusteella',
     'tour_edit' => 'Matkan muokkaus',
     // Tyhjennä
     'clear' => 'Tyhjennä',
@@ -142,7 +142,7 @@ return [
     // Arvostelu
     'review' => 'Arvostelu',
     // Käyttäjä
-    'user'=> 'Käyttäjä',
+    'user' => 'Käyttäjä',
     // Matka
     'tour' => 'Matka',
     // Täältä löydät kaikki tilaukset
@@ -249,11 +249,11 @@ return [
     'image_upload_error' => 'Kuvan tallennus ei onnistunut.',
     // Vahvista sähköpostiosoitteesi alla olevasta linkistä
     'confirm_email_link' => 'Vahvista sähköpostiosoitteesi alla olevasta linkistä',
-    'confirm_email'=>'Vahvista sähköpostiosoite',
+    'confirm_email' => 'Vahvista sähköpostiosoite',
     // Are you sure you want to proceed?
-    'confirm_delete'=> 'Haluatko varmasti jatkaa?',
+    'confirm_delete' => 'Haluatko varmasti jatkaa?',
     // Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö. Vahvista siinä olevasta linkistä sähköpostiosoitteesi.
-    'confirm_email_msg'=> 'Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö.<br> Vahvista siinä olevasta linkistä sähköpostiosoitteesi.',
+    'confirm_email_msg' => 'Tiedot on tallennettu. Sinulle on lähetty antamaasi sähköpostiosoitteeseen.vahvistuspyyntö.<br> Vahvista siinä olevasta linkistä sähköpostiosoitteesi.',
 
 
     'tour_name' => 'Matkan nimi',
@@ -327,7 +327,7 @@ return [
     'select_guide' => 'Valitse matkaopas',
     // Valitse matka
     'select_tour' => 'Valitse matka',
-    'add'=> 'Lisää',
+    'add' => 'Lisää',
     // Matkaopas on jo lisätty tälle matkalle
     'guide_already_added' => 'Matkaopas on jo lisätty tälle matkalle',
     // Arvostelusi on päivitetty!
@@ -410,5 +410,7 @@ return [
     'no_reservations' => 'Et ole tehnyt yhtään varausta',
     'login_with_google' => 'Kirjaudu Googlella',
     'login_required' => 'Kirjaudu sisään ennen varaamista',
+    // 'google_logged_in' => 'Logged in with Google',
+    'google_logged_in' => 'Kirjautunut sisään Googlella',
 
 ];

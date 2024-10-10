@@ -82,8 +82,9 @@ if (isset($_GET['code'])) {
             } else {
                 // New user, insert into database using prepared statements
                 $is_active = '1';
-                $stmt = db_connect()->prepare("INSERT INTO users (firstname, lastname, email, google_id,is_active) VALUES (?,?,?,?,?)");
-                $stmt->bind_param("sssss", $firstname, $lastname, $email, $google_id, $is_active); // Bind the parameters
+                $created = date('Y-m-d H:i:s');
+                $stmt = db_connect()->prepare("INSERT INTO users (firstname, lastname, email, google_id,is_active,created) VALUES (?,?,?,?,?,?)");
+                $stmt->bind_param("ssssss", $firstname, $lastname, $email, $google_id, $is_active,$created); // Bind the parameters
                 $stmt->execute();
 
                 // Fetch the newly created user
