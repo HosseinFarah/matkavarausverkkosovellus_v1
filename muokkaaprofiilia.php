@@ -3,6 +3,7 @@ ob_start();
 
 include_once "lang.php";
 $title = translate('edit_profile');
+include 'debuggeri.php';
 include "header.php";
 
 $css = 'profiili.css';
@@ -15,7 +16,6 @@ $kentat_tiedosto = ['image'];
 
 include "virheilmoitukset.php";
 echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
-include 'debuggeri.php';
 // Fetch user data
 $id = intval($_GET['id']);
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
@@ -51,7 +51,7 @@ include 'muokkaaprofiiliatarkistus.php';
 ?>
 
 <!-- Update profile page -->
-    <body>
+<body>
         
         <div class="container mt-5">
             <div class="row">
