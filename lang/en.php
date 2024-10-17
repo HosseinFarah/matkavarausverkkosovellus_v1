@@ -133,7 +133,7 @@ return [
     'accept_terms' => 'Accept terms',
     'invalid_image' => 'Invalid image',
     'image_exists' => 'Image already exists',
-    'image_size_error' => 'Image size must be less than 5MB',
+    'image_size_error' => 'Image size must be less than 2MB',
     'image_upload_error' => 'Image upload failed',
     'confirm_email_link' => 'Confirm your email address by clicking this link',
     'confirm_email' => 'Confirm email',
@@ -293,6 +293,11 @@ return [
     'sort' => 'Sort',
     // Et ole tehnyt yhtään varausta
     'no_reservations' => 'You have not made any reservations',
-
+    // login_with_google
+    'login_with_google' => 'Login with Google',
+    // login required before booking
+    'login_required' => 'Login required before booking',
+    // logged in with google account
+    'google_logged_in' => 'Logged in with Google',
 
 ];

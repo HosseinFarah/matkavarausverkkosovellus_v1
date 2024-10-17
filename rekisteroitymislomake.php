@@ -1,5 +1,6 @@
 <?php
 ob_start();
+
 /* Huom. Tässä salasanakenttien täsmääminen tarkistetaan vain palvelimella. */
 $title = 'Rekisteröityminen';
 $kentat = ['firstname', 'lastname', 'email', 'password', 'password2', 'address', 'postcode', 'city', 'mobilenumber'];
@@ -17,6 +18,10 @@ echo "<script>const virheilmoitukset = $virheilmoitukset_json</script>";
 include "header.php";
 include "posti.php";
 include "rekisterointi.php";
+if ($loggedIn) {
+       echo "<script>location.href='profiili.php'</script>";
+       exit;
+}
 ?>
 <div class="container">
        <div class="row g-3 align-items-center mt-3 d-flex justify-content-center">

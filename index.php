@@ -191,8 +191,24 @@ $slider = ["(1).jpg", "(2).jpg", "(3).jpg", "(4).jpg", "(5).jpg", "(6).jpg", "(7
               $votesResult = my_query($votesSql);
               $votesRow = $votesResult->fetch_assoc();
               $voter = $votesRow['votes'];
+              $starRating = [1, 2, 3, 4, 5];
 
-              $rating = intval($reviewRow['rating']) . " <i class= 'fas fa-star text-light'></i>" . " | " . $voter . " <i class='fas fa-user text-light'></i>";
+              // replace  $reviewRow['rating] value  with <i class= 'fas fa-star text-light'></i> default star icon is 5 
+              $reviewRow['rating'] = intval($reviewRow['rating']);
+              $rating = "";
+              for ($i = 0; $i < $reviewRow['rating']; $i++) {
+                $rating .= "<i class= 'fas fa-star text-primary fs-4'></i>";
+              }
+              if ($reviewRow['rating'] < 5) {
+                for ($i = 0; $i < 5 - $reviewRow['rating']; $i++) {
+                  $rating .= "<i class= 'fas fa-star text-secondary fs-4'></i>";
+                }
+              }
+
+
+
+
+
 
               echo "
             <div class='col-md-4 mb-4'>
@@ -208,7 +224,7 @@ $slider = ["(1).jpg", "(2).jpg", "(3).jpg", "(4).jpg", "(5).jpg", "(6).jpg", "(7
                   <div class='card-footer rounded'>
                     <small class='text-body-secondary'><p class='card-text badge text-bg-secondary fs-6 mb-3'>" . translate('price') . ": $price €</p></small>
                     <small class='text-body-secondary'><p class='card-text fs-6 text-primary-emphasis '><i class='fas fa-calendar'></i> $startDate</p></small>
-                    <p class='card-text mt-2 text-end'><strong></strong><span class ='badge text-bg-primary'> $rating</span></p>
+                    <p class='card-text mt-2 text-start'><strong></strong><span class =''> $rating | $voter <i class='fas fa-user text-secondary'></i></span></p>
                   </div>
                   <div class='text-end'>
                     <a href='tour.php?id=$id' class='btn btn-primary m-1'> <i class='fas fa-binoculars fs-5 text-light'></i></a>";

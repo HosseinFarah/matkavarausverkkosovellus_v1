@@ -19,15 +19,23 @@ if (isset($_POST['painike'])) {
         $target_file = $target_dir . basename($image);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $extensions_arr = ["jpg", "jpeg", "png", "gif"];
+        // check image size if more than 2MB
+
+
+
 
         if (in_array($imageFileType, $extensions_arr)) {
-            // Delete the old image
-            if ($row['image'] != "default.jpg") {
-                unlink($target_dir . $row['image']);
-                move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-            }
-            else {
-                $image = "default.jpg";
+            if ($_FILES['image']['size'] > 2097152) {
+                $errors['image'] = translate('image_size_error');
+                $image = $row['image'];
+            } else {
+                // Delete the old image
+                if ($row['image'] != "default.jpg") {
+                    unlink($target_dir . $row['image']);
+                    move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+                } else {
+                    $image = "default.jpg";
+                }
             }
         } else {
             $errors['image'] = "Invalid file type.";
@@ -42,7 +50,8 @@ if (isset($_POST['painike'])) {
     if (empty($errors)) {
         $updated = date('Y-m-d H:i:s');
         $query_update = "UPDATE users SET firstname='$firstname', lastname='$lastname', address='$address', postcode='$postcode', city='$city', mobilenumber='$mobilenumber',  image='$image' , updated='$updated' WHERE id='$id'";
-        $result_update=my_query($query_update);
+        $result_update = my_query($query_update);
+        debuggeri('muokkaaprofiiliatarkistus.php', $result_update);
         if ($result_update) {
             $success = "success";
             $message = translate('profile_updated');
@@ -56,5 +65,3 @@ if (isset($_POST['painike'])) {
     }
 }
 ob_end_flush();
-
-?>

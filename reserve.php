@@ -4,12 +4,13 @@ include_once 'lang.php';
 $title = translate('book_tour');
 include 'header.php';
 $tourId = (isset($_GET['id']) && !empty($_GET['id'])) ? intval($_GET['id']) : 0;
-$user_Id = intval($_SESSION['user_id']);
+$user_Id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
 
 // Check if the user is logged in
-if ($_SESSION['user_id'] == null) {
-    header('Location: login.php');
+if ($user_Id == 0 || empty($user_Id)) {
+    echo "<div class='container my-5'><div class='row d-flex align-items-center justify-content-center'><div class='col-md-12'><h2 class='text-center badge text-bg-danger fs-3'>" . translate('login_required') . "</h2></div></div></div>";
+    echo "<script>setTimeout(function(){window.location.href='login.php'},2000);</script>";
 } else {
     // Fetch user details
     $userQuery = "SELECT firstname,lastname, mobilenumber,email FROM users WHERE id = $user_Id";

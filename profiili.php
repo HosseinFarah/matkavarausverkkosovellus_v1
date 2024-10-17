@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include "asetukset.php";
 include "db.php";
 include "rememberme.php";
@@ -8,7 +11,6 @@ $title = translate('profile');
 
 include "header.php";
 $css = 'site.css';
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $query = "SELECT * FROM users WHERE id = $user_id";
@@ -21,6 +23,7 @@ if (isset($_SESSION['user_id'])) {
     $kaupunki = $row['city'];
     $katuosoite = $row['address'];
     $postinumero = $row['postcode'];
+    $google_id = $row['google_id'];
     if ($row['image'] == NULL || $row['image'] == "") {
         $photo = "default.jpg";
     } else {
@@ -31,7 +34,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- profile page -->
 <?php
-if ($loggedIn === 'user') { ?>
+if ($loggedIn === 'user' || isset($_SESSION['user'])) { ?>
 
     <body>
         <!-- Main Content -->
@@ -51,7 +54,15 @@ if ($loggedIn === 'user') { ?>
                         <a href="muokkaaprofiilia.php?id=<?= $user_id ?>" class="btn btn-primary"><?= translate('edit_profile') ?></a>
                         <a href="poistu.php" class="btn btn-primary"><?= translate('logout') ?></a>
                         <div>
-                            <a href="update_password.php?id=<?= $user_id ?>" class="btn btn-warning mt-1"><?= translate('update_password') ?></a>
+                            <?php
+                                if($google_id != NULL){
+                                    echo "<p class='badge bg-secondary text-light fs-6 mt-1'>".translate('google_logged_in')."</p>";
+                                }
+                                else{
+                                    echo "<a href='update_password.php?id=". $user_id ."' class='btn btn-warning mt-1'>". translate('update_password')."</a>
+                                    ";
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

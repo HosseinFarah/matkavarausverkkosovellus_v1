@@ -36,7 +36,7 @@ if ($row) {
     $user_name = $row['firstname'] . ' ' . $row['lastname'];
     $user_email = $row['email'];
     $user_phone = $row['mobilenumber'];
-    $reservation_date = $row['created'];
+    $reservation_date = $row['updated'];
     $reservation_code = $row['reservation_id'];
     $tour_image = 'profiilikuvat/tours/' . $row['tourImage']; // Corrected path
 
@@ -62,9 +62,10 @@ if ($row) {
     $pdf->Cell(0, 10, 'Tour Price: ' . number_format($tour_price, 2) . '', 0, 1); // Format price
     $pdf->MultiCell(0, 10, 'User Name: ' . $user_name, 0, 1);
     $pdf->Cell(0, 30, 'User Email: ' . $user_email, 0, 1);
-    $pdf->Cell(0, 10, 'User Phone: ' . $user_phone, 0, 1);
-    $pdf->Cell(0, 10, 'Reservation Date: ' . date('d-m-Y', strtotime($reservation_date)), 0, 1); // Format date
-    $pdf->Cell(0, 10, 'Reservation Code: ' . $reservation_code, 0, 1);
+    if($user_phone != '') {
+        $pdf->Cell(0, 10, 'User Phone: ' . $user_phone, 0, 1);
+    }
+    $pdf->Cell(0, 10, 'Reservation Date: ' . date('d-m-y:H,i,s', strtotime($reservation_date)), 0, 1); // Format date    $pdf->Cell(0, 10, 'Reservation Code: ' . $reservation_code, 0, 1);
     $pdf->Ln(10); // Add space before image
 
     // Display image with a border and better position

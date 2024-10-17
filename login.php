@@ -82,11 +82,14 @@ include "header.php";
       </form>
 
       <!-- login with google -->
-      <!-- <div class="row g-3 align-items-center mt-1 d-flex justify-content-center">
-        <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=656915444750-jencm5pb6chr7gri8547p9qrmp6iilqq.apps.googleusercontent.com&redirect_uri=http://localhost/google_login.php&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&access_type=offline" class="btn btn-danger">
-          <i class="fab fa-google"></i> <?= translate('login_with_google'); ?>
-        </a>
-      </div> -->
+      
+      <div class="row g-3 align-items-center mt-1 d-flex justify-content-center">
+        <div class="col-md-6 m-3">
+          <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=656915444750-jencm5pb6chr7gri8547p9qrmp6iilqq.apps.googleusercontent.com&redirect_uri=<?= $_SERVER['HTTP_HOST']=='localhost'?'http://localhost/google_login.php':'https://farahkordmahalehho-ayg0crenf5cag7dv.westeurope-01.azurewebsites.net/google_login.php' ?>&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&access_type=offline" class="btn btn-danger">
+            <i class="fab fa-google"></i> <?= translate('login_with_google'); ?>
+          </a>
+        </div>
+      </div>
 
 
       <div id="ilmoitukset" class="alert alert-<?= $success; ?> alert-dismissible fade show <?= $display ?? ""; ?>" role="alert">
